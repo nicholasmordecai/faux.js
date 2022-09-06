@@ -10,7 +10,8 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc -w",
-    "test": "mocha --require ts-node/register test/**/*.spec.ts"
+    "test": "mocha --require ts-node/register test/**/*.spec.ts",
+    "lint": "eslint --ext .ts . --fix"
   },
   "author": "Nicholas Mordecai",
   "url": "https://github.com/owner/project/issues",
@@ -23,9 +24,14 @@
     "yargs": "^17.5.1"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.3",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.7.15",
     "@types/yargs": "^17.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "chai": "^4.3.6",
+    "eslint": "^8.23.0",
     "mocha": "^10.0.0",
     "ts-node": "^10.9.1"
   }

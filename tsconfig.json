@@ -8,6 +8,7 @@
       "esModuleInterop": true,
       "moduleResolution": "node",
       "typeRoots": ["./test/@types/", "./node_modules/@types"],
+      "noImplicitAny": true, 
     },
     "include": [
       "src/**/*"
