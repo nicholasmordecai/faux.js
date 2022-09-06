@@ -1,4 +1,3 @@
-
 import factory from './factory';
 
 export {

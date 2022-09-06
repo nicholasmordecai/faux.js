@@ -13,7 +13,7 @@ export async function compile(entryPoint: string): Promise<void> {
 	const writeProject = new Project({
 		skipAddingFilesFromTsConfig: true,
 		compilerOptions: {
-			outDir: './node_modules/lumis/src/factory',
+			outDir: './node_modules/lumis/dist/factory',
 			declaration: true,
 			sourceMap: true,
 			moduleResolution: ModuleResolutionKind.Classic,
@@ -76,6 +76,7 @@ export async function compile(entryPoint: string): Promise<void> {
 	// console.log(chalk.green('Writing the project to disc...'));
 
 	await writeProject.save();
+	await writeProject.emit();
 
 	// console.log(chalk.green('Finished'));
 
