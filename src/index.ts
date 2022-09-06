@@ -1,8 +1,8 @@
-import factory from "./factory";
+import factory from './factory';
 
 export {
-    factory
-}
+	factory
+};
 
 /**
  * Steps to use

@@ -1,20 +1,20 @@
-import { ClassDeclaration, MethodDeclaration } from "ts-morph";
+import { ClassDeclaration, MethodDeclaration } from 'ts-morph';
 
 export function generateMethod(
-  classDeclaration: ClassDeclaration,
-  name: string,
-  returnType: string
+	classDeclaration: ClassDeclaration,
+	name: string,
+	returnType: string
 ): MethodDeclaration {
-  return classDeclaration.addMethod({
-    name,
-    returnType,
-    isStatic: true,
-    docs: [
-      {
-        description: `Factory constructor for ${name} interface`,
-      },
-    ],
-  });
+	return classDeclaration.addMethod({
+		name,
+		returnType,
+		isStatic: true,
+		docs: [
+			{
+				description: `Factory constructor for ${name} interface`,
+			},
+		],
+	});
 }
 
 // tags: [
