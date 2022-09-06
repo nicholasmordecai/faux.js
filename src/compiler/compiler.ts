@@ -1,11 +1,11 @@
-import chalk from 'chalk';
+// import chalk from 'chalk';
 import { InterfaceDeclaration, ModuleResolutionKind, Project } from 'ts-morph';
 
 import { functionGenerator } from './function-generator';
 import { generateMethod } from './method-generator';
 
 export async function compile(entryPoint: string): Promise<void> {
-	console.log(chalk.green('Creating new project...'));
+	// console.log(chalk.green('Creating new project...'));
 	const project = new Project();
 	project.addSourceFilesAtPaths(entryPoint);
 	project.resolveSourceFileDependencies();
@@ -13,7 +13,7 @@ export async function compile(entryPoint: string): Promise<void> {
 	const writeProject = new Project({
 		skipAddingFilesFromTsConfig: true,
 		compilerOptions: {
-			outDir: './node_modules/lumis/src/factory/source-files',
+			outDir: './node_modules/lumis/src/factory',
 			declaration: true,
 			sourceMap: true,
 			moduleResolution: ModuleResolutionKind.Classic,
@@ -21,7 +21,7 @@ export async function compile(entryPoint: string): Promise<void> {
 	});
 
 	const writeSourceFile = writeProject.createSourceFile(
-		'./node_modules/lumis/src/factory/source-files/index.ts',
+		'./node_modules/lumis/src/factory/index.ts',
 		'',
 		{
 			overwrite: true,
@@ -33,7 +33,7 @@ export async function compile(entryPoint: string): Promise<void> {
 		name: 'factory',
 	});
 
-	console.log(chalk.green('Getting all source files'));
+	// console.log(chalk.green('Getting all source files'));
 
 	const sourceFiles = project.getSourceFiles();
 
@@ -41,6 +41,7 @@ export async function compile(entryPoint: string): Promise<void> {
 	for (const sourceFile of sourceFiles) {
 		allInterfaces.push(...sourceFile.getInterfaces());
 	}
+	console.log(allInterfaces);
 
 	// need to find a way to create the factory here so I can automatically create an object from an interface
 	for (const tInterface of allInterfaces) {
@@ -72,11 +73,11 @@ export async function compile(entryPoint: string): Promise<void> {
 		newMethod.addStatements([functionGenerator(properties)]);
 	}
 
-	console.log(chalk.green('Writing the project to disc...'));
+	// console.log(chalk.green('Writing the project to disc...'));
 
 	await writeProject.save();
 
-	console.log(chalk.green('Finished'));
+	// console.log(chalk.green('Finished'));
 
 }
 

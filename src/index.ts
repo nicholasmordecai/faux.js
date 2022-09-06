@@ -1,4 +1,5 @@
-import { factory } from './factory';
+
+import factory from './factory';
 
 export {
 	factory
