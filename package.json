@@ -2,8 +2,10 @@
   "name": "lumis",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "author": "Nicholas Mordecai",
+  "url": "https://github.com/owner/project/issues",
+  "license": "Apache-2.0",
+  "types": "dist/factory/index.d.ts",
   "bin": {
     "lumis": "dist/cli/index.js"
   },
@@ -13,9 +15,6 @@
     "test": "mocha --require ts-node/register test/**/*.spec.ts",
     "lint": "eslint --ext .ts . --fix"
   },
-  "author": "Nicholas Mordecai",
-  "url": "https://github.com/owner/project/issues",
-  "license": "Apache-2.0",
   "dependencies": {
     "@faker-js/faker": "^7.5.0",
     "chalk": "^4.1.2",

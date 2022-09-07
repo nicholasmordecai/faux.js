@@ -1,7 +1,6 @@
-import factory from './factory';
-
+import * as lumis from './factory';
 export {
-	factory
+	lumis
 };
 
 /**

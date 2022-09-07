@@ -1,15 +1,16 @@
-// import chalk from 'chalk';
 import { InterfaceDeclaration, ModuleResolutionKind, Project } from 'ts-morph';
+import { generateClass } from './generators/class';
 
-import { functionGenerator } from './function-generator';
-import { generateMethod } from './method-generator';
+import { functionGenerator } from './generators/function';
+import { generateInterface, generateOptionalInterface } from './generators/interface';
+import { generateCreateMethod, generateFakeMethod } from './generators/method';
 
 export async function compile(entryPoint: string): Promise<void> {
-	// console.log(chalk.green('Creating new project...'));
 	const project = new Project();
 	project.addSourceFilesAtPaths(entryPoint);
 	project.resolveSourceFileDependencies();
 
+	// instatiate a new project, to be written into the factory directory
 	const writeProject = new Project({
 		skipAddingFilesFromTsConfig: true,
 		compilerOptions: {
@@ -20,65 +21,54 @@ export async function compile(entryPoint: string): Promise<void> {
 		},
 	});
 
-	const writeSourceFile = writeProject.createSourceFile(
-		'./node_modules/lumis/src/factory/index.ts',
-		'',
-		{
-			overwrite: true,
-		}
-	);
-
-	const factoryClass = writeSourceFile.addClass({
-		isDefaultExport: true,
-		name: 'factory',
-	});
-
-	// console.log(chalk.green('Getting all source files'));
-
 	const sourceFiles = project.getSourceFiles();
 
+	// find all interfaces from the source files
 	const allInterfaces: InterfaceDeclaration[] = [];
 	for (const sourceFile of sourceFiles) {
 		allInterfaces.push(...sourceFile.getInterfaces());
 	}
-	console.log(allInterfaces);
+
+	// create source file for the exports
+	// const writeExportsSourceFile = writeProject.createSourceFile(
+	// 	`./node_modules/lumis/src/factory/index.ts`,
+	// 	writer => { writer.writeLine(`import { options } from './../types/types';`).blankLine();},
+	// 	{
+	// 		overwrite: true,
+	// 	},
+	// );
+
+	// create source file for the interfaces
+	const writeSourceFile = writeProject.createSourceFile(
+		'./node_modules/lumis/src/factory/index.ts',
+		writer => { writer.writeLine('import { options } from \'./../types/types\';').blankLine();},
+		{
+			overwrite: true,
+		},
+	);
 
 	// need to find a way to create the factory here so I can automatically create an object from an interface
-	for (const tInterface of allInterfaces) {
-		writeSourceFile.addInterface({
-			name: tInterface.getName(),
-			isExported: true,
-			properties: tInterface.getProperties().map((propertySignature) => {
-				return {
-					name: propertySignature.getName(),
-					type: propertySignature.getType().getText(),
-				};
-			}),
-		});
+	for (const referenceInterface of allInterfaces) {
+		// get some consts for easier access
+		const properties = referenceInterface.getProperties();
+		const interfaceName: string = referenceInterface.getName();
+		
+		// create the new class
+		const newClass = generateClass(writeSourceFile, interfaceName, properties);
 
-		const properties = tInterface.getProperties();
+		// generate the interfaces
+		generateInterface(writeSourceFile, referenceInterface);
+		generateOptionalInterface(writeSourceFile, referenceInterface);
 
-		const interfaceName = tInterface.getName();
-		const newMethod = generateMethod(factoryClass, interfaceName, interfaceName);
+		// create the class methods
+		const createMethod = generateCreateMethod(newClass, 'create', interfaceName, properties);
+		const fakeMethod = generateFakeMethod(newClass, 'fake', interfaceName, properties);
 
-		const params: { name: string; type: string }[] = [];
-		for (const prop of properties) {
-			params.push({ name: prop.getName(), type: prop.getType().getText() });
-			newMethod.addParameter({
-				name: prop.getName(),
-				type: prop.getType().getText(),
-				hasQuestionToken: true,
-			});
-		}
-		newMethod.addStatements([functionGenerator(properties)]);
+		// create functional statements
+		createMethod.addStatements([functionGenerator(properties)]);
+		fakeMethod.addStatements([functionGenerator(properties)]);
 	}
-
-	// console.log(chalk.green('Writing the project to disc...'));
 
 	await writeProject.save();
 	await writeProject.emit();
-
-	// console.log(chalk.green('Finished'));
-
 }
-
