@@ -4,20 +4,18 @@ version: 2.1
 
 jobs:
   build_and_test:
-    docker:
-      — image: cimg/node:18.8.0
+    executor: node/default
     steps:
       - checkout
       - node/install-packages:
           pkg-manager: npm
       - run:
-          command: npm test
-          name: Run tests
-      - run:
           command: npm run build
           name: Build app
-
+      - run:
+          command: npm test
+          name: Run tests
 workflows:
-  build_and_test:
+  build:
     jobs:
       - build_and_test
