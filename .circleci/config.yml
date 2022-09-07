@@ -7,19 +7,19 @@ jobs:
   build_and_test:
     docker:
       - image: 'cimg/base:stable'
-        steps: null
-      - node/install:
-          node-version: '16.15'
-      - checkout
-      - node/install-packages:
-          pkg-manager: npm
-      - run:
-          command: npm run build
-          name: Build app
-      - run:
-          command: npm test
-          name: Run tests
+        steps:
+        - node/install:
+            node-version: '16.15'
+        - checkout
+        - node/install-packages:
+            pkg-manager: npm
+        - run:
+            command: npm run build
+            name: Build app
+        - run:
+            command: npm test
+            name: Run tests
 workflows:
-  build:
+  run:
     jobs:
       - build_and_test
