@@ -6,7 +6,8 @@ export function generateCreateMethod(
 	returnType: string,
 	properties: PropertySignature[]
 ): MethodDeclaration {
-	const docs = generateDocs(name, properties);
+	const className: string = classDeclaration.getName() as string;
+	const docs = generateDocs(className);
 	const newMethod = classDeclaration.addMethod({
 		name: name,
 		returnType,
@@ -29,7 +30,8 @@ export function generateFakeMethod(
 	returnType: string,
 	properties: PropertySignature[]
 ): MethodDeclaration {
-	const docs = generateDocs(name, properties);
+	const className: string = classDeclaration.getName() as string;
+	const docs = generateDocs(className);
 	const newMethod = classDeclaration.addMethod({
 		name: name,
 		returnType,
@@ -46,19 +48,20 @@ export function generateFakeMethod(
 	return newMethod;
 }
 
-function generateDocs(name: string, properties: PropertySignature[]): OptionalKind<JSDocStructure> {
+function generateDocs(name: string): OptionalKind<JSDocStructure> {
 	return {
-		description: `Factory constructor for ${name} interface`,
 		tags: [
-			...properties.map((property) => {
-				return {
-					tagName: 'param',
-					text: `${property.getName()} ${property.getType().getText()}`,
-				};
-			}),
+			{
+				tagName: 'description',
+				text: `Create a new object instance from the ${name} interface.`
+			},
+			{
+				tagName: 'param',
+				text: `{${name}Options} options`
+			},
 			{
 				tagName: 'returns',
-				text: name,
+				text: `{${name}}`,
 			},
 		],
 	};

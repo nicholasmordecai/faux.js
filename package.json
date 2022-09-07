@@ -5,7 +5,8 @@
   "author": "Nicholas Mordecai",
   "url": "https://github.com/owner/project/issues",
   "license": "Apache-2.0",
-  "types": "dist/factory/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
     "lumis": "dist/cli/index.js"
   },

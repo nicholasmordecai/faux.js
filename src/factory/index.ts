@@ -9,28 +9,33 @@ export class Person {
         };
 
     /**
-     * Factory constructor for create interface
-     * @param firstName string
-     * @param lastName string
-     * @param isPerson boolean
-     * @param age number
-     * @returns create
+     * Factory constructor for Person interface
+     * @description Create a new object instance from the Person interface.
+     * @param {PersonOptions} options
+     * @returns {Person}
      */
     static create(options?: PersonOptions): Person {
-        return {firstName: "hi",lastName: "hi",isPerson: true,age: 123};
+        return {
+        	 firstName: "",
+        	 lastName: "",
+        	 isPerson: true,
+        	 age: 1,
+        }
     }
 
     /**
-     * Factory constructor for fake interface
-     * @param firstName string
-     * @param lastName string
-     * @param isPerson boolean
-     * @param age number
-     * @returns fake
+     * Factory constructor for Person interface
+     * @description Create a new object instance from the Person interface.
+     * @param {PersonOptions} options
+     * @returns {Person}
      */
     static fake(options?: PersonOptions): Person {
-                return {firstName: "hi",lastName: "hi",isPerson: true,age: 123};
-
+        return {
+        	 firstName: "",
+        	 lastName: "",
+        	 isPerson: true,
+        	 age: 1,
+        }
     }
 }
 
