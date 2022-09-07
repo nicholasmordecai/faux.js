@@ -3,12 +3,15 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@18.8.0
+  node: circleci/node@5.0.2
 
 jobs:
   build_and_test:
-    executor: node/default
+      docker:
+      - image: 'cimg/base:stable'
     steps:
+      - node/install:
+          node-version: '16.15'
       - checkout
       - node/install-packages:
           pkg-manager: npm
