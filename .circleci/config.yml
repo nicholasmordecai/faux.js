@@ -4,7 +4,8 @@ version: 2.1
 
 jobs:
   build_and_test:
-    executor: node/default
+    docker:
+      — image: cimg/node:18.8.0
     steps:
       - checkout
       - node/install-packages:
