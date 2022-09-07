@@ -1,3 +1,4 @@
 node_modules
 dist
-src/factory/
+src/factory/index.ts
+src/index.ts

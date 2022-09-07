@@ -6,7 +6,7 @@ export function createSchemaObject(properties: PropertySignature[]): string {
 	const codeBlock =  writer.write('').block(() => {
 		properties.map((property) => {
 			const type = getNativeType(property.getType());
-			return writer.writeLine(` ${property.getName()}: ${type},`);
+			return writer.writeLine(`${property.getName()}: ${type},`);
 		});
 	}).toString();
 

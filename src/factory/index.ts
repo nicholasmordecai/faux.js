@@ -2,14 +2,14 @@ import { options } from './../types/types';
 
 export class Person {
     static schema: Person = {
-        	 firstName: "",
-        	 lastName: "",
-        	 isPerson: true,
-        	 age: 1,
+        	firstName: "",
+        	age: 1,
+        	isHuman: true,
+        	someValue: null,
+        	thisValue: undefined,
         };
 
     /**
-     * Factory constructor for Person interface
      * @description Create a new object instance from the Person interface.
      * @param {PersonOptions} options
      * @returns {Person}
@@ -17,38 +17,55 @@ export class Person {
     static create(options?: PersonOptions): Person {
         return {
         	 firstName: "",
-        	 lastName: "",
-        	 isPerson: true,
         	 age: 1,
-        }
-    }
-
-    /**
-     * Factory constructor for Person interface
-     * @description Create a new object instance from the Person interface.
-     * @param {PersonOptions} options
-     * @returns {Person}
-     */
-    static fake(options?: PersonOptions): Person {
-        return {
-        	 firstName: "",
-        	 lastName: "",
-        	 isPerson: true,
-        	 age: 1,
+        	 isHuman: true,
+        	 someValue: null,
+        	 thisValue: undefined,
         }
     }
 }
 
 export interface Person {
     firstName: string;
-    lastName: string;
-    isPerson: boolean;
     age: number;
+    isHuman: boolean;
+    someValue: null;
+    thisValue: undefined;
 }
 
 export interface PersonOptions {
     firstName?: options<string>;
-    lastName?: options<string>;
-    isPerson?: options<boolean>;
     age?: options<number>;
+    isHuman?: options<boolean>;
+    someValue?: options<null>;
+    thisValue?: options<undefined>;
+}
+
+export class Student {
+    static schema: Student = {
+        	class: "",
+        	grades: [1, 2, 3, 4, 5],
+        };
+
+    /**
+     * @description Create a new object instance from the Student interface.
+     * @param {StudentOptions} options
+     * @returns {Student}
+     */
+    static create(options?: StudentOptions): Student {
+        return {
+        	 class: "",
+        	 grades: [1, 2, 3, 4, 5],
+        }
+    }
+}
+
+export interface Student {
+    class: string;
+    grades: number[];
+}
+
+export interface StudentOptions {
+    class?: options<string>;
+    grades?: options<number[]>;
 }
