@@ -36,4 +36,3 @@ export class Node {
 		this.branchRight = right;
 	}
 }
-  

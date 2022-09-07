@@ -33,6 +33,10 @@
             "error",
             "always"
         ],
-        "eol-last": "error"
+        "eol-last": "error",
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ]
     }
 }

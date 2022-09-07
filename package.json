@@ -2,10 +2,13 @@
   "name": "lumis",
   "version": "0.0.1",
   "description": "",
+  "author": "Nicholas Mordecai",
+  "url": "https://github.com/owner/project/issues",
+  "license": "Apache-2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "compile": "dist/cli/index.js"
+    "lumis": "dist/cli/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -13,18 +16,16 @@
     "test": "mocha --require ts-node/register test/**/*.spec.ts",
     "lint": "eslint --ext .ts . --fix"
   },
-  "author": "Nicholas Mordecai",
-  "url": "https://github.com/owner/project/issues",
-  "license": "Apache-2.0",
   "dependencies": {
     "@faker-js/faker": "^7.5.0",
-    "chalk": "^5.0.1",
+    "chalk": "^4.1.2",
     "ts-morph": "^16.0.0",
     "typescript": "^4.8.2",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
     "@types/chai": "^4.3.3",
+    "@types/glob": "^8.0.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.7.15",
     "@types/yargs": "^17.0.12",
