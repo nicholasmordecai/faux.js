@@ -48,7 +48,7 @@ export function generateFakeMethod(
 	return newMethod;
 }
 
-function generateDocs(name: string): OptionalKind<JSDocStructure> {
+export function generateDocs(name: string): OptionalKind<JSDocStructure> {
 	return {
 		tags: [
 			{

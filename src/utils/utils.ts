@@ -1,7 +1,11 @@
-import { Type } from 'ts-morph';
-import { Type as tsType } from 'typescript';
+import { PropertySignature, SyntaxKind } from 'ts-morph';
 
-export function getNativeType(type: Type<tsType>) {
+export function traverseProperty(property: PropertySignature) {
+	return getNativeType(property);
+}
+
+export function getNativeType(property: PropertySignature) {
+	const type = property.getType();
 	if(type.isString()) {
 		return '""';
 	}
@@ -26,5 +30,28 @@ export function getNativeType(type: Type<tsType>) {
 		return '[1, 2, 3, 4, 5]';
 	}
 
-	// return null;
+	// should probably re-write this using the writer.object class instead of constructing strings.
+	if(type.isObject()) {
+		const typeLiteral = property.getLastChildByKind(SyntaxKind.TypeLiteral);
+		if(!typeLiteral) return;
+		const properties = typeLiteral.getProperties();
+		let t = '{';
+		for(const tProperty of properties) {
+			t += `${tProperty.getName()}: ${traverseProperty(tProperty)},`;
+		}
+		t += '}';
+		return t;
+	}
+
+	// if(type.isInterface()) {
+	// 	const typeLiteral = property.getLastChildByKind(SyntaxKind.TypeLiteral);
+	// 	if(!typeLiteral) return;
+	// 	const properties = typeLiteral.getProperties();
+	// 	let t = '{';
+	// 	for(const tProperty of properties) {
+			
+	// 	}
+	// 	t += '}';
+	// 	return t;
+	// }
 }
