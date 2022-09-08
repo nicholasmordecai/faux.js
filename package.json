@@ -14,7 +14,9 @@
     "build": "tsc",
     "build:watch": "tsc -w",
     "test": "mocha --require ts-node/register test/**/*.spec.ts",
-    "lint": "eslint --ext .ts . --fix"
+    "lint": "eslint --ext .ts . --fix",
+    "dev:start": "NODE_ENV=dev ts-node src/cli/index.ts -f ./dev/types/**/*",
+    "dev:watch": "NODE_ENV=dev nodemon --watch 'dev/**' --ignore /dev/compiled/** --ext 'ts,d.ts' --exec ts-node src/cli/index.ts -f ./dev/types/**/*"
   },
   "dependencies": {
     "@faker-js/faker": "^7.5.0",
@@ -34,6 +36,7 @@
     "chai": "^4.3.6",
     "eslint": "^8.23.0",
     "mocha": "^10.0.0",
+    "nodemon": "^2.0.19",
     "ts-node": "^10.9.1"
   }
 }
