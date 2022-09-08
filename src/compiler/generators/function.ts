@@ -13,13 +13,15 @@ import { getNativeType } from '../../utils/utils';
 // 	return stmntStr;
 // }
 
-export function functionGenerator(properties: PropertySignature[]): string {
-	const writer = new CodeBlockWriter({ useTabs: true });
-	const codeBlock =  writer.write('return ').block(() => {
-		properties.map((property) => {
-			const type = getNativeType(property.getType());
-			return writer.writeLine(` ${property.getName()}: ${type},`);
-		});
-	}).toString();
-	return codeBlock;
-}
+// export function functionGenerator(properties: PropertySignature[]): string {
+// 	const writer = new CodeBlockWriter({ useTabs: true });
+// 	const codeBlock =  writer.write('return ').block(() => {
+// 		properties.map((property) => {
+// 			const symbol = property.getSymbol();
+// 			if(!symbol) return null;
+// 			const type = traverseSymbols([symbol]);
+// 			return writer.writeLine(` ${property.getName()}: ${type},`);
+// 		});
+// 	}).toString();
+// 	return codeBlock;
+// }

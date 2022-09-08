@@ -1,7 +1,7 @@
 import { InterfaceDeclaration, ModuleResolutionKind, Project } from 'ts-morph';
 import { generateClass } from './generators/class';
 
-import { functionGenerator } from './generators/function';
+// import { functionGenerator } from './generators/function';
 import { generateInterface, generateOptionalInterface } from './generators/interface';
 import { generateCreateMethod } from './generators/method';
 
@@ -57,11 +57,11 @@ export async function compile(entryPoint: string): Promise<void> {
 		generateOptionalInterface(writeSourceFile, referenceInterface);
 
 		// create the class methods
-		const createMethod = generateCreateMethod(newClass, 'create', interfaceName, properties);
+		// const createMethod = generateCreateMethod(newClass, 'create', interfaceName, properties);
 		// const fakeMethod = generateFakeMethod(newClass, 'fake', interfaceName, properties);
 
 		// create functional statements
-		createMethod.addStatements([functionGenerator(properties)]);
+		// createMethod.addStatements([functionGenerator(properties)]);
 		// fakeMethod.addStatements([functionGenerator(properties)]);
 	}
 

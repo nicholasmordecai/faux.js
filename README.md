@@ -15,3 +15,6 @@
 - 3.  Get it to overwride parameters if passed in (change to obj)
 - 4.  add linter config
       \*/
+
+// TODO
+Arrays containing complex types don't work.

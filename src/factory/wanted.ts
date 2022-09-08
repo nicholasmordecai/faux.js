@@ -14,29 +14,29 @@ export interface PersonOptional {
 }
 
 export class newPerson {
-    static schema: Person = {
-        firstName: '',
-        lastName: ''
-    };
+	static schema: Person = {
+		firstName: '',
+		lastName: ''
+	};
 
-    static create(options?: PersonOptional): Person {
-        const obj: typeof newPerson.schema = {
-            firstName: '',
-            lastName: ''
-        }
+	static create(options?: PersonOptional): Person {
+		const obj: typeof newPerson.schema = {
+			firstName: '',
+			lastName: ''
+		};
 
-        return obj;
-    }
+		return obj;
+	}
 
-    static fake(): Person {
-        const obj: typeof newPerson.schema = {
-            firstName: '',
-            lastName: ''
-        }
+	static fake(): Person {
+		const obj: typeof newPerson.schema = {
+			firstName: '',
+			lastName: ''
+		};
 
-        return obj;
-    }
+		return obj;
+	}
 }
 
-newPerson.create({firstName: {fake: true}});
+newPerson.create({ firstName: { fake: true } });
 newPerson.fake();
