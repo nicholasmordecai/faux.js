@@ -1,5 +1,6 @@
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![<typescript>](https://badgen.net/badge/typescript/strict%20%F0%9F%92%AA/blue?icon=typescript)](https://www.typescriptlang.org/)
+[![<megmut>](https://circleci.com/gh/megmut/lumis.svg?style=svg)](https://app.circleci.com/pipelines/github/megmut/lumis?branch=master)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![npm](https://img.shields.io/npm/v/lumis?style=flat-square)
 
 # Lumis
@@ -35,6 +36,7 @@ v8.16.0
   - [Versioning](#versioning)
   - [Authors](#authors)
   - [License](#license)
+- [Apache 2.0 License © Nicholas Mordecai](#apache-20-license--nicholas-mordecai)
 
 ## Getting Started
 
