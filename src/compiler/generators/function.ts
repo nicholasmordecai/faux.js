@@ -1,27 +1,8 @@
-import { CodeBlockWriter, PropertySignature } from 'ts-morph';
-import { getNativeType } from '../../utils/utils';
+import { PropertySignature } from 'ts-morph';
+import { createSchemaObject } from './object';
 
-// export function functionGenerator(params: PropertySignature[]): string {
-// 	let stmntStr = 'return {';
-// 	for (const param of params) {
-// 		const value = getNativeType(param.getType());
-// 		stmntStr += `${param.getName()}: "${value}",`;
-// 	}
-// 	stmntStr = stmntStr.slice(0, stmntStr.length - 1);
-// 	stmntStr += '};';
-
-// 	return stmntStr;
-// }
-
-// export function functionGenerator(properties: PropertySignature[]): string {
-// 	const writer = new CodeBlockWriter({ useTabs: true });
-// 	const codeBlock =  writer.write('return ').block(() => {
-// 		properties.map((property) => {
-// 			const symbol = property.getSymbol();
-// 			if(!symbol) return null;
-// 			const type = traverseSymbols([symbol]);
-// 			return writer.writeLine(` ${property.getName()}: ${type},`);
-// 		});
-// 	}).toString();
-// 	return codeBlock;
-// }
+export function functionGenerator(properties: PropertySignature[]): string {
+	let codeBlock = 'return ';
+	codeBlock += createSchemaObject(properties);
+	return codeBlock;
+}

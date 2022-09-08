@@ -4,8 +4,9 @@
 ![npm](https://img.shields.io/npm/v/lumis?style=flat-square)
 
 # Lumis
+## Automatically create factory and fake data from typescript interfaces
 
-> Automatically create factory and fake data from typescript interfaces
+> Please note, this is still very early development and has not been tested in a production envirnoment!
 
 ## Prerequisites
 
@@ -23,12 +24,14 @@ v8.16.0
 ## Table of contents
 
 - [Lumis](#lumis)
+  - [Automatically create factory and fake data from typescript interfaces](#automatically-create-factory-and-fake-data-from-typescript-interfaces)
   - [Prerequisites](#prerequisites)
   - [Table of contents](#table-of-contents)
   - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Usage](#usage)
     - [Running the tests](#running-the-tests)
+  - [Known Bugs](#known-bugs)
   - [Contributing](#contributing)
   - [Versioning](#versioning)
   - [Authors](#authors)
@@ -66,6 +69,7 @@ To run Lumis on your project, add the command to your package.json scripts:
 }
 ```
 and execute the above script like so:
+
 ```sh
 $ npm run lumis
 # or
@@ -83,7 +87,8 @@ $ lumis --files=./**/*.ts
 $ npm test
 ```
 
-
+## Known Bugs
+Arrays containing complex types don't work.
 
 
 ## Contributing
@@ -91,7 +96,7 @@ $ npm test
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 1.  Fork it!
-2.  Create your feature branch: `git checkout -b my-new-feature`
+2.  Create your feature branch: `git checkout -b feat/my-new-feature`
 3.  Add your changes: `git add .`
 4.  Commit your changes: `git commit -am 'Add some feature'`
 5.  Push to the branch: `git push origin my-new-feature`
@@ -99,17 +104,14 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/megmut/lumis/tags).
 
 ## Authors
 
 - **Nicholas Mordecai**
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/megmut/lumis/contributors) who participated in this project.
 
 ## License
 
-[MIT License](https://andreasonny.mit-license.org/2019) © Andrea SonnY
-
-// TODO
-Arrays containing complex types don't work.
+[Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) © Nicholas Mordecai
