@@ -10,11 +10,19 @@ export async function compile(entryPoint: string): Promise<void> {
 	project.addSourceFilesAtPaths(entryPoint);
 	project.resolveSourceFileDependencies();
 
+	const nodeEnv = process.env.NODE_ENV;
+	
+	const fileConfig = {
+		outDir: nodeEnv === 'dev' ? './dev/compiled' : './node_modules/lumis/dist/factory',
+		srcFile: nodeEnv === 'dev' ? './src/factory/index.ts' : '../node_modules/lumis/src/factory/index.ts',
+		rootSrcFile: nodeEnv === 'dev' ? './src/index.ts' : '../node_modules/lumis/src/index.ts',
+	};
+
 	// instatiate a new project, to be written into the factory directory
 	const writeProject = new Project({
 		skipAddingFilesFromTsConfig: true,
 		compilerOptions: {
-			outDir: './node_modules/lumis/dist/factory',
+			outDir: fileConfig.outDir,
 			declaration: true,
 			sourceMap: true,
 			moduleResolution: ModuleResolutionKind.Classic,
@@ -26,12 +34,13 @@ export async function compile(entryPoint: string): Promise<void> {
 	// find all interfaces from the source files
 	const allInterfaces: InterfaceDeclaration[] = [];
 	for (const sourceFile of sourceFiles) {
+		console.log(sourceFile.getBaseName());
 		allInterfaces.push(...sourceFile.getInterfaces());
 	}
 
 	// create source file for the interfaces
 	const writeSourceFile = writeProject.createSourceFile(
-		'./node_modules/lumis/src/factory/index.ts',
+		fileConfig.srcFile,
 		writer => { writer.writeLine('import { options } from \'./../types/types\';').blankLine();},
 		{
 			overwrite: true,
@@ -67,7 +76,7 @@ export async function compile(entryPoint: string): Promise<void> {
 
 	// create source file for the exports
 	writeProject.createSourceFile(
-		'./node_modules/lumis/src/index.ts',
+		fileConfig.rootSrcFile,
 		writer => {
 			// write each import statement
 			importDeclarations.map((value) => {
