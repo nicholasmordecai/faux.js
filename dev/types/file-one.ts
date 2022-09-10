@@ -1,4 +1,4 @@
-export interface Person {
+export interface Example {
     str: string;
     num: number;
     literal: {
