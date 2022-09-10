@@ -18,7 +18,7 @@ export function generateCreateMethod(
 	newMethod.addParameter({
 		name: 'options',
 		type: `${returnType}Options`,
-		hasQuestionToken: true,
+		hasQuestionToken: false,
 	});
 
 	return newMethod;
