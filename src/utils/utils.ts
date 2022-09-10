@@ -35,10 +35,9 @@ function traverseNodes(node: Node): any {
 		if(node.isKind(SyntaxKind.TypeLiteral)) {
 			return constructFromLiteralType(node);
 		}
-
-		if(node.isKind(SyntaxKind.PropertySignature)) {
-			const tupleType = node.getFirstChildByKind(SyntaxKind.TupleType);
-			if(!tupleType) return '[]';
+		
+		const tupleType = node.getFirstChildByKind(SyntaxKind.TupleType);
+		if(tupleType) {
 			return loopTupleType(tupleType);
 		}
 
