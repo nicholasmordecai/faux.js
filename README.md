@@ -82,6 +82,47 @@ or if you have it installed globally:
 $ lumis --files=./**/*.ts
 ```
 
+## Examples
+Create the following file, saving the example below inside.
+```ts
+  export interface Example {
+    str: string;
+    num: number;
+    literal: {
+        key1: string;
+        key2: string;
+    };
+    arraySimple: string[];
+    arrayComplex: Array<{key1: string, key2: number}>;
+
+    tupSimple: [string, string, number];
+    tupComplex: [number, string, {key1: string}];
+    address: Address;
+  }
+
+  interface Address {
+      streetName: string;
+      houseNumber: number;
+  }
+```
+
+Now run your npm command:
+```sh
+$ npm run lumis
+# or
+$ yarn lumis
+```
+
+Now in any other Typescript file in your project, you can get the factory.
+```ts
+import { Example, Address } from 'lumis';
+
+const newExample = Example.create({...});
+
+// note, this is currently being implemented
+const fakedExample = Example.fake();
+```
+
 ### Running the tests
 
 ```sh

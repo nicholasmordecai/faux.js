@@ -1,3 +1,8 @@
-import { Person } from './compiled/index';
+import { Example } from './compiled';
 
-Person.create();
+const e = Example.create({
+	name: 'hi',
+	age: 123
+});
+
+console.log(e);

@@ -1,30 +1,5 @@
 import { InterfaceDeclaration, SourceFile } from 'ts-morph';
 
-export function generateOptionsInterface(sourceFile: SourceFile): InterfaceDeclaration {
-	const newInterface = sourceFile.addInterface({
-		name: 'options',
-		isExported: true,
-		properties: [
-			{
-				name: 'fake',
-				type: 'boolean',
-				hasQuestionToken: true,
-			},
-			{
-				name: 'value',
-				type: 'T',
-				hasQuestionToken: true,
-			}
-		],
-		typeParameters: [
-			{ name: 'T',
-			}
-		]
-	});
-
-	return newInterface;
-}
-
 export function generateInterface(sourceFile: SourceFile, referenceInterface: InterfaceDeclaration): InterfaceDeclaration {
 	const newInterface = sourceFile.addInterface({
 		name: referenceInterface.getName(),
@@ -33,6 +8,7 @@ export function generateInterface(sourceFile: SourceFile, referenceInterface: In
 			return {
 				name: propertySignature.getName(),
 				type: propertySignature.getType().getText(),
+				hasQuestionToken: propertySignature.hasQuestionToken()
 			};
 		}),
 	});

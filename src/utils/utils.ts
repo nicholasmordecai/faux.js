@@ -1,57 +1,124 @@
-import { PropertySignature, SyntaxKind } from 'ts-morph';
+import { ArrayTypeNode, CodeBlockWriter, Node, PropertySignature, SyntaxKind, TupleTypeNode, TypeLiteralNode, TypeReferenceNode } from 'ts-morph';
 
 export function traverseProperty(property: PropertySignature) {
-	return getNativeType(property);
+	return traverseNodes(property);
 }
 
-export function getNativeType(property: PropertySignature) {
-	const type = property.getType();
-	if(type.isString()) {
+function traverseNodes(node: Node) {
+	const type = node.getType();
+
+	if (type.isString()) {
 		return '""';
 	}
 
-	if(type.isNumber()) {
+	if (type.isNumber()) {
 		return 1;
 	}
 
-	if(type.isBoolean()) {
+	if (type.isBoolean()) {
 		return true;
 	}
 
-	if(type.isNull()) {
+	if (type.isNull()) {
 		return null;
 	}
 
-	if(type.isUnknown()) {
+	if (type.isUnknown()) {
 		return;
 	}
 
-	if(type.isArray()) {
-		return '[1, 2, 3, 4, 5]';
+	if (type.isArray()) {
+		return handleArrayType(node);
 	}
 
-	// should probably re-write this using the writer.object class instead of constructing strings.
-	if(type.isObject()) {
-		const typeLiteral = property.getLastChildByKind(SyntaxKind.TypeLiteral);
-		if(!typeLiteral) return;
-		const properties = typeLiteral.getProperties();
-		let t = '{';
-		for(const tProperty of properties) {
-			t += `${tProperty.getName()}: ${traverseProperty(tProperty)},`;
+	if (type.isObject()) {
+		if(node.isKind(SyntaxKind.TypeLiteral)) {
+			return constructFromLiteralType(node);
 		}
-		t += '}';
-		return t;
+		
+		const tupleType = node.getFirstChildByKind(SyntaxKind.TupleType);
+		if(tupleType) {
+			return loopTupleType(tupleType);
+		}
+
+		const nodeChild = node.getFirstChildByKind(SyntaxKind.TypeLiteral);
+		if(!nodeChild) {
+			const symbol = type.getSymbol();
+
+			if(!symbol) return '{}';
+			const identifier = symbol.getName();
+			const referenceInterface = node.getSourceFile().getInterface(identifier);
+			if(!referenceInterface) return '{}';
+
+			let s = '{';
+			referenceInterface.getProperties().forEach((property) => {
+				s += `${property.getName()}: ${traverseNodes(property)},`;
+			});
+			s += '}';
+			return s;
+		}
+
+		return constructFromLiteralType(nodeChild);
+	}
+}
+
+function handleArrayType(node: Node) {
+	// handles cases like string[]
+	const arrayTypeNode = node.getFirstChildByKind(SyntaxKind.ArrayType);
+	if(arrayTypeNode) {
+		return loopArrayType(arrayTypeNode);
 	}
 
-	// if(type.isInterface()) {
-	// 	const typeLiteral = property.getLastChildByKind(SyntaxKind.TypeLiteral);
-	// 	if(!typeLiteral) return;
-	// 	const properties = typeLiteral.getProperties();
-	// 	let t = '{';
-	// 	for(const tProperty of properties) {
-			
-	// 	}
-	// 	t += '}';
-	// 	return t;
-	// }
+	// handles cases like Array<string>
+	const typeReference = node.getFirstChildByKind(SyntaxKind.TypeReference);
+	if(typeReference) {
+		return loopThroughComplexArrayType(typeReference);
+	}
+}
+
+function loopTupleType(tupleNode: TupleTypeNode ) {
+	const elements = tupleNode.getElements();
+	const writer = new CodeBlockWriter({ useTabs: true });
+	writer.write('[');
+	elements.forEach((elementNode) => {
+		writer.write(`${traverseNodes(elementNode)},`);
+	});
+	writer.write(']');
+	return writer.toString();
+}
+
+function loopArrayType(arrayTypeNode: ArrayTypeNode): string {
+	const writer = new CodeBlockWriter({ useTabs: true });
+	writer.write('[');
+	arrayTypeNode.forEachChild((childNode) => {
+		const recursion = traverseNodes(childNode);
+		if(recursion) {
+			writer.write(recursion.toString());
+		}
+	});
+	writer.write(']');
+	return writer.toString();
+}
+
+function loopThroughComplexArrayType(typeReference: TypeReferenceNode) {
+	const writer = new CodeBlockWriter({ useTabs: true });
+	writer.write('[');
+	typeReference.forEachChild((childNode) => {
+		const recursion = traverseNodes(childNode);
+		if(recursion) {
+			writer.write(recursion.toString());
+		}
+	});
+	writer.write(']');
+	return writer.toString();
+}
+
+function constructFromLiteralType(literalNode: TypeLiteralNode): string {
+	const properties = literalNode.getProperties();
+	const writer = new CodeBlockWriter({ useTabs: true });
+	return writer.write('').block(() => {
+		properties.forEach((property) => {
+			writer.writeLine(`${property.getName()}: ${traverseNodes(property)},`);
+		});
+	}).toString();
 }

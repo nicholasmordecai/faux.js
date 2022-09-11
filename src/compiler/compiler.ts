@@ -34,17 +34,12 @@ export async function compile(entryPoint: string): Promise<void> {
 	// find all interfaces from the source files
 	const allInterfaces: InterfaceDeclaration[] = [];
 	for (const sourceFile of sourceFiles) {
-		console.log(sourceFile.getBaseName());
 		allInterfaces.push(...sourceFile.getInterfaces());
 	}
 
 	// create source file for the interfaces
 	const writeSourceFile = writeProject.createSourceFile(
-		fileConfig.srcFile,
-		writer => { writer.writeLine('import { options } from \'./../types/types\';').blankLine();},
-		{
-			overwrite: true,
-		},
+		fileConfig.srcFile, 'import { options } from "./utils/types"', { overwrite: true, }
 	);
 
 	// need to find a way to create the factory here so I can automatically create an object from an interface
@@ -66,8 +61,8 @@ export async function compile(entryPoint: string): Promise<void> {
 		generateOptionalInterface(writeSourceFile, referenceInterface);
 
 		// create the class methods
-		const createMethod = generateCreateMethod(newClass, 'create', interfaceName, properties);
-		// const fakeMethod = generateFakeMethod(newClass, 'fake', interfaceName, properties);
+		const createMethod = generateCreateMethod(newClass, 'create', interfaceName);
+		// const fakeMethod = generateFakeMethod(newClass, 'fake', interfaceName);
 
 		// create functional statements
 		createMethod.addStatements([functionGenerator(properties)]);
@@ -95,6 +90,7 @@ export async function compile(entryPoint: string): Promise<void> {
 		},
 	);
 
+	writeProject.addSourceFilesAtPaths('./src/factory/utils/**/*{.d.ts,.ts}');
 	await writeProject.save();
 	await writeProject.emit();
 }
