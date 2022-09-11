@@ -1,19 +1,21 @@
 export interface Example {
-    str: string;
-    num: number;
-    literal: {
-        key1: string;
-        key2: string;
-    };
-    arraySimple: string[];
-    arrayComplex: Array<{key1: string, key2: number}>;
-
-    tupSimple: [string, string, number];
-    tupComplex: [number, string, {key1: string}];
-    address: Address;
+    name: string;
+    age?: number;
 }
+//     num: number;
+//     literal: {
+//         key1: string;
+//         key2: string;
+//     };
+//     arraySimple: string[];
+//     arrayComplex: Array<{key1: string, key2: number}>;
 
-interface Address {
-    streetName: string;
-    houseNumber: number;
-}
+//     tupSimple: [string, string, number];
+//     tupComplex: [number, string, {key1: string}];
+//     address: Address;
+// }
+
+// interface Address {
+//     streetName: string;
+//     houseNumber: number;
+// }

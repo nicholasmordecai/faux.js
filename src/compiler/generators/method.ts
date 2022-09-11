@@ -1,10 +1,9 @@
-import { ClassDeclaration, JSDocStructure, MethodDeclaration, OptionalKind, PropertySignature } from 'ts-morph';
+import { ClassDeclaration, JSDocStructure, MethodDeclaration, OptionalKind } from 'ts-morph';
 
 export function generateCreateMethod(
 	classDeclaration: ClassDeclaration,
 	name: string,
 	returnType: string,
-	properties: PropertySignature[]
 ): MethodDeclaration {
 	const className: string = classDeclaration.getName() as string;
 	const docs = generateDocs(className);
@@ -17,7 +16,7 @@ export function generateCreateMethod(
 
 	newMethod.addParameter({
 		name: 'options',
-		type: `${returnType}Options`,
+		type: `${returnType}`,
 		hasQuestionToken: false,
 	});
 
@@ -28,7 +27,6 @@ export function generateFakeMethod(
 	classDeclaration: ClassDeclaration,
 	name: string,
 	returnType: string,
-	properties: PropertySignature[]
 ): MethodDeclaration {
 	const className: string = classDeclaration.getName() as string;
 	const docs = generateDocs(className);

@@ -1,7 +1,8 @@
-import { Person } from './compiled/index';
+import { Example } from './compiled';
 
-// const t = Person.create({
-//     tupComplex: [1, "", {key1: ""}];
-// });
+const e = Example.create({
+	name: 'hi',
+	age: 123
+});
 
-// console.log(t);
+console.log(e);

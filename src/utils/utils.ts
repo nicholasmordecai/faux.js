@@ -4,7 +4,7 @@ export function traverseProperty(property: PropertySignature) {
 	return traverseNodes(property);
 }
 
-function traverseNodes(node: Node): any {
+function traverseNodes(node: Node) {
 	const type = node.getType();
 
 	if (type.isString()) {
@@ -90,9 +90,12 @@ function loopTupleType(tupleNode: TupleTypeNode ) {
 function loopArrayType(arrayTypeNode: ArrayTypeNode): string {
 	const writer = new CodeBlockWriter({ useTabs: true });
 	writer.write('[');
-		arrayTypeNode.forEachChild((childNode) => {
-			writer.write(traverseNodes(childNode));
-		});
+	arrayTypeNode.forEachChild((childNode) => {
+		const recursion = traverseNodes(childNode);
+		if(recursion) {
+			writer.write(recursion.toString());
+		}
+	});
 	writer.write(']');
 	return writer.toString();
 }
@@ -100,9 +103,12 @@ function loopArrayType(arrayTypeNode: ArrayTypeNode): string {
 function loopThroughComplexArrayType(typeReference: TypeReferenceNode) {
 	const writer = new CodeBlockWriter({ useTabs: true });
 	writer.write('[');
-		typeReference.forEachChild((childNode) => {
-			writer.write(traverseNodes(childNode));
-		});
+	typeReference.forEachChild((childNode) => {
+		const recursion = traverseNodes(childNode);
+		if(recursion) {
+			writer.write(recursion.toString());
+		}
+	});
 	writer.write(']');
 	return writer.toString();
 }
