@@ -15,7 +15,8 @@
     "build:watch": "tsc -w",
     "test": "mocha --require ts-node/register test/**/*.spec.ts",
     "test:watch": "mocha --require ts-node/register --watch --watch-files test/**/*.spec.ts,src/**/* test/**/*.spec.ts",
-    "lint": "eslint --ext .ts . --fix",
+    "lint": "eslint --ext .ts .",
+    "lint:fix": "eslint --ext .ts . --fix",
     "dev:start": "cross-env NODE_ENV=dev ts-node src/cli/index.ts -f ./dev/types/**/*",
     "dev:watch": "cross-env NODE_ENV=dev nodemon --watch 'dev/**' --ignore /dev/compiled/** --ext 'ts,d.ts' --exec ts-node src/cli/index.ts -f ./dev/types/**/*"
   },
