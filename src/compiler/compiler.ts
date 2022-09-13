@@ -1,9 +1,9 @@
 import { InterfaceDeclaration, ModuleResolutionKind, Project } from 'ts-morph';
 import { generateClass } from './generators/class';
 
-import { functionGenerator } from './generators/function';
+import { createFakeFunction } from './generators/function';
 import { generateInterface, generateOptionalInterface } from './generators/interface';
-import { generateCreateMethod } from './generators/method';
+import { generateCreateMethod, generateFakeMethod } from './generators/method';
 
 export async function compile(entryPoint: string): Promise<void> {
 	const project = new Project();
@@ -39,7 +39,7 @@ export async function compile(entryPoint: string): Promise<void> {
 
 	// create source file for the interfaces
 	const writeSourceFile = writeProject.createSourceFile(
-		fileConfig.srcFile, 'import { options } from "./utils/types"', { overwrite: true, }
+		fileConfig.srcFile, 'import { options } from "./utils/types";', { overwrite: true, }
 	);
 
 	// need to find a way to create the factory here so I can automatically create an object from an interface
@@ -65,8 +65,8 @@ export async function compile(entryPoint: string): Promise<void> {
 		// const fakeMethod = generateFakeMethod(newClass, 'fake', interfaceName);
 
 		// create functional statements
-		createMethod.addStatements([functionGenerator(properties)]);
-		// fakeMethod.addStatements([functionGenerator(properties)]);
+		createMethod.addStatements('return options;');
+		// fakeMethod.addStatements([createFakeFunction(properties)]);
 	}
 
 	// create source file for the exports

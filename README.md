@@ -130,8 +130,7 @@ $ npm test
 ```
 
 ## Known Bugs
-* Arrays containing complex types don't work.
-* Nested interfaces aren't supported
+- cli lumis command not recognised on windows (npm link)
 
 
 ## Contributing
