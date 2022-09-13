@@ -1,8 +1,17 @@
-import { PropertySignature } from 'ts-morph';
-import { createSchemaObject } from './object';
+import { CodeBlockWriter, PropertySignature } from 'ts-morph';
+// import { nameMap } from '../../mocker/nameMap';
+import { traverseProperty } from '../../utils/utils';
 
-export function functionGenerator(properties: PropertySignature[]): string {
-	let codeBlock = 'return ';
-	codeBlock += createSchemaObject(properties);
-	return codeBlock;
+export function createFakeFunction(properties: PropertySignature[]) {
+	const writer = new CodeBlockWriter({ useTabs: true });
+	const codeBlock =  writer.write('').block(() => {
+		properties.map((property) => {
+			const schema = traverseProperty(property);
+			// const name = property.getName();
+			console.log(typeof schema);
+
+			// return writer.writeLine(`${name}: ${type},`);
+		});
+	}).toString();
+	return '';
 }
