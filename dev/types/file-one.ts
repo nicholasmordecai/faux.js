@@ -1,21 +1,23 @@
-export interface Example {
-    name: string;
-    age?: number;
+export interface Unit {
+    displayName: string;
+    health: number;
+    cost: [number, string, boolean];
+    blah: number[];
+    blah2: Array<{age: number, name: string}>;
+    translations: {
+        key1: string;
+        key2: string;
+        foo: {
+            bar: {
+                age: number;
+            }
+        }
+    };
+    isLanded?: boolean;
+    person: Person;
 }
-//     num: number;
-//     literal: {
-//         key1: string;
-//         key2: string;
-//     };
-//     arraySimple: string[];
-//     arrayComplex: Array<{key1: string, key2: number}>;
 
-//     tupSimple: [string, string, number];
-//     tupComplex: [number, string, {key1: string}];
-//     address: Address;
-// }
-
-// interface Address {
-//     streetName: string;
-//     houseNumber: number;
-// }
+interface Person {
+    name: string;
+    age: number;
+}
