@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.0.4] - 2022-09-14
+### Fixed
+- Windows can correctly target the lumis CLI with npm link (symlinks)
+
 ## 0.0.3 - 2022-09-13
 ### Added
 - Changelog
