@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import { JSDocTagStructure } from 'ts-morph';
 import { generateDocs } from './../../src/compiler/generators/method';
 
-describe('Method Docs', function () {
+describe('Method Docs', () => {
 	it('Should create a doc object correctly', function () {
 		const docs = generateDocs('test-doc');
 		const tags: JSDocTagStructure[] = docs.tags as JSDocTagStructure[];

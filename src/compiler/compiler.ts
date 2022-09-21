@@ -39,8 +39,13 @@ export async function compile(entryPoint: string): Promise<void> {
 
 	// create source file for the interfaces
 	const writeSourceFile = writeProject.createSourceFile(
-		fileConfig.srcFile, 'import { options } from "./utils/types";', { overwrite: true, }
+		fileConfig.srcFile, '', { overwrite: true, }
 	);
+	writeSourceFile.addStatements([
+		'import { faker } from "@faker-js/faker"',
+		'import { options } from "./utils/types"',
+		'import { fakeType } from "./utils/utils"',
+	]);
 
 	// need to find a way to create the factory here so I can automatically create an object from an interface
 	const importDeclarations: string[] = [];
@@ -62,11 +67,11 @@ export async function compile(entryPoint: string): Promise<void> {
 
 		// create the class methods
 		const createMethod = generateCreateMethod(newClass, 'create', interfaceName);
-		// const fakeMethod = generateFakeMethod(newClass, 'fake', interfaceName);
+		const fakeMethod = generateFakeMethod(newClass, 'fake', interfaceName);
 
 		// create functional statements
 		createMethod.addStatements('return options;');
-		// fakeMethod.addStatements([createFakeFunction(properties)]);
+		fakeMethod.addStatements([createFakeFunction(interfaceName)]);
 	}
 
 	// create source file for the exports

@@ -1,8 +1,9 @@
 import { ClassDeclaration, PropertySignature, SourceFile } from 'ts-morph';
-import { createSchemaObject } from './object';
+import { createFakeObject, createSchemaObject } from './object';
 
 export function generateClass(sourceFile: SourceFile, className: string, properties: PropertySignature[]): ClassDeclaration {
 	const objectSchema = createSchemaObject(properties);
+	const fakeSchema = createFakeObject(properties);
 
 	const factoryClass = sourceFile.addClass({
 		isDefaultExport: false,
@@ -14,6 +15,12 @@ export function generateClass(sourceFile: SourceFile, className: string, propert
 				isStatic: true,
 				type: className,
 				initializer: objectSchema
+			},
+			{ 
+				name: 'fakeSchema', 
+				isStatic: true,
+				type: className,
+				initializer: fakeSchema
 			}
 		]
 	});
