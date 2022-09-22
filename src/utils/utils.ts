@@ -1,5 +1,30 @@
 import { ArrayTypeNode, CodeBlockWriter, Node, PropertySignature, SyntaxKind, TupleTypeNode, TypeLiteralNode, TypeReferenceNode } from 'ts-morph';
 
+export enum tsTypes {
+	string,
+	number,
+	boolean,
+	array,
+	tuple,
+	enum,
+	unknown,
+	any,
+	void,
+	null,
+	undefined,
+	never,
+	object,
+	union,
+	bigint,
+	symbol
+}
+
+export interface rawType {
+	key: string;
+	type: tsTypes;
+	children: rawType[];
+}
+
 export function traverseProperty(property: PropertySignature) {
 	return traverseNodes(property);
 }

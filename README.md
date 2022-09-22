@@ -130,7 +130,8 @@ $ npm test
 ```
 
 ## Known Bugs
-- cli lumis command not recognised on windows (npm link)
+- Nullkeyword isn't being recognised in the looper
+
 
 
 ## Contributing
@@ -158,3 +159,6 @@ See also the list of [contributors](https://github.com/megmut/lumis/contributors
 
 [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) © Nicholas Mordecai
 =======
+
+##### Notes To Self
+- If a nested structure is optional, a config should be set to allow that nested property to be or not to be generated
