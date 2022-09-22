@@ -7,23 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 0.0.5 - 2022-09-22
+### Added
+- Added tests to start to cover the recursive type lookup
+
 ### Changed
 - Re-wrote the recursive type lookup
 - Bump @typescript-eslint/parser from 5.37.0 to 5.38.0
 - Bump nodemon from 2.0.19 to 2.0.20
 - Bump @typescript-eslint/eslint-plugin from 5.37.0 to 5.38.0
 
-### Added
-- Added tests to start to cover the recursive type lookup
-
-## [0.0.4] - 2022-09-14
-### Fixed
-- Windows can correctly target the lumis CLI with npm link (symlinks)
-
+## 0.0.4 - 2022-09-14
 ### Changed
 - Changed @types/node from 18.7.17 to 18.7.18
 
-## [0.0.3] - 2022-09-13
+### Fixed
+- Windows can correctly target the lumis CLI with npm link (symlinks)
 
+## 0.0.3 - 2022-09-13
 ### Added
 - Changelog
