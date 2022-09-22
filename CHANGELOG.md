@@ -11,8 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 Re-wrote the recursive type lookup + tests
-Changed @types/node from 18.7.17 to 18.7.18 (PR#20)
-
+Bump @types/node from 18.7.17 to 18.7.18 #20
+Bump @typescript-eslint/parser from 5.37.0 to 5.38.0 #23
+Bump nodemon from 2.0.19 to 2.0.20 #21
+Bump @typescript-eslint/eslint-plugin from 5.37.0 to 5.38.0 #22
 
 ## [0.0.3] - 2022-09-13
 ### Added
