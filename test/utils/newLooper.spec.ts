@@ -95,4 +95,25 @@ describe('new looper test', () => {
 		expect(rawType).to.deep.equal(assertion);
 	});
 
+	// it('Should return one raw type from an array (generic)', () => {
+	// 	const { sourceFile } = testProject();
+
+	// 	const testInterface = sourceFile.insertInterface(0, {
+	// 		name: 'ITest',
+	// 		properties: [
+	// 			{ name: 'scores', type: 'Array<number>' }
+	// 		]
+	// 	});
+
+	// 	const rawType = traverseProperty(testInterface.getProperties()[0]);
+	// 	const assertion: RawType = { 
+	// 		key: 'scores', type: tsTypes.array, children: [
+	// 			{ key: null, type: tsTypes.number, children: [] },
+	// 		]
+	// 	};
+
+	// 	expect(testInterface).instanceOf(InterfaceDeclaration);
+	// 	expect(rawType).to.deep.equal(assertion);
+	// });
+
 });

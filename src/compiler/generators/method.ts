@@ -1,4 +1,5 @@
-import { ClassDeclaration, JSDocStructure, MethodDeclaration, OptionalKind } from 'ts-morph';
+import { ClassDeclaration, MethodDeclaration } from 'ts-morph';
+import { generateDocs } from './docs';
 
 export function generateCreateMethod(
 	classDeclaration: ClassDeclaration,
@@ -23,6 +24,13 @@ export function generateCreateMethod(
 	return newMethod;
 }
 
+/**
+ * This is what generates a method that will be used to fake an interface instance
+ * @param classDeclaration 
+ * @param name 
+ * @param returnType 
+ * @returns 
+ */
 export function generateFakeMethod(
 	classDeclaration: ClassDeclaration,
 	name: string,
@@ -46,21 +54,4 @@ export function generateFakeMethod(
 	return newMethod;
 }
 
-export function generateDocs(name: string): OptionalKind<JSDocStructure> {
-	return {
-		tags: [
-			{
-				tagName: 'description',
-				text: `Create a new object instance from the ${name} interface.`
-			},
-			{
-				tagName: 'param',
-				text: `{${name}Options} options`
-			},
-			{
-				tagName: 'returns',
-				text: `{${name}}`,
-			},
-		],
-	};
-}
+

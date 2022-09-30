@@ -16,13 +16,18 @@ export enum tsTypes {
 	object,
 	union,
 	bigint,
-	symbol
+	symbol,
+	typeReference
 }
 
 export interface RawType {
 	key: string | null;
 	type: tsTypes;
 	children: RawType[] | undefined;
+}
+
+export function recursivlyTraverse() {
+	
 }
 
 export function traverseProperty(property: PropertySignature): RawType | undefined {
@@ -57,7 +62,6 @@ export function traverseProperty(property: PropertySignature): RawType | undefin
 					type: internalType,
 					children: children
 				};
-				// cast here as we know it's a typeLiteral - maybe refactor?
 			}
 
 			/**
@@ -66,7 +70,9 @@ export function traverseProperty(property: PropertySignature): RawType | undefin
 			if(internalType === tsTypes.array) {
 				const element = (node as ArrayTypeNode).getElementTypeNode();
 				const elementType = mapTypes(element.getKind());
-				if(elementType === undefined) return undefined;
+				if(elementType === undefined) {
+					return undefined;
+				}
 
 				return {
 					key: identifier.getText(),
@@ -235,5 +241,7 @@ function mapTypes(kind: SyntaxKind): tsTypes | undefined {
 		return tsTypes.object;
 	case SyntaxKind.ArrayType :
 		return tsTypes.array;
+	case SyntaxKind.TypeReference :
+		return tsTypes.typeReference;
 	}
 }
