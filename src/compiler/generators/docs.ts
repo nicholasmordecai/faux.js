@@ -1,4 +1,4 @@
-import { JSDocStructure, OptionalKind } from "ts-morph";
+import { JSDocStructure, OptionalKind } from 'ts-morph';
 
 export function generateDocs(name: string): OptionalKind<JSDocStructure> {
 	return {

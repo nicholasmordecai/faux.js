@@ -5,7 +5,7 @@ import { generateFakeMethod } from '../../src/compiler/generators/fake';
 import { testProject } from '../utils';
 
 describe('Fake', function () {
-	it.only('Should return a faked object from an interface', () => {
+	it('Should return a faked object from an interface', () => {
 		const { sourceFile } = testProject();
 
 		const testInterface = sourceFile.insertInterface(0, {
