@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { JSDocTagStructure } from 'ts-morph';
-import { generateDocs } from './../../src/compiler/generators/method';
+import { generateDocs } from './../../src/compiler/generators/docs';
 
 describe('Method Docs', () => {
 	it('Should create a doc object correctly', function () {

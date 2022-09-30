@@ -1,4 +1,4 @@
-import { ArrayTypeNode, PropertySignature, SyntaxKind, TupleTypeNode, TypeLiteralNode } from 'ts-morph';
+import { ArrayTypeNode, PropertySignature, SyntaxKind, TypeLiteralNode } from 'ts-morph';
 
 export enum tsTypes {
 	string,
@@ -16,7 +16,8 @@ export enum tsTypes {
 	object,
 	union,
 	bigint,
-	symbol
+	symbol,
+	typeReference
 }
 
 export interface RawType {
@@ -24,6 +25,10 @@ export interface RawType {
 	type: tsTypes;
 	children: RawType[] | undefined;
 }
+
+// export function recursivlyTraverse() {
+	
+// }
 
 export function traverseProperty(property: PropertySignature): RawType | undefined {
 	const identifier = property.getFirstChildByKind(SyntaxKind.Identifier);
@@ -57,7 +62,6 @@ export function traverseProperty(property: PropertySignature): RawType | undefin
 					type: internalType,
 					children: children
 				};
-				// cast here as we know it's a typeLiteral - maybe refactor?
 			}
 
 			/**
@@ -66,7 +70,9 @@ export function traverseProperty(property: PropertySignature): RawType | undefin
 			if(internalType === tsTypes.array) {
 				const element = (node as ArrayTypeNode).getElementTypeNode();
 				const elementType = mapTypes(element.getKind());
-				if(elementType === undefined) return undefined;
+				if(elementType === undefined) {
+					return undefined;
+				}
 
 				return {
 					key: identifier.getText(),
@@ -128,63 +134,63 @@ export function traverseProperty(property: PropertySignature): RawType | undefin
 	return undefined;
 }
 
-function constructFromLiteralType(literalNode: TypeLiteralNode): RawType[] {
-	const rawTypes: RawType[] = [];
-	literalNode.getProperties().forEach((property) => {
-		const rawType = traverseProperty(property);
-		if(rawType) {
-			rawTypes.push(rawType);
-		}
-	});
-	return rawTypes;
-}
+// function constructFromLiteralType(literalNode: TypeLiteralNode): RawType[] {
+// 	const rawTypes: RawType[] = [];
+// 	literalNode.getProperties().forEach((property) => {
+// 		const rawType = traverseProperty(property);
+// 		if(rawType) {
+// 			rawTypes.push(rawType);
+// 		}
+// 	});
+// 	return rawTypes;
+// }
 
-function handleArrayProperty(node: PropertySignature): RawType | undefined {
-	// handles cases like string[] or interface[]
-	const arrayTypeNode = node.getFirstChildByKind(SyntaxKind.ArrayType);
-	if(arrayTypeNode) {
-		return { 
-			key: node.getName(),
-			type: tsTypes.array,
-			children: loopArrayType(arrayTypeNode)
-		};
-	}
+// function handleArrayProperty(node: PropertySignature): RawType | undefined {
+// 	// handles cases like string[] or interface[]
+// 	const arrayTypeNode = node.getFirstChildByKind(SyntaxKind.ArrayType);
+// 	if(arrayTypeNode) {
+// 		return { 
+// 			key: node.getName(),
+// 			type: tsTypes.array,
+// 			children: loopArrayType(arrayTypeNode)
+// 		};
+// 	}
 
-	// handles cases like Array<string>
-	// const typeReference = node.getFirstChildByKind(SyntaxKind.TypeReference);
-	// if(typeReference) {
-	// 	return loopThroughComplexArrayType(typeReference);
-	// }
-}
+// 	// handles cases like Array<string>
+// 	// const typeReference = node.getFirstChildByKind(SyntaxKind.TypeReference);
+// 	// if(typeReference) {
+// 	// 	return loopThroughComplexArrayType(typeReference);
+// 	// }
+// }
 
-function loopArrayType(arrayTypeNode: ArrayTypeNode): RawType[] | undefined {
-	const child = arrayTypeNode.getFirstChildByKind(SyntaxKind.TypeReference);
-	if(!child) return undefined;
-	const arrayProperty = mapTypes(child.getKind());
+// function loopArrayType(arrayTypeNode: ArrayTypeNode): RawType[] | undefined {
+// 	const child = arrayTypeNode.getFirstChildByKind(SyntaxKind.TypeReference);
+// 	if(!child) return undefined;
+// 	const arrayProperty = mapTypes(child.getKind());
 
-	if(!arrayProperty) return undefined;
-	return [{
-		key: null,
-		type: arrayProperty,
-		children: []
-	}];
-}
+// 	if(!arrayProperty) return undefined;
+// 	return [{
+// 		key: null,
+// 		type: arrayProperty,
+// 		children: []
+// 	}];
+// }
 
-function loopTupleType(tupleNode: TupleTypeNode): RawType[] | undefined {
-	const typeArray: RawType[] = [];
-	tupleNode.getElements().forEach((node) => {
-		const type = node.getType();
-		if(!type) return undefined;
-		const kind = node.getKind();
-		return {
-			key: null,
-			type: mapTypes(kind),
-			children: []
-		};
-	});
+// function loopTupleType(tupleNode: TupleTypeNode): RawType[] | undefined {
+// 	const typeArray: RawType[] = [];
+// 	tupleNode.getElements().forEach((node) => {
+// 		const type = node.getType();
+// 		if(!type) return undefined;
+// 		const kind = node.getKind();
+// 		return {
+// 			key: null,
+// 			type: mapTypes(kind),
+// 			children: []
+// 		};
+// 	});
 	
-	return typeArray;
-}
+// 	return typeArray;
+// }
 
 // function loopThroughComplexArrayType(typeReference: TypeReferenceNode) {
 // 	const writer = new CodeBlockWriter({ useTabs: true });
@@ -235,5 +241,7 @@ function mapTypes(kind: SyntaxKind): tsTypes | undefined {
 		return tsTypes.object;
 	case SyntaxKind.ArrayType :
 		return tsTypes.array;
+	case SyntaxKind.TypeReference :
+		return tsTypes.typeReference;
 	}
 }
