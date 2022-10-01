@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Bump @types/yargs from 17.0.12 to 17.0.13
+
 ## 0.0.6 - 2022-09-30
 ### Added
 - Added the beginning of the fake function to start generating fake interface instances
