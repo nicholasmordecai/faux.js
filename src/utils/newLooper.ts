@@ -29,7 +29,7 @@ export interface RawType {
 export function recursivlyTraverse(properties: PropertySignature[]): RawType[] | undefined {
 	const rawTypes: any = [];
 
-	for (let property of properties) {
+	for (const property of properties) {
 		const identifier = property.getFirstChildByKind(SyntaxKind.Identifier);
 		if (!identifier) {
 			return undefined;
@@ -221,41 +221,41 @@ export function traverseProperty(property: PropertySignature): RawType | undefin
 
 function mapTypes(kind: SyntaxKind): tsTypes | undefined {
 	switch (kind) {
-		case SyntaxKind.StringKeyword:
-			return tsTypes.string;
-		case SyntaxKind.NumberKeyword:
-			return tsTypes.number;
-		case SyntaxKind.BooleanKeyword:
-			return tsTypes.boolean;
-		case SyntaxKind.TupleType:
-			return tsTypes.tuple;
-		case SyntaxKind.EnumKeyword:
-			return tsTypes.enum;
-		case SyntaxKind.UnknownKeyword:
-			return tsTypes.unknown;
-		case SyntaxKind.AnyKeyword:
-			return tsTypes.any;
-		case SyntaxKind.VoidKeyword:
-			return tsTypes.void;
+	case SyntaxKind.StringKeyword:
+		return tsTypes.string;
+	case SyntaxKind.NumberKeyword:
+		return tsTypes.number;
+	case SyntaxKind.BooleanKeyword:
+		return tsTypes.boolean;
+	case SyntaxKind.TupleType:
+		return tsTypes.tuple;
+	case SyntaxKind.EnumKeyword:
+		return tsTypes.enum;
+	case SyntaxKind.UnknownKeyword:
+		return tsTypes.unknown;
+	case SyntaxKind.AnyKeyword:
+		return tsTypes.any;
+	case SyntaxKind.VoidKeyword:
+		return tsTypes.void;
 		// case SyntaxKind.NullKeyword : -- null type isn't working as it's being displayed as a literal rather than syntaxKind.NullKeyword
 		// 	return tsTypes.null;
-		case SyntaxKind.UndefinedKeyword:
-			return tsTypes.undefined;
-		case SyntaxKind.NeverKeyword:
-			return tsTypes.never;
+	case SyntaxKind.UndefinedKeyword:
+		return tsTypes.undefined;
+	case SyntaxKind.NeverKeyword:
+		return tsTypes.never;
 		// case SyntaxKind.ObjectKeyword : -- this shouldn't exist here as if it's an object, it should be dealt with recursivly
 		// 	return tsTypes.object;
 		// case SyntaxKind.UnionType : -- this is the type, not the keyword. Needs investigation
 		// 	return tsTypes.union;
-		case SyntaxKind.BigIntKeyword:
-			return tsTypes.bigint;
-		case SyntaxKind.SymbolKeyword:
-			return tsTypes.symbol;
-		case SyntaxKind.TypeLiteral:
-			return tsTypes.object;
-		case SyntaxKind.ArrayType:
-			return tsTypes.array;
-		case SyntaxKind.TypeReference:
-			return tsTypes.typeReference;
+	case SyntaxKind.BigIntKeyword:
+		return tsTypes.bigint;
+	case SyntaxKind.SymbolKeyword:
+		return tsTypes.symbol;
+	case SyntaxKind.TypeLiteral:
+		return tsTypes.object;
+	case SyntaxKind.ArrayType:
+		return tsTypes.array;
+	case SyntaxKind.TypeReference:
+		return tsTypes.typeReference;
 	}
 }

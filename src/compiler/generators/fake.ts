@@ -14,13 +14,13 @@ export function generateFakeMethod(schema: RawType[]) {
 
 export function generateFakeFromType(rawType: RawType) {
 	switch (rawType.type) {
-		case tsTypes.string:
-			return '"absdefg"';
-		case tsTypes.number:
-			return 123;
-		case tsTypes.boolean:
-			return true;
-		case tsTypes.bigint:
-			return `BigInt("900719925474099145665")`;
+	case tsTypes.string:
+		return '"absdefg"';
+	case tsTypes.number:
+		return 123;
+	case tsTypes.boolean:
+		return true;
+	case tsTypes.bigint:
+		return 'BigInt("900719925474099145665")';
 	}
 }
