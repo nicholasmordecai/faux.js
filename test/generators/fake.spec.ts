@@ -22,7 +22,6 @@ describe('Fake', function () {
 		if (rawTypes !== undefined) {
 			const fakeMethod = generateFakeMethod(rawTypes);
 			const fakeMethodResult = fakeMethod();
-			console.log(fakeMethod.toString())
 
 			// check string
 			expect(fakeMethodResult).to.haveOwnProperty('name');

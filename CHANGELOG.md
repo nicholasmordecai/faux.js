@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- bigint type now supported
+
+### Changed
+- Bump @types/node from 18.7.19 to 18.8.3
+- Bump chalk from 5.0.1 to 5.1.0
+- Bump @typescript-eslint/eslint-plugin from 5.38.0 to 5.39.0
+- Bump @typescript-eslint/parser from 5.38.0 to 5.39.0
+- Bump eslint from 8.23.1 to 8.24.0
+- Bump typescript from 4.8.3 to 4.8.4
+
 ## 0.0.7 - 2022-10-01
 ### Changed
 - Bump @types/yargs from 17.0.12 to 17.0.13
