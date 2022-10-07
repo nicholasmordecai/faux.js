@@ -3,3 +3,5 @@ node_modules
 src/index.ts
 src/factory/index.ts
 dev/compiled
+coverage/
+.nyc_output/

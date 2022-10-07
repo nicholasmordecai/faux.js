@@ -16,6 +16,7 @@
     "build:watch": "tsc -w",
     "test": "mocha --require ts-node/register test/**/*.spec.ts",
     "test:watch": "mocha --require ts-node/register --watch --watch-files test/**/*.spec.ts,src/**/* test/**/*.spec.ts",
+    "test:coverage": "nyc npm run test",
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint --ext .ts . --fix",
     "dev:start": "cross-env NODE_ENV=dev ts-node src/cli/index.ts -f ./dev/types/**/*",
@@ -29,6 +30,7 @@
     "yargs": "^17.5.1"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.3",
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.0",
@@ -41,6 +43,25 @@
     "eslint": "^8.23.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
+    "nyc": "^15.1.0",
     "ts-node": "^10.9.1"
-  }
+  },
+  "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "check-coverage": true,
+    "all": true,
+    "include": [
+        "src/**/!(*.test.*).[tj]s?(x)"
+    ],
+    "exclude": [
+        "src/_tests_/**/*.*"
+    ],
+    "reporter": [
+        "html",
+        "lcov",
+        "text",
+        "text-summary"
+    ],
+    "report-dir": "coverage"
+}
 }
