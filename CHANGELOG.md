@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Test coverage with NYC & Istanbul
+
+### Changed
+- Bump yargs from 17.5.1 to 17.6.0
+- Bump @types/mocha from 9.1.1 to 10.0.0
+
 ## 0.0.8 - 2022-10-06
 ### Added
 - bigint type now supported
