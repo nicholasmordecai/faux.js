@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Test coverage with NYC & Istanbul
+- Github action to submit coverage reports
 
 ### Changed
 - Bump yargs from 17.5.1 to 17.6.0

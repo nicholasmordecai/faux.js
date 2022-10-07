@@ -2,6 +2,7 @@
 [![<megmut>](https://circleci.com/gh/megmut/lumis.svg?style=svg)](https://app.circleci.com/pipelines/github/megmut/lumis?branch=master)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![npm](https://img.shields.io/npm/v/lumis?style=flat-square)
+[![Coverage Status](https://coveralls.io/repos/github/megmut/lumis/badge.svg?branch=master)](https://coveralls.io/github/megmut/lumis?branch=master)
 
 # Lumis
 ## Automatically create factory and fake data from typescript interfaces
