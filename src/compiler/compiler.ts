@@ -1,13 +1,11 @@
-import { InterfaceDeclaration, ModuleResolutionKind, Project } from 'ts-morph';
+import { EmitResult, InterfaceDeclaration, ModuleResolutionKind, Project } from 'ts-morph';
 import { generateClass } from './generators/class';
 
 import { createFakeFunction } from './generators/function';
 import { generateInterface, generateOptionalInterface } from './generators/interface';
 import { generateCreateMethod, generateFakeMethod } from './generators/method';
 
-export async function compile(entryPoint: string, inMemory: boolean = false): Promise<void> {
-	const project = new Project();
-	project.addSourceFilesAtPaths(entryPoint);
+export async function compile(project: Project): Promise<EmitResult> {
 	project.resolveSourceFileDependencies();
 
 	const nodeEnv = process.env.NODE_ENV;
@@ -20,7 +18,6 @@ export async function compile(entryPoint: string, inMemory: boolean = false): Pr
 
 	// instatiate a new project, to be written into the factory directory
 	const writeProject = new Project({
-		useInMemoryFileSystem: inMemory,
 		skipAddingFilesFromTsConfig: true,
 		compilerOptions: {
 			outDir: fileConfig.outDir,
@@ -99,5 +96,5 @@ export async function compile(entryPoint: string, inMemory: boolean = false): Pr
 
 	writeProject.addSourceFilesAtPaths('./src/factory/utils/**/*{.d.ts,.ts}');
 	await writeProject.save();
-	await writeProject.emit();
+	return writeProject.emit();
 }
