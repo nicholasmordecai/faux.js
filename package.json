@@ -14,8 +14,8 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc -w",
-    "test": "mocha --require ts-node/register test/**/*.spec.ts",
-    "test:watch": "mocha --require ts-node/register --watch --watch-files test/**/*.spec.ts,src/**/* test/**/*.spec.ts",
+    "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\"",
+    "test:watch": "mocha --require ts-node/register --recursive --watch --watch-files \"test/**/*.spec.ts\",\"src/**/*\" \"test/**/*.spec.ts\"",
     "test:coverage": "nyc npm run test",
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint --ext .ts . --fix",
@@ -51,18 +51,18 @@
     "check-coverage": true,
     "all": true,
     "include": [
-        "src/**/!(*.test.*).[tj]s?(x)"
+      "src/**/!(*.test.*).[tj]s?(x)"
     ],
     "exclude": [
-        "src/_tests_/**/*.*"
+      "src/_tests_/**/*.*"
     ],
     "reporter": [
-        "html",
-        "lcov",
-        "text",
-        "text-summary"
+      "html",
+      "lcov",
+      "text",
+      "text-summary"
     ],
     "report-dir": "coverage",
     "lines": 0
-}
+  }
 }

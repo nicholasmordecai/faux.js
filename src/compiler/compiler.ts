@@ -5,7 +5,7 @@ import { createFakeFunction } from './generators/function';
 import { generateInterface, generateOptionalInterface } from './generators/interface';
 import { generateCreateMethod, generateFakeMethod } from './generators/method';
 
-export async function compile(entryPoint: string): Promise<void> {
+export async function compile(entryPoint: string, inMemory: boolean = false): Promise<void> {
 	const project = new Project();
 	project.addSourceFilesAtPaths(entryPoint);
 	project.resolveSourceFileDependencies();
@@ -20,6 +20,7 @@ export async function compile(entryPoint: string): Promise<void> {
 
 	// instatiate a new project, to be written into the factory directory
 	const writeProject = new Project({
+		useInMemoryFileSystem: inMemory,
 		skipAddingFilesFromTsConfig: true,
 		compilerOptions: {
 			outDir: fileConfig.outDir,
@@ -41,6 +42,7 @@ export async function compile(entryPoint: string): Promise<void> {
 	const writeSourceFile = writeProject.createSourceFile(
 		fileConfig.srcFile, '', { overwrite: true, }
 	);
+	
 	writeSourceFile.addStatements([
 		'import { faker } from "@faker-js/faker"',
 		'import { options } from "./utils/types"',
