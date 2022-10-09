@@ -1,13 +1,11 @@
-import { InterfaceDeclaration, ModuleResolutionKind, Project } from 'ts-morph';
+import { EmitResult, InterfaceDeclaration, ModuleResolutionKind, Project } from 'ts-morph';
 import { generateClass } from './generators/class';
 
 import { createFakeFunction } from './generators/function';
 import { generateInterface, generateOptionalInterface } from './generators/interface';
 import { generateCreateMethod, generateFakeMethod } from './generators/method';
 
-export async function compile(entryPoint: string): Promise<void> {
-	const project = new Project();
-	project.addSourceFilesAtPaths(entryPoint);
+export async function compile(project: Project): Promise<EmitResult> {
 	project.resolveSourceFileDependencies();
 
 	const nodeEnv = process.env.NODE_ENV;
@@ -41,6 +39,7 @@ export async function compile(entryPoint: string): Promise<void> {
 	const writeSourceFile = writeProject.createSourceFile(
 		fileConfig.srcFile, '', { overwrite: true, }
 	);
+	
 	writeSourceFile.addStatements([
 		'import { faker } from "@faker-js/faker"',
 		'import { options } from "./utils/types"',
@@ -97,5 +96,5 @@ export async function compile(entryPoint: string): Promise<void> {
 
 	writeProject.addSourceFilesAtPaths('./src/factory/utils/**/*{.d.ts,.ts}');
 	await writeProject.save();
-	await writeProject.emit();
+	return writeProject.emit();
 }
