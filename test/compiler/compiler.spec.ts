@@ -18,8 +18,8 @@ describe('Compiler Tests', () => {
 		});
 
 		const result = compile(project).then(() => {
-            expect(result).not.to.be.undefined;
-            done();
-        });
+			expect(result).not.to.be.undefined;
+			done();
+		});
 	});
 });
