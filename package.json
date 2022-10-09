@@ -14,8 +14,8 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc -w",
-    "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\"",
-    "test:watch": "mocha --require ts-node/register --recursive --watch --watch-files \"test/**/*.spec.ts\",\"src/**/*\" \"test/**/*.spec.ts\"",
+    "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\" --timeout 5000",
+    "test:watch": "mocha --require ts-node/register --recursive --watch --watch-files \"test/**/*.spec.ts\",\"src/**/*\" \"test/**/*.spec.ts\" --timeout 5000",
     "test:coverage": "nyc npm run test",
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint --ext .ts . --fix",
