@@ -43,7 +43,7 @@ export async function compile(project: Project): Promise<EmitResult> {
 	writeSourceFile.addStatements([
 		'import { faker } from "@faker-js/faker"',
 		'import { options } from "./utils/types"',
-		'import { fakeType } from "./utils/utils"',
+		'import * as Utils from "./utils/utils"',
 	]);
 
 	// need to find a way to create the factory here so I can automatically create an object from an interface

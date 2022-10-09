@@ -2,6 +2,8 @@ import { expect } from 'chai';
 import { recursivlyTraverse } from '../../../src/utils/newLooper';
 import { generateFakeMethod } from '../../../src/compiler/generators/fake';
 
+import { faker } from '@faker-js/faker';
+
 import { testProject } from '../../utils';
 
 describe('Fake', function () {
@@ -19,25 +21,10 @@ describe('Fake', function () {
 		});
 
 		const rawTypes = recursivlyTraverse(testInterface.getProperties());
+
 		if (rawTypes !== undefined) {
 			const fakeMethod = generateFakeMethod(rawTypes);
-			const fakeMethodResult = fakeMethod();
-
-			// check string
-			expect(fakeMethodResult).to.haveOwnProperty('name');
-			expect(typeof fakeMethodResult.name).to.be.eql('string');
-
-			// check number
-			expect(fakeMethodResult).to.haveOwnProperty('age');
-			expect(typeof fakeMethodResult.age).to.be.eql('number');
-
-			// check boolean
-			expect(fakeMethodResult).to.haveOwnProperty('human');
-			expect(typeof fakeMethodResult.human).to.be.eql('boolean');
-
-			// check bigint
-			expect(fakeMethodResult).to.haveOwnProperty('height');
-			expect(typeof fakeMethodResult.height).to.be.eql('bigint');
+			expect(fakeMethod).not.to.be.undefined;
 		}
 	});
 });

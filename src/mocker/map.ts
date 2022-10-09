@@ -19,6 +19,10 @@ export function name(): string {
 export function age(): number {
 	return faker.datatype.number({ min: 1, max: 120 });
 }
+
+export function bigint(): bigint {
+	return faker.datatype.bigInt()
+}
   
 export function randn_bm(seed: number) {
 	const u = 1 - mulberry32(seed)();

@@ -5,11 +5,12 @@ export function testProject(): { project: Project, sourceFile: SourceFile } {
 		skipAddingFilesFromTsConfig: true,
 		compilerOptions: {
 			useInMemoryFileSystem: true,
-			declaration: true,
-			sourceMap: true,
+			declaration: false,
+			sourceMap: false,
 			moduleResolution: ModuleResolutionKind.Classic,
 		},
 	});
+	
 	const sourceFile = project.createSourceFile('index.ts');
 
 	return {
