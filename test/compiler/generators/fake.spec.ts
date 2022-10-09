@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import { recursivlyTraverse } from '../../src/utils/newLooper';
-import { generateFakeMethod } from '../../src/compiler/generators/fake';
+import { recursivlyTraverse } from '../../../src/utils/newLooper';
+import { generateFakeMethod } from '../../../src/compiler/generators/fake';
 
-import { testProject } from '../utils';
+import { testProject } from '../../utils';
 
 describe('Fake', function () {
 	it('Should return a faked object from an interface', () => {
