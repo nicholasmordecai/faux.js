@@ -1,0 +1,1 @@
+export * as Mocker from './map';

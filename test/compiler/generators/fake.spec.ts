@@ -1,13 +1,12 @@
 import { expect } from 'chai';
 import { recursivlyTraverse } from '../../../src/utils/newLooper';
 import { generateFakeMethod } from '../../../src/compiler/generators/fake';
-
-import { faker } from '@faker-js/faker';
+import { Mocker } from '../../../src/mocker';
 
 import { testProject } from '../../utils';
 
 describe('Fake', function () {
-	it('Should return a faked object from an interface', () => {
+	it('Should return a faked object from an interface', async () => {
 		const { sourceFile } = testProject();
 
 		const testInterface = sourceFile.insertInterface(0, {

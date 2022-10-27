@@ -1,6 +1,5 @@
 import { CodeBlockWriter } from 'ts-morph';
 import { RawType } from '../../utils/newLooper';
-import * as Utils from '../../mocker/map';
 
 export enum tsTypes {
 	string,
@@ -25,7 +24,7 @@ export function generateFakeMethod(schema: RawType[]) {
 	const writer = new CodeBlockWriter({ useTabs: true });
 	writer.writeLine('return {');
 	for (const property of schema) {
-		writer.writeLine(`${property.key}: ${generateFakeFromType(property)}(),`);
+		writer.writeLine(`${property.key}: Mocker.${generateFakeFromType(property)}(),`);
 	}
 	writer.writeLine('}');
 	return new Function(writer.toString());
@@ -34,12 +33,12 @@ export function generateFakeMethod(schema: RawType[]) {
 export function generateFakeFromType(rawType: RawType) {
 	switch (rawType.type) {
 		case tsTypes.string:
-			return Utils.string;
+			return 'string';
 		case tsTypes.number:
-			return Utils.number;
+			return 'number';
 		case tsTypes.boolean:
-			return Utils.boolean;
+			return 'boolean';
 		case tsTypes.bigint:
-			return Utils.bigint;
+			return 'bigint';
 	}
 }
