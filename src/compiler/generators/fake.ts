@@ -32,13 +32,13 @@ export function generateFakeMethod(schema: RawType[]) {
 
 export function generateFakeFromType(rawType: RawType) {
 	switch (rawType.type) {
-		case tsTypes.string:
-			return 'datatype.string';
-		case tsTypes.number:
-			return 'datatype.number';
-		case tsTypes.boolean:
-			return 'datatype.boolean';
-		case tsTypes.bigint:
-			return 'datatype.bigint';
+	case tsTypes.string:
+		return 'datatype.string';
+	case tsTypes.number:
+		return 'datatype.number';
+	case tsTypes.boolean:
+		return 'datatype.boolean';
+	case tsTypes.bigint:
+		return 'datatype.bigint';
 	}
 }
