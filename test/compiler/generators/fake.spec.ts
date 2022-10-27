@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import { recursivlyTraverse } from '../../../src/utils/newLooper';
 import { generateFakeMethod } from '../../../src/compiler/generators/fake';
-import { Mocker } from '../../../src/mocker';
 
 import { testProject } from '../../utils';
 
@@ -23,6 +22,7 @@ describe('Fake', function () {
 
 		if (rawTypes !== undefined) {
 			const fakeMethod = generateFakeMethod(rawTypes);
+			console.log(fakeMethod.toString());
 			expect(fakeMethod).not.to.be.undefined;
 		}
 	});

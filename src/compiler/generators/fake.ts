@@ -24,7 +24,7 @@ export function generateFakeMethod(schema: RawType[]) {
 	const writer = new CodeBlockWriter({ useTabs: true });
 	writer.writeLine('return {');
 	for (const property of schema) {
-		writer.writeLine(`${property.key}: Mocker.${generateFakeFromType(property)}(),`);
+		writer.writeLine(`${property.key}: Faker.${generateFakeFromType(property)}(),`);
 	}
 	writer.writeLine('}');
 	return new Function(writer.toString());
@@ -33,12 +33,12 @@ export function generateFakeMethod(schema: RawType[]) {
 export function generateFakeFromType(rawType: RawType) {
 	switch (rawType.type) {
 		case tsTypes.string:
-			return 'string';
+			return 'datatype.string';
 		case tsTypes.number:
-			return 'number';
+			return 'datatype.number';
 		case tsTypes.boolean:
-			return 'boolean';
+			return 'datatype.boolean';
 		case tsTypes.bigint:
-			return 'bigint';
+			return 'datatype.bigint';
 	}
 }
