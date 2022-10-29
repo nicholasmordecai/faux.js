@@ -27,7 +27,7 @@ describe('Command Line Interface', () => {
 		}).to.throw(Error);
 	});
 
-	it.only('Should run complete test', async () => {
+	it('Should run complete test', async () => {
 		mkdirSync('./temp', { recursive: true });
 		const createdFile = writeFileSync('./temp/main.ts', testInterface);
 		try {
