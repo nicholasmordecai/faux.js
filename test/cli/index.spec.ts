@@ -30,17 +30,17 @@ describe('Command Line Interface', () => {
 	it.only('Should run complete test', async () => {
 		mkdirSync('./temp', { recursive: true });
 		const createdFile = writeFileSync('./temp/main.ts', testInterface);
-        try {
-            const compileResult = cli("--file=./temp/main.ts --out=./temp/result");
-            // null check here is to ensure a process exit code 0
-            expect(compileResult).to.be.null;
-        } catch(error) {
-            expect(error).to.not.be.null;
-        }
+		try {
+			const compileResult = cli('--file=./temp/main.ts --out=./temp/result');
+			// null check here is to ensure a process exit code 0
+			expect(compileResult).to.be.null;
+		} catch(error) {
+			expect(error).to.not.be.null;
+		}
 		const runnerFile = writeFileSync('./temp/run.ts', testFn);
 		const runResult = runFn('');
-        expect(JSON.parse(runResult)).to.deep.equal({
-            userName: 'heyyy'
-        })
+		expect(JSON.parse(runResult)).to.deep.equal({
+			userName: 'heyyy'
+		});
 	});
 });
