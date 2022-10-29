@@ -1,15 +1,15 @@
 import { CodeBlockWriter, PropertySignature } from 'ts-morph';
-import { traverseProperty }  from '../../utils/utils';
+import { traverseProperty }  from '../../utils/newLooper';
 
 export function createSchemaObject(properties: PropertySignature[]): string {
 	const writer = new CodeBlockWriter({ useTabs: true });
 	const codeBlock =  writer.write('').block(() => {
 		properties.map((property) => {
 			const type = traverseProperty(property);
-			return writer.writeLine(`${property.getName()}: ${type},`);
+			console.log(type);
+			return writer.writeLine(`${property.getName()}: ${'string'},`);
 		});
 	}).toString();
-
 	return codeBlock;
 }
 

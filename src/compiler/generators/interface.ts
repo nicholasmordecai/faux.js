@@ -1,8 +1,7 @@
 import { InterfaceDeclaration, SourceFile, SyntaxKind } from 'ts-morph';
 
 export function generateInterface(sourceFile: SourceFile, referenceInterface: InterfaceDeclaration): InterfaceDeclaration | undefined {
-	const identifier = referenceInterface.getFirstChildByKind(SyntaxKind.Identifier);
-	if(!identifier) return undefined;
+	const identifier = referenceInterface.getFirstChildByKindOrThrow(SyntaxKind.Identifier);
 
 	const newInterface = sourceFile.addInterface({
 		name: identifier.getText(),

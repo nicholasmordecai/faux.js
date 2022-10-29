@@ -5,7 +5,7 @@ import { generateFakeMethod } from '../../../src/compiler/generators/fake';
 import { testProject } from '../../utils';
 
 describe('Fake', function () {
-	it('Should return a faked object from an interface', () => {
+	it('Should return a faked object from an interface', async () => {
 		const { sourceFile } = testProject();
 
 		const testInterface = sourceFile.insertInterface(0, {
@@ -19,25 +19,11 @@ describe('Fake', function () {
 		});
 
 		const rawTypes = recursivlyTraverse(testInterface.getProperties());
+
 		if (rawTypes !== undefined) {
 			const fakeMethod = generateFakeMethod(rawTypes);
-			const fakeMethodResult = fakeMethod();
-
-			// check string
-			expect(fakeMethodResult).to.haveOwnProperty('name');
-			expect(typeof fakeMethodResult.name).to.be.eql('string');
-
-			// check number
-			expect(fakeMethodResult).to.haveOwnProperty('age');
-			expect(typeof fakeMethodResult.age).to.be.eql('number');
-
-			// check boolean
-			expect(fakeMethodResult).to.haveOwnProperty('human');
-			expect(typeof fakeMethodResult.human).to.be.eql('boolean');
-
-			// check bigint
-			expect(fakeMethodResult).to.haveOwnProperty('height');
-			expect(typeof fakeMethodResult.height).to.be.eql('bigint');
+			console.log(fakeMethod.toString());
+			expect(fakeMethod).not.to.be.undefined;
 		}
 	});
 });

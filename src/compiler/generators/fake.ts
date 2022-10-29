@@ -1,12 +1,30 @@
 import { CodeBlockWriter } from 'ts-morph';
 import { RawType } from '../../utils/newLooper';
-import { tsTypes } from '../../utils/utils';
+
+export enum tsTypes {
+	string,
+	number,
+	boolean,
+	array,
+	tuple,
+	enum,
+	unknown,
+	any,
+	void,
+	null,
+	undefined,
+	never,
+	object,
+	union,
+	bigint,
+	symbol
+}
 
 export function generateFakeMethod(schema: RawType[]) {
 	const writer = new CodeBlockWriter({ useTabs: true });
 	writer.writeLine('return {');
 	for (const property of schema) {
-		writer.writeLine(`${property.key}: ${generateFakeFromType(property)},`);
+		writer.writeLine(`${property.key}: Faker.${generateFakeFromType(property)}(),`);
 	}
 	writer.writeLine('}');
 	return new Function(writer.toString());
@@ -15,12 +33,12 @@ export function generateFakeMethod(schema: RawType[]) {
 export function generateFakeFromType(rawType: RawType) {
 	switch (rawType.type) {
 	case tsTypes.string:
-		return '"absdefg"';
+		return 'datatype.string';
 	case tsTypes.number:
-		return 123;
+		return 'datatype.number';
 	case tsTypes.boolean:
-		return true;
+		return 'datatype.boolean';
 	case tsTypes.bigint:
-		return 'BigInt("900719925474099145665")';
+		return 'datatype.bigint';
 	}
 }
