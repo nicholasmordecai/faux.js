@@ -13,6 +13,7 @@ async function runCli() {
 	const project = new Project();
 	project.addSourceFilesAtPaths(fileName);
 	await compile(project, outDir);
+	process.exit(0);
 }
 
 runCli();

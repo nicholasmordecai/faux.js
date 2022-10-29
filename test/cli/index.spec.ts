@@ -7,17 +7,17 @@ export interface ITest { userName: string; }
 `;
 
 const cli = (args: any) => {
-	return execSync(`ts-node src/cli/index.ts ${args}`, { stdio: 'inherit' });
+	return execSync(`ts-node src/cli/index.ts ${args}`).toString();
 };
 
 const testFn = `
 import { ITest } from './result/';
 const created = ITest.create({ userName: 'heyyy' });
-console.log(created);
+console.log(JSON.stringify(created));
 `;
 
 const runFn = (args: any) => {
-	return execSync(`ts-node temp/run.ts ${args}`, { stdio: 'inherit' });
+	return execSync(`ts-node temp/run.ts ${args}`).toString();
 };
 
 describe('Command Line Interface', () => {
@@ -27,12 +27,20 @@ describe('Command Line Interface', () => {
 		}).to.throw(Error);
 	});
 
-	it('Should run complete test', async () => {
+	it.only('Should run complete test', async () => {
 		mkdirSync('./temp', { recursive: true });
 		const createdFile = writeFileSync('./temp/main.ts', testInterface);
-		// expect(cli("--file=./temp/main.ts --out=./temp/result")).to.not.be.null;
+        try {
+            const compileResult = cli("--file=./temp/main.ts --out=./temp/result");
+            // null check here is to ensure a process exit code 0
+            expect(compileResult).to.be.null;
+        } catch(error) {
+            expect(error).to.not.be.null;
+        }
 		const runnerFile = writeFileSync('./temp/run.ts', testFn);
 		const runResult = runFn('');
-		console.log(runResult);
+        expect(JSON.parse(runResult)).to.deep.equal({
+            userName: 'heyyy'
+        })
 	});
 });
