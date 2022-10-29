@@ -1,8 +1,10 @@
 {
   "name": "lumis",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Typesafe interface mocking library for pseudo random data",
-  "categories": ["Testing"],
+  "categories": [
+    "Testing"
+  ],
   "keywords": [],
   "author": "Nicholas Mordecai",
   "url": "https://github.com/megmut/lumis",
