@@ -5,7 +5,7 @@ import { createFakeFunction } from './generators/function';
 import { generateInterface, generateOptionalInterface } from './generators/interface';
 import { generateCreateMethod, generateFakeMethod } from './generators/method';
 
-export async function compile(project: Project): Promise<EmitResult> {
+export async function compile(project: Project, outDir: string | null): Promise<EmitResult> {
 	project.resolveSourceFileDependencies();
 
 	const nodeEnv = process.env.NODE_ENV;
@@ -15,6 +15,11 @@ export async function compile(project: Project): Promise<EmitResult> {
 		srcFile: nodeEnv === 'dev' ? './src/factory/index.ts' : '../node_modules/lumis/src/factory/index.ts',
 		rootSrcFile: nodeEnv === 'dev' ? './src/index.ts' : '../node_modules/lumis/src/index.ts',
 	};
+
+	// // override outdir if it's not null
+	if(outDir) {
+		fileConfig.outDir = outDir;
+	}
 
 	// instatiate a new project, to be written into the factory directory
 	const writeProject = new Project({

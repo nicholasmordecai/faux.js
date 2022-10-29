@@ -6,7 +6,8 @@ export function createSchemaObject(properties: PropertySignature[]): string {
 	const codeBlock =  writer.write('').block(() => {
 		properties.map((property) => {
 			const type = traverseProperty(property);
-			return writer.writeLine(`${property.getName()}: ${type},`);
+			console.log(type);
+			return writer.writeLine(`${property.getName()}: ${'string'},`);
 		});
 	}).toString();
 	return codeBlock;

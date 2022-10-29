@@ -17,7 +17,7 @@ describe('Compiler Tests', () => {
 			]
 		});
 
-		const result = compile(project).then(() => {
+		const result = compile(project, null).then(() => {
 			expect(result).not.to.be.undefined;
 			done();
 		});

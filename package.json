@@ -16,6 +16,7 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc -w",
+    "pretest": "npm run build",
     "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\" --timeout 15000",
     "test:watch": "mocha --require ts-node/register --recursive --watch --watch-files \"test/**/*.spec.ts\",\"src/**/*\" \"test/**/*.spec.ts\" --timeout 15000",
     "test:coverage": "nyc npm run test",
