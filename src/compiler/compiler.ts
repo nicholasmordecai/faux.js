@@ -103,7 +103,7 @@ export async function compile(project: Project, outDir: string | null): Promise<
 	);
 
 	const files: string[] = ['types.d.ts', 'enums.ts'];
-	for(let file of files) {
+	for(const file of files) {
 		copyFileSync(`./src/shared/${file}`, `./temp/shared/${file}`);
 	}
 

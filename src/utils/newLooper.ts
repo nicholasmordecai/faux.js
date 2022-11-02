@@ -7,8 +7,9 @@ export interface RawType {
 	children: RawType[] | undefined;
 }
 
+
 export function recursivlyTraverse(properties: PropertySignature[]): RawType[] | undefined {
-	const rawTypes: any = [];
+	const rawTypes: RawType[] = [];
 
 	for (const property of properties) {
 		const identifier = property.getFirstChildByKind(SyntaxKind.Identifier);
@@ -24,6 +25,7 @@ export function recursivlyTraverse(properties: PropertySignature[]): RawType[] |
 
 	return rawTypes;
 }
+
 
 export function traverseProperty(property: PropertySignature): RawType | undefined {
 	const identifier = property.getFirstChildByKind(SyntaxKind.Identifier);

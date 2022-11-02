@@ -2,9 +2,9 @@ import { CodeBlockWriter, PropertySignature } from 'ts-morph';
 import { tsTypes } from '../../shared/enums';
 import { traverseProperty }  from '../../utils/newLooper';
 
-export function createSchemaObject(properties: PropertySignature[]): {string: string, obj: Object} {
+export function createSchemaObject(properties: PropertySignature[]): {string: string, obj: Record<string, unknown>} {
 	const writer = new CodeBlockWriter({ useTabs: true });
-	const obj: {[key: string]: any} = {};
+	const obj: {[key: string]: unknown} = {};
 	const codeBlock =  writer.write('').block(() => {
 		properties.map((property) => {
 			const type = traverseProperty(property);
@@ -13,7 +13,7 @@ export function createSchemaObject(properties: PropertySignature[]): {string: st
 			return writer.writeLine(`${property.getName()}: tsTypes.${tsTypes[type.type]},`);
 		});
 	}).toString();
-	return {string: codeBlock, obj: obj};
+	return { string: codeBlock, obj: obj };
 }
 
 export function createFakeObject(properties: PropertySignature[]) {

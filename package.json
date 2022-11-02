@@ -23,6 +23,7 @@
     "test:coverage": "nyc npm run test",
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint --ext .ts . --fix",
+    "circular-dep-check": "dpdm --exit-code circular:1 ./src/cli/index.ts",
     "dev:start": "cross-env NODE_ENV=dev ts-node src/cli/index.ts -f ./dev/types/**/*",
     "dev:watch": "cross-env NODE_ENV=dev nodemon --watch 'dev/**' --ignore /dev/compiled/** --ext 'ts,d.ts' --exec ts-node src/cli/index.ts -f ./dev/types/**/*"
   },
@@ -44,6 +45,7 @@
     "@typescript-eslint/parser": "^5.36.2",
     "chai": "^4.3.6",
     "cross-env": "^7.0.3",
+    "dpdm": "^3.10.0",
     "eslint": "^8.23.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
