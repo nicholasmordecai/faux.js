@@ -1,24 +1,6 @@
 import { CodeBlockWriter } from 'ts-morph';
 import { RawType } from '../../utils/newLooper';
-
-export enum tsTypes {
-	string,
-	number,
-	boolean,
-	array,
-	tuple,
-	enum,
-	unknown,
-	any,
-	void,
-	null,
-	undefined,
-	never,
-	object,
-	union,
-	bigint,
-	symbol
-}
+import { tsTypes } from '../../shared/enums';
 
 export function generateFakeMethod(schema: RawType[]) {
 	const writer = new CodeBlockWriter({ useTabs: true });

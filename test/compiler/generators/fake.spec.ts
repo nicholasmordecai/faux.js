@@ -22,9 +22,7 @@ describe('Fake', function () {
 
 		if (rawTypes !== undefined) {
 			const fakeMethod = generateFakeMethod(rawTypes);
-			console.log(fakeMethod.toString());
 			expect(fakeMethod).not.to.be.undefined;
 		}
 	});
 });
-

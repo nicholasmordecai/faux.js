@@ -1,3 +1,4 @@
+import { copyFileSync } from 'fs';
 import { EmitResult, InterfaceDeclaration, ModuleResolutionKind, Project } from 'ts-morph';
 import { generateClass } from './generators/class';
 
@@ -9,15 +10,17 @@ export async function compile(project: Project, outDir: string | null): Promise<
 	project.resolveSourceFileDependencies();
 
 	const nodeEnv = process.env.NODE_ENV;
-	
+
+	// todo - clean this up, it's ugly and problematic if someone has a node-env set to dev
 	const fileConfig = {
 		outDir: nodeEnv === 'dev' ? './dev/compiled' : './node_modules/lumis/dist/factory',
+		srcDir: nodeEnv === 'dev' ? './src/factory' : '../node_modules/lumis/src/factory',
 		srcFile: nodeEnv === 'dev' ? './src/factory/index.ts' : '../node_modules/lumis/src/factory/index.ts',
 		rootSrcFile: nodeEnv === 'dev' ? './src/index.ts' : '../node_modules/lumis/src/index.ts',
 	};
 
 	// // override outdir if it's not null
-	if(outDir) {
+	if (outDir) {
 		fileConfig.outDir = outDir;
 	}
 
@@ -44,11 +47,11 @@ export async function compile(project: Project, outDir: string | null): Promise<
 	const writeSourceFile = writeProject.createSourceFile(
 		fileConfig.srcFile, '', { overwrite: true, }
 	);
-	
+
 	writeSourceFile.addStatements([
 		'import { faker } from "@faker-js/faker"',
-		'import { options } from "./utils/types"',
-		'import * as Utils from "./utils/utils"',
+		'import { options } from "../../shared/types";',
+		'import { tsTypes } from "../../shared/enums"',
 	]);
 
 	// need to find a way to create the factory here so I can automatically create an object from an interface
@@ -58,7 +61,7 @@ export async function compile(project: Project, outDir: string | null): Promise<
 		// get some consts for easier access
 		const properties = referenceInterface.getProperties();
 		const interfaceName: string = referenceInterface.getName();
-		
+
 		// create the new class
 		const newClass = generateClass(writeSourceFile, interfaceName, properties);
 		importDeclarations.push(`import { ${interfaceName}, ${interfaceName}Options } from './factory';`);
@@ -99,7 +102,11 @@ export async function compile(project: Project, outDir: string | null): Promise<
 		},
 	);
 
-	writeProject.addSourceFilesAtPaths('./src/factory/utils/**/*{.d.ts,.ts}');
+	const files: string[] = ['types.d.ts', 'enums.ts'];
+	for(let file of files) {
+		copyFileSync(`./src/shared/${file}`, `./temp/shared/${file}`);
+	}
+
 	await writeProject.save();
 	return writeProject.emit();
 }

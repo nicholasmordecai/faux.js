@@ -1,24 +1,5 @@
 import { ArrayTypeNode, PropertySignature, SyntaxKind, TypeLiteralNode } from 'ts-morph';
-
-export enum tsTypes {
-	string,
-	number,
-	boolean,
-	array,
-	tuple,
-	enum,
-	unknown,
-	any,
-	void,
-	null,
-	undefined,
-	never,
-	object,
-	union,
-	bigint,
-	symbol,
-	typeReference
-}
+import { tsTypes } from '../shared/enums';
 
 export interface RawType {
 	key: string | null;
