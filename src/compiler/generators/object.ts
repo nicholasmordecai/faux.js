@@ -1,6 +1,6 @@
 import { CodeBlockWriter, PropertySignature } from 'ts-morph';
 import { tsTypes } from '../../shared/enums';
-import { traverseProperty }  from '../../utils/newLooper';
+import { traverseProperty }  from '../../utils/utils';
 
 export function createSchemaObject(properties: PropertySignature[]): {string: string, obj: Record<string, unknown>} {
 	const writer = new CodeBlockWriter({ useTabs: true });

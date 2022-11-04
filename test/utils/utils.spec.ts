@@ -1,9 +1,11 @@
 import { expect } from 'chai';
 import { InterfaceDeclaration } from 'ts-morph';
 
-import { testProject } from './../utils';
-import { RawType, traverseProperty } from './../../src/utils/newLooper';
+import { traverseProperty } from '../../src/utils/utils';
 import { tsTypes } from '../../src/shared/enums';
+import { RawType } from '../../src/shared/types';
+
+import { testProject } from '../utils';
 
 describe('new looper test', () => {
 	it('Should return one raw type from basic properties', () => {

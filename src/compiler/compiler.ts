@@ -9,14 +9,11 @@ import { generateCreateMethod, generateFakeMethod } from './generators/method';
 export async function compile(project: Project, outDir: string | null): Promise<EmitResult> {
 	project.resolveSourceFileDependencies();
 
-	const nodeEnv = process.env.NODE_ENV;
-
-	//! todo - clean this up, it's ugly and problematic if someone has a node-env set to dev
 	const fileConfig = {
-		outDir: nodeEnv === 'dev' ? './dev/compiled' : './node_modules/lumis/dist/factory',
-		srcDir: nodeEnv === 'dev' ? './src/factory' : '../node_modules/lumis/src/factory',
-		srcFile: nodeEnv === 'dev' ? './src/factory/index.ts' : '../node_modules/lumis/src/factory/index.ts',
-		rootSrcFile: nodeEnv === 'dev' ? './src/index.ts' : '../node_modules/lumis/src/index.ts',
+		outDir: './node_modules/lumis/dist/factory',
+		srcDir: '../node_modules/lumis/src/factory',
+		srcFile: '../node_modules/lumis/src/factory/index.ts',
+		rootSrcFile: '../node_modules/lumis/src/index.ts',
 	};
 
 	// override outdir if it's not null
@@ -104,8 +101,9 @@ export async function compile(project: Project, outDir: string | null): Promise<
 
 	//! This isn't complete, it shouldn't always write to the temp folder
 	//! instead, it should be writing to the outDir
+	console.log(fileConfig.outDir);
 	const files: string[] = ['types.d.ts', 'enums.ts'];
-	for(const file of files) {
+	for (const file of files) {
 		copyFileSync(`./src/shared/${file}`, `./temp/shared/${file}`);
 	}
 

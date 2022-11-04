@@ -1,5 +1,5 @@
 import { CodeBlockWriter } from 'ts-morph';
-import { RawType } from '../../utils/newLooper';
+import { RawType } from '../../shared/types';
 import { tsTypes } from '../../shared/enums';
 
 export function generateFakeMethod(schema: RawType[]) {
