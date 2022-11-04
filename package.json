@@ -1,6 +1,6 @@
 {
   "name": "lumis",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Typesafe interface mocking library for Faker.js",
   "categories": [
     "Testing"
