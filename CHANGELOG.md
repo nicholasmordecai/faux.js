@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+## Changed
+- Improved code quality
+- Bump mocha from 10.0.0 to 10.1.0
+- Bump @types/node from 18.11.7 to 18.11.9
+- Bump @typescript-eslint/parser from 5.41.0 to 5.42.0
+
 ## 0.1.1 - 2022-11-04
 ### Added
 - Added NPM keywords

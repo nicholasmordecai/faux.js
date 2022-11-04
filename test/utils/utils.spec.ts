@@ -1,13 +1,19 @@
 import { expect } from 'chai';
-import { InterfaceDeclaration } from 'ts-morph';
+import { InterfaceDeclaration, Node } from 'ts-morph';
 
-import { traverseProperty } from '../../src/utils/utils';
+import { recursivlyTraverse, traverseProperty } from '../../src/utils/utils';
 import { tsTypes } from '../../src/shared/enums';
 import { RawType } from '../../src/shared/types';
 
 import { testProject } from '../utils';
+import sinon from 'sinon';
 
 describe('new looper test', () => {
+
+	afterEach(() => {
+		sinon.restore();
+	});
+
 	it('Should return one raw type from basic properties', () => {
 		const { sourceFile } = testProject();
 
@@ -22,6 +28,39 @@ describe('new looper test', () => {
 
 		expect(testInterface).instanceOf(InterfaceDeclaration);
 		expect(rawType).to.deep.equal({ key: 'name', type: tsTypes.string, children: [] });
+	});
+
+	it('Should handle undefined returned by getFirstChildBySyntax', () => {
+		const { sourceFile } = testProject();
+
+		const testInterface = sourceFile.insertInterface(0, {
+			name: 'ITest',
+			properties: [
+				{ name: 'name', type: 'string' }
+			]
+		});
+
+		sinon.stub(Node.prototype, "getFirstChildByKind").returns(undefined);
+
+		const rawType = traverseProperty(testInterface.getProperties()[0]);
+		expect(rawType).to.be.undefined;
+	});
+
+	it('Should handle undefined returned by getFirstChildBySyntax during recursion', () => {
+		const { sourceFile } = testProject();
+
+		const testInterface = sourceFile.insertInterface(0, {
+			name: 'ITest',
+			properties: [
+				{ name: 'name', type: 'string' },
+				{ name: 'secondName', type: 'string' }
+			]
+		});
+
+		sinon.stub(Node.prototype, "getFirstChildByKind").returns(undefined);
+
+		const rawTypes = recursivlyTraverse(testInterface.getProperties());
+		expect(rawTypes).to.deep.equal([]);
 	});
 
 	it('Should return raw type from basic properties', () => {
@@ -99,25 +138,29 @@ describe('new looper test', () => {
 		expect(rawType).to.deep.equal(assertion);
 	});
 
-	// it('Should return one raw type from an array (generic)', () => {
-	// 	const { sourceFile } = testProject();
+	it('Should recursivly loop through properties', async () => {
+		const { sourceFile } = testProject();
 
-	// 	const testInterface = sourceFile.insertInterface(0, {
-	// 		name: 'ITest',
-	// 		properties: [
-	// 			{ name: 'scores', type: 'Array<number>' }
-	// 		]
-	// 	});
+		const testInterface = sourceFile.insertInterface(0, {
+			name: 'ITest',
+			properties: [
+				{ name: 'name', type: 'string' },
+				{ name: 'age', type: 'number' },
+				{ name: 'human', type: 'boolean' },
+				{ name: 'height', type: 'bigint' },
+			]
+		});
 
-	// 	const rawType = traverseProperty(testInterface.getProperties()[0]);
-	// 	const assertion: RawType = { 
-	// 		key: 'scores', type: tsTypes.array, children: [
-	// 			{ key: null, type: tsTypes.number, children: [] },
-	// 		]
-	// 	};
+		const rawTypes = recursivlyTraverse(testInterface.getProperties());
+		const assertion: RawType[] = [
+			{ key: 'name', type: tsTypes.string, children: [] },
+			{ key: 'age', type: tsTypes.number, children: [] },
+			{ key: 'human', type: tsTypes.boolean, children: [] },
+			{ key: 'height', type: tsTypes.bigint, children: [] }
+		];
 
-	// 	expect(testInterface).instanceOf(InterfaceDeclaration);
-	// 	expect(rawType).to.deep.equal(assertion);
-	// });
+		expect(testInterface).instanceOf(InterfaceDeclaration);
+		expect(rawTypes).to.deep.equal(assertion);
+	});
 
 });

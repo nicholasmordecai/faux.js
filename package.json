@@ -46,6 +46,7 @@
     "@types/glob": "^8.0.0",
     "@types/mocha": "^10.0.0",
     "@types/node": "^18.7.16",
+    "@types/sinon": "^10.0.13",
     "@types/yargs": "^17.0.12",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
@@ -56,6 +57,7 @@
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
     "nyc": "^15.1.0",
+    "sinon": "^14.0.1",
     "ts-node": "^10.9.1"
   },
   "nyc": {
@@ -67,7 +69,8 @@
     ],
     "exclude": [
       "src/_tests_/**/*.*",
-      "src/factory/**/*.*"
+      "src/factory/**/*.*",
+      "src/index.ts"
     ],
     "reporter": [
       "html",

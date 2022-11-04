@@ -12,7 +12,7 @@ async function runCli() {
 
 	const project = new Project();
 	project.addSourceFilesAtPaths(fileName);
-	await compile(project, {inMemory: false, outDir: outDir});
+	await compile(project, { inMemory: false, outDir: outDir });
 	process.exit(0);
 }
 

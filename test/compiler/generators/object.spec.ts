@@ -1,11 +1,17 @@
 import { expect } from 'chai';
+import * as sinon from 'sinon';
 
 import { testProject } from './../../utils';
 import { createSchemaObject } from './../../../src/compiler/generators/object';
 import { generateInterface } from '../../../src/compiler/generators/interface';
-import { tsTypes } from '../../../src/shared/enums';
+import * as utils from '../../../src/utils/utils';
 
 describe('Object Creation Specs', () => {
+
+	afterEach(() => {
+        sinon.restore();
+    });
+
 	it('Should create a schema object from a property signature', () => {
 		const testInterface = testProject().sourceFile.addInterface({
 			name: 'test',
@@ -28,7 +34,8 @@ describe('Object Creation Specs', () => {
 		});
 	});
 
-	it.only('Should handle traverse property returning null', () => {
+	it('Should handle traverse property returning null', () => {
+
 		const testInterface = testProject().sourceFile.addInterface({
 			name: 'test',
 			properties: [
@@ -44,11 +51,9 @@ describe('Object Creation Specs', () => {
 		expect(newInterface).to.not.be.undefined;
 		expect(props.length).to.eql(1);
 
-		
+		sinon.stub(utils, "traverseProperty").returns(undefined);
 
 		const objectSchema = createSchemaObject(props);
-		expect(objectSchema.obj).to.deep.equal({
-			age: "tsTypes.number"
-		});
+		expect(objectSchema.obj).to.deep.equal({});
 	});
 });

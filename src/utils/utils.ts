@@ -4,11 +4,11 @@ import { RawType } from '../shared/types';
 
 export function recursivlyTraverse(properties: PropertySignature[]): RawType[] | undefined {
 	const rawTypes: RawType[] = [];
-
 	for (const property of properties) {
 		const identifier = property.getFirstChildByKind(SyntaxKind.Identifier);
+		console.log(identifier);
 		if (!identifier) {
-			return undefined;
+			continue;
 		}
 
 		const rawType = traverseProperty(property);
@@ -22,6 +22,7 @@ export function recursivlyTraverse(properties: PropertySignature[]): RawType[] |
 
 export function traverseProperty(property: PropertySignature): RawType | undefined {
 	const identifier = property.getFirstChildByKind(SyntaxKind.Identifier);
+
 	if (!identifier) {
 		return undefined;
 	}
