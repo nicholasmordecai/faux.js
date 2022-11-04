@@ -17,7 +17,7 @@ describe('Compiler Tests', () => {
 			]
 		});
 
-		const result = compile(project, null).then(() => {
+		const result = compile(project, {inMemory: true}).then(() => {
 			expect(result).not.to.be.undefined;
 			done();
 		});

@@ -36,9 +36,9 @@ function getType(node: PropertySignature) {
 	if(type.isBoolean()) return 'faker.datatype.boolean()';
 
 	// TO Implement
-	if(type.isEnum()) return 0;
+	// if(type.isEnum()) return 0;
 
-	if(type.isLiteral()) {
-		return {};
-	}
+	// if(type.isLiteral()) {
+	// 	return {};
+	// }
 }

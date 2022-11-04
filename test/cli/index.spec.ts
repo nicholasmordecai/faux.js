@@ -11,13 +11,13 @@ const cli = (args: any) => {
 };
 
 const createFn = `
-import { ITest } from './result/';
+import { ITest } from './index';
 const created = ITest.create({ userName: 'heyyy' });
 console.log(JSON.stringify(created));
 `;
 
 const fakeFn = `
-import { ITest } from './result/';
+import { ITest } from './index';
 const created = ITest.fake();
 console.log(JSON.stringify(created));
 `;
@@ -36,7 +36,7 @@ describe('Command Line Interface Compiler', () => {
 		mkdirSync('./temp', { recursive: true });
 		mkdirSync('./temp/shared', { recursive: true });
 		writeFileSync('./temp/main.ts', testInterface);
-		cli('--file=./temp/main.ts --out=./temp/result');
+		cli('--file=./temp/main.ts --out=./temp');
 	});
 
 	after(() => {

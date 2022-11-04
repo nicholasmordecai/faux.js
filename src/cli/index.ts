@@ -8,11 +8,11 @@ import { Project } from 'ts-morph';
 async function runCli() {
 	const argv = await getArguments();
 	const fileName: string = argv.file;
-	const outDir: string | null = argv.out || null;
+	const outDir: string | undefined = argv.out;
 
 	const project = new Project();
 	project.addSourceFilesAtPaths(fileName);
-	await compile(project, outDir);
+	await compile(project, {inMemory: false, outDir: outDir});
 	process.exit(0);
 }
 

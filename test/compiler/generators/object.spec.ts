@@ -27,4 +27,28 @@ describe('Object Creation Specs', () => {
 			age: "tsTypes.number"
 		});
 	});
+
+	it.only('Should handle traverse property returning null', () => {
+		const testInterface = testProject().sourceFile.addInterface({
+			name: 'test',
+			properties: [
+				{ name: 'age', type: 'number' },
+			]
+		});
+
+		const newInterface = generateInterface(testProject().sourceFile, testInterface);
+
+		if(!newInterface) return false;
+		
+		const props = newInterface.getProperties();
+		expect(newInterface).to.not.be.undefined;
+		expect(props.length).to.eql(1);
+
+		
+
+		const objectSchema = createSchemaObject(props);
+		expect(objectSchema.obj).to.deep.equal({
+			age: "tsTypes.number"
+		});
+	});
 });
