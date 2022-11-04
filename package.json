@@ -1,11 +1,17 @@
 {
   "name": "lumis",
   "version": "0.1.0",
-  "description": "Typesafe interface mocking library for pseudo random data",
+  "description": "Typesafe interface mocking library for Faker.js",
   "categories": [
     "Testing"
   ],
-  "keywords": [],
+  "keywords": [
+    "mock",
+    "interface",
+    "typescript",
+    "faker",
+    "data"
+  ],
   "author": "Nicholas Mordecai",
   "url": "https://github.com/megmut/lumis",
   "license": "Apache-2.0",
