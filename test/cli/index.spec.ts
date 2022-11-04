@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync, mkdirSync, rmSync } from 'fs';
 import { expect } from 'chai';
 import { execSync } from 'child_process';
 
@@ -34,13 +34,14 @@ describe('Command Line Interface Compiler', () => {
 	// Setup the temp folder and create a test interface, along with calling the CLI to run Lumis
 	before(() => {
 		mkdirSync('./temp', { recursive: true });
+		mkdirSync('./temp/shared', { recursive: true });
 		writeFileSync('./temp/main.ts', testInterface);
-		const cliResult = cli('--file=./temp/main.ts --out=./temp/result');
-		console.log(cliResult);
+		cli('--file=./temp/main.ts --out=./temp/result');
 	});
 
 	after(() => {
 		// clear the temp folder here
+		// rmSync('./temp', { recursive: true, force: true });
 	});
 
 	it('Should fail due to no file argument passed', () => {

@@ -11,7 +11,7 @@ export async function compile(project: Project, outDir: string | null): Promise<
 
 	const nodeEnv = process.env.NODE_ENV;
 
-	// todo - clean this up, it's ugly and problematic if someone has a node-env set to dev
+	//! todo - clean this up, it's ugly and problematic if someone has a node-env set to dev
 	const fileConfig = {
 		outDir: nodeEnv === 'dev' ? './dev/compiled' : './node_modules/lumis/dist/factory',
 		srcDir: nodeEnv === 'dev' ? './src/factory' : '../node_modules/lumis/src/factory',
@@ -19,7 +19,7 @@ export async function compile(project: Project, outDir: string | null): Promise<
 		rootSrcFile: nodeEnv === 'dev' ? './src/index.ts' : '../node_modules/lumis/src/index.ts',
 	};
 
-	// // override outdir if it's not null
+	// override outdir if it's not null
 	if (outDir) {
 		fileConfig.outDir = outDir;
 	}
@@ -50,7 +50,7 @@ export async function compile(project: Project, outDir: string | null): Promise<
 
 	writeSourceFile.addStatements([
 		'import { faker } from "@faker-js/faker"',
-		'import { options } from "../../shared/types";',
+		'import { options } from "../../shared/types.d.ts";',
 		'import { tsTypes } from "../../shared/enums"',
 	]);
 
@@ -102,6 +102,8 @@ export async function compile(project: Project, outDir: string | null): Promise<
 		},
 	);
 
+	//! This isn't complete, it shouldn't always write to the temp folder
+	//! instead, it should be writing to the outDir
 	const files: string[] = ['types.d.ts', 'enums.ts'];
 	for(const file of files) {
 		copyFileSync(`./src/shared/${file}`, `./temp/shared/${file}`);

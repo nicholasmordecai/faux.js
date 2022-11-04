@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { testProject } from './../../utils';
 import { createSchemaObject } from './../../../src/compiler/generators/object';
 import { generateInterface } from '../../../src/compiler/generators/interface';
+import { tsTypes } from '../../../src/shared/enums';
 
 describe('Object Creation Specs', () => {
 	it('Should create a schema object from a property signature', () => {
@@ -23,7 +24,7 @@ describe('Object Creation Specs', () => {
 
 		const objectSchema = createSchemaObject(props);
 		expect(objectSchema.obj).to.deep.equal({
-			age: 'number'
+			age: "tsTypes.number"
 		});
 	});
 });

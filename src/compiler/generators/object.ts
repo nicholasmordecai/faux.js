@@ -32,8 +32,8 @@ export function createFakeObject(properties: PropertySignature[]) {
 function getType(node: PropertySignature) {
 	const type = node.getType();
 
-	if(type.isString()) return 'faker.name.fullName';
-	if(type.isBoolean()) return 'faker.datatype.boolean';
+	if(type.isString()) return 'faker.name.fullName()';
+	if(type.isBoolean()) return 'faker.datatype.boolean()';
 
 	// TO Implement
 	if(type.isEnum()) return 0;
