@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Added
+- Added NPM keywords
+- Added a npm script for checking for circular dependency
+
+### Changed
+- Cleaned up some files
+- Increased code coverage further
+- Bump @faker-js/faker from 7.5.0 to 7.6.0
+- Bump @typescript-eslint/eslint-plugin from 5.39.0 to 5.42.0
 
 ## 0.1.0 - 2022-10-29
 ### Added

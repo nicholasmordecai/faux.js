@@ -1,7 +1,9 @@
 import { expect } from 'chai';
 import { InterfaceDeclaration } from 'ts-morph';
+
 import { testProject } from './../utils';
-import { RawType, traverseProperty, tsTypes } from './../../src/utils/newLooper';
+import { RawType, traverseProperty } from './../../src/utils/newLooper';
+import { tsTypes } from '../../src/shared/enums';
 
 describe('new looper test', () => {
 	it('Should return one raw type from basic properties', () => {
@@ -45,7 +47,7 @@ describe('new looper test', () => {
 		expect(testInterface).instanceOf(InterfaceDeclaration);
 
 		let i = 0;
-		for(const property of testInterface.getProperties()) {
+		for (const property of testInterface.getProperties()) {
 			const rawType = traverseProperty(property);
 			expect(rawType).to.deep.equal({ key: properties[i].name, type: properties[i].internalType, children: [] });
 			i++;
@@ -63,7 +65,7 @@ describe('new looper test', () => {
 		});
 
 		const rawType = traverseProperty(testInterface.getProperties()[0]);
-		const assertion: RawType = { 
+		const assertion: RawType = {
 			key: 'name', type: tsTypes.object, children: [
 				{ key: 'name', type: tsTypes.string, children: [] },
 				{ key: 'age', type: tsTypes.number, children: [] }
@@ -85,7 +87,7 @@ describe('new looper test', () => {
 		});
 
 		const rawType = traverseProperty(testInterface.getProperties()[0]);
-		const assertion: RawType = { 
+		const assertion: RawType = {
 			key: 'scores', type: tsTypes.array, children: [
 				{ key: null, type: tsTypes.number, children: [] },
 			]

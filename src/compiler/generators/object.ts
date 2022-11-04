@@ -1,16 +1,19 @@
 import { CodeBlockWriter, PropertySignature } from 'ts-morph';
+import { tsTypes } from '../../shared/enums';
 import { traverseProperty }  from '../../utils/newLooper';
 
-export function createSchemaObject(properties: PropertySignature[]): string {
+export function createSchemaObject(properties: PropertySignature[]): {string: string, obj: Record<string, unknown>} {
 	const writer = new CodeBlockWriter({ useTabs: true });
+	const obj: {[key: string]: unknown} = {};
 	const codeBlock =  writer.write('').block(() => {
 		properties.map((property) => {
 			const type = traverseProperty(property);
-			console.log(type);
-			return writer.writeLine(`${property.getName()}: ${'string'},`);
+			if(!type || !type.key) return null;
+			obj[type.key] = `tsTypes.${tsTypes[type.type]}`;
+			return writer.writeLine(`${property.getName()}: tsTypes.${tsTypes[type.type]},`);
 		});
 	}).toString();
-	return codeBlock;
+	return { string: codeBlock, obj: obj };
 }
 
 export function createFakeObject(properties: PropertySignature[]) {
@@ -29,8 +32,8 @@ export function createFakeObject(properties: PropertySignature[]) {
 function getType(node: PropertySignature) {
 	const type = node.getType();
 
-	if(type.isString()) return 'faker.name.fullName';
-	if(type.isBoolean()) return 'faker.datatype.boolean';
+	if(type.isString()) return 'faker.name.fullName()';
+	if(type.isBoolean()) return 'faker.datatype.boolean()';
 
 	// TO Implement
 	if(type.isEnum()) return 0;

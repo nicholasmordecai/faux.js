@@ -1,4 +1,4 @@
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync, mkdirSync, rmSync } from 'fs';
 import { expect } from 'chai';
 import { execSync } from 'child_process';
 
@@ -10,37 +10,60 @@ const cli = (args: any) => {
 	return execSync(`ts-node src/cli/index.ts ${args}`).toString();
 };
 
-const testFn = `
+const createFn = `
 import { ITest } from './result/';
 const created = ITest.create({ userName: 'heyyy' });
 console.log(JSON.stringify(created));
 `;
 
-const runFn = (args: any) => {
+const fakeFn = `
+import { ITest } from './result/';
+const created = ITest.fake();
+console.log(JSON.stringify(created));
+`;
+
+const createFnExec = (args: any) => {
 	return execSync(`ts-node temp/run.ts ${args}`).toString();
 };
 
-describe('Command Line Interface', () => {
+const fakeFnExec = (args: any) => {
+	return execSync(`ts-node temp/run.ts ${args}`).toString();
+};
+
+describe('Command Line Interface Compiler', () => {
+	// Setup the temp folder and create a test interface, along with calling the CLI to run Lumis
+	before(() => {
+		mkdirSync('./temp', { recursive: true });
+		mkdirSync('./temp/shared', { recursive: true });
+		writeFileSync('./temp/main.ts', testInterface);
+		cli('--file=./temp/main.ts --out=./temp/result');
+	});
+
+	after(() => {
+		// clear the temp folder here
+		// rmSync('./temp', { recursive: true, force: true });
+	});
+
 	it('Should fail due to no file argument passed', () => {
 		expect(function () {
 			cli('');
 		}).to.throw(Error);
 	});
 
-	it('Should run complete test', async () => {
-		mkdirSync('./temp', { recursive: true });
-		const createdFile = writeFileSync('./temp/main.ts', testInterface);
-		try {
-			const compileResult = cli('--file=./temp/main.ts --out=./temp/result');
-			// null check here is to ensure a process exit code 0
-			expect(compileResult).to.be.null;
-		} catch(error) {
-			expect(error).to.not.be.null;
-		}
-		const runnerFile = writeFileSync('./temp/run.ts', testFn);
-		const runResult = runFn('');
+	it('Should run complete create function test', async () => {
+		const runnerFile = writeFileSync('./temp/run.ts', createFn);
+		const runResult = createFnExec('');
 		expect(JSON.parse(runResult)).to.deep.equal({
 			userName: 'heyyy'
 		});
+	});
+
+	it('Should run complete fake function test', async () => {
+		writeFileSync('./temp/run.ts', fakeFn);
+		const fakeResult = fakeFnExec('');
+		const obj = JSON.parse(fakeResult);
+		expect(obj).not.to.be.null;
+		expect(obj).to.haveOwnProperty('userName');
+		expect(obj.userName).to.be.string;
 	});
 });
