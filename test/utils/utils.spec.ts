@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { InterfaceDeclaration, Node, SyntaxKind } from 'ts-morph';
 
-import { mapTypes, recursivlyTraverse, traverseProperty } from '../../src/utils/utils';
+import * as Utils from '../../src/utils/utils';
 import { tsTypes } from '../../src/shared/enums';
 import { RawType } from '../../src/shared/types';
 
@@ -24,7 +24,7 @@ describe('Util Functions', () => {
 			]
 		});
 
-		const rawType = traverseProperty(testInterface.getProperties()[0]);
+		const rawType = Utils.traverseProperty(testInterface.getProperties()[0]);
 
 		expect(testInterface).instanceOf(InterfaceDeclaration);
 		expect(rawType).to.deep.equal({ key: 'name', type: tsTypes.string, children: [] });
@@ -42,7 +42,7 @@ describe('Util Functions', () => {
 
 		sinon.stub(Node.prototype, "getFirstChildByKind").returns(undefined);
 
-		const rawType = traverseProperty(testInterface.getProperties()[0]);
+		const rawType = Utils.traverseProperty(testInterface.getProperties()[0]);
 		expect(rawType).to.be.undefined;
 	});
 
@@ -59,7 +59,7 @@ describe('Util Functions', () => {
 
 		sinon.stub(Node.prototype, "getFirstChildByKind").returns(undefined);
 
-		const rawTypes = recursivlyTraverse(testInterface.getProperties());
+		const rawTypes = Utils.recursivlyTraverse(testInterface.getProperties());
 		expect(rawTypes).to.deep.equal([]);
 	});
 
@@ -89,7 +89,7 @@ describe('Util Functions', () => {
 
 		let i = 0;
 		for (const property of testInterface.getProperties()) {
-			const rawType = traverseProperty(property);
+			const rawType = Utils.traverseProperty(property);
 			expect(rawType).to.deep.equal({ key: properties[i].name, type: properties[i].internalType, children: [] });
 			i++;
 		}
@@ -105,7 +105,7 @@ describe('Util Functions', () => {
 			]
 		});
 
-		const rawType = traverseProperty(testInterface.getProperties()[0]);
+		const rawType = Utils.traverseProperty(testInterface.getProperties()[0]);
 		const assertion: RawType = {
 			key: 'name', type: tsTypes.object, children: [
 				{ key: 'name', type: tsTypes.string, children: [] },
@@ -127,7 +127,7 @@ describe('Util Functions', () => {
 			]
 		});
 
-		const rawType = traverseProperty(testInterface.getProperties()[0]);
+		const rawType = Utils.traverseProperty(testInterface.getProperties()[0]);
 		const assertion: RawType = {
 			key: 'scores', type: tsTypes.array, children: [
 				{ key: null, type: tsTypes.number, children: [] },
@@ -151,7 +151,7 @@ describe('Util Functions', () => {
 			]
 		});
 
-		const rawTypes = recursivlyTraverse(testInterface.getProperties());
+		const rawTypes = Utils.recursivlyTraverse(testInterface.getProperties());
 		const assertion: RawType[] = [
 			{ key: 'name', type: tsTypes.string, children: [] },
 			{ key: 'age', type: tsTypes.number, children: [] },
@@ -165,7 +165,7 @@ describe('Util Functions', () => {
 
 	it('Should correctly map a type', () => {
 		const type = SyntaxKind.StringKeyword;
-		const result = mapTypes(type);
+		const result = Utils.mapTypes(type);
 		expect(result).to.be.equal(tsTypes.string);
 	});
 });
