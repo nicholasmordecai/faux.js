@@ -1,14 +1,14 @@
 import { expect } from 'chai';
-import { InterfaceDeclaration, Node } from 'ts-morph';
+import { InterfaceDeclaration, Node, SyntaxKind } from 'ts-morph';
 
-import { recursivlyTraverse, traverseProperty } from '../../src/utils/utils';
+import { mapTypes, recursivlyTraverse, traverseProperty } from '../../src/utils/utils';
 import { tsTypes } from '../../src/shared/enums';
 import { RawType } from '../../src/shared/types';
 
 import { testProject } from '../utils';
 import sinon from 'sinon';
 
-describe('new looper test', () => {
+describe('Util Functions', () => {
 
 	afterEach(() => {
 		sinon.restore();
@@ -163,4 +163,9 @@ describe('new looper test', () => {
 		expect(rawTypes).to.deep.equal(assertion);
 	});
 
+	it('Should correctly map a type', () => {
+		const type = SyntaxKind.StringKeyword;
+		const result = mapTypes(type);
+		expect(result).to.be.equal(tsTypes.string);
+	});
 });

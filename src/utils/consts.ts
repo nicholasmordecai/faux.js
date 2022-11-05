@@ -1,7 +1,7 @@
 import { SyntaxKind } from "ts-morph";
 import { tsTypes } from "../shared/enums";
 
-export const map: {[key: number]: tsTypes} = {
+export const typeMap: Record<number, number>= {
     [SyntaxKind.StringKeyword]: tsTypes.string,
     [SyntaxKind.NumberKeyword]: tsTypes.number,
     [SyntaxKind.BooleanKeyword]: tsTypes.boolean,
@@ -20,4 +20,11 @@ export const map: {[key: number]: tsTypes} = {
     [SyntaxKind.TypeLiteral]: tsTypes.object,
     [SyntaxKind.ArrayType]: tsTypes.array,
     [SyntaxKind.TypeReference]: tsTypes.typeReference
+};
+
+export const fakerMap: { [key: string]: string } = {
+    [tsTypes.string]: 'faker.datatype.string()',
+    [tsTypes.number]: 'faker.datatype.number()',
+    [tsTypes.boolean]: 'faker.datatype.boolean()',
+    [tsTypes.bigint]: 'faker.datatype.bigint()',
 };

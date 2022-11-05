@@ -1,7 +1,7 @@
 import { ArrayTypeNode, PropertySignature, SyntaxKind, TypeLiteralNode, Node, ts, Identifier } from 'ts-morph';
 import { tsTypes } from '../shared/enums';
 import { RawType } from '../shared/types';
-import { map } from './../utils/consts';
+import { typeMap } from './../utils/consts';
 
 export function recursivlyTraverse(properties: PropertySignature[]): RawType[] | undefined {
 	const rawTypes: RawType[] = [];
@@ -29,7 +29,7 @@ export function traverseProperty(property: PropertySignature): RawType | undefin
 	}
 
 	for (const node of property.getChildren()) {
-		const internalType = mapTypes(node.getKind());
+		const internalType: tsTypes | undefined = mapTypes(node.getKind());
 
 		if (internalType === undefined) {
 			continue;
@@ -92,6 +92,6 @@ export function handleArray(node: Node<ts.Node>, identifier: Identifier) {
 	};
 }
 
-export function mapTypes(kind: SyntaxKind): tsTypes | undefined {
-	return map[kind] || undefined;
+export function mapTypes(kind: SyntaxKind): tsTypes {
+	return typeMap[kind];
 }
