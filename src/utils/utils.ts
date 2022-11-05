@@ -51,8 +51,6 @@ export function traverseProperty(property: PropertySignature): RawType | undefin
 			};
 		}
 	}
-
-	return undefined;
 }
 
 export function handleObject(node: Node<ts.Node>, identifier: Identifier, internalType: tsTypes) {
@@ -76,6 +74,7 @@ export function handleObject(node: Node<ts.Node>, identifier: Identifier, intern
 
 export function handleArray(node: Node<ts.Node>, identifier: Identifier) {
 	const element = (node as ArrayTypeNode).getElementTypeNode();
+	
 	const elementType = mapTypes(element.getKind());
 	if (elementType === undefined) {
 		return undefined;

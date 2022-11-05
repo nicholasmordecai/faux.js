@@ -20,7 +20,7 @@ export function generateClass(sourceFile: SourceFile, className: string, propert
 				name: 'fakeSchema', 
 				isStatic: true,
 				type: className,
-				initializer: fakeSchema
+				initializer: fakeSchema.string
 			}
 		]
 	});

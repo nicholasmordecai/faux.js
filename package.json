@@ -1,5 +1,5 @@
 {
-  "name": "lumis",
+  "name": "@megmut/lumis",
   "version": "0.1.1",
   "description": "Typesafe interface mocking library for Faker.js",
   "categories": [
