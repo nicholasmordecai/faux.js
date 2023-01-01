@@ -41,7 +41,7 @@ export function getConditionFromProbability<T>(conditions: IProbability<T>[]): I
     const calculatedProb = rngFloat({ min: 0, max: 100 });
     let previousProb = 0;
     for (const condition of conditions) {
-        if(calculatedProb > previousProb && calculatedProb <= previousProb + condition.probability) {
+        if(calculatedProb >= previousProb && calculatedProb < previousProb + condition.probability) {
             return condition;
         }
     }
