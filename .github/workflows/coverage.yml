@@ -1,6 +1,7 @@
 on: ["push", "pull_request"]
 
 name: Test Coveralls
+- uses: actions/checkout@v3
 
 jobs:
 
