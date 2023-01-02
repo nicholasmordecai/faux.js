@@ -59,13 +59,13 @@ export function rngInt(options?: MathOptions): number {
 	return Math.floor(mulberry32() * (options.max - options.min + 1) + options.min);
 }
 
-export function rngProbDist() {
+// export function rngProbDist() {
 
-}
+// }
 
-export function logDist() {
+// export function logDist() {
 
-}
+// }
 
 export function percent(options?: MathOptions): number {
 	return rngFloat(options);

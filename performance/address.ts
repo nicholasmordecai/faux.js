@@ -30,10 +30,10 @@ export async function AddressPerformance(): Promise<IResult> {
 		suite.on('cycle', (event: Event) => {
 			const benchmark = event.target;
 			const key = benchmark.name as 'Lumis' | 'Faker';
-			result[key].city = benchmark.hz!;
+			result[key].city = benchmark.hz as number;
 		});
 
-		suite.on('complete', (event: Event) => {
+		suite.on('complete', () => {
 			resolve(result);
 		});
 

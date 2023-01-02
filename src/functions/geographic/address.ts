@@ -2,8 +2,7 @@ import { rngInt } from '../math/number';
 import { rngFromArray } from '../util/array';
 import { fromFormat } from '../util/string';
 
-import { GB } from '../../locales/gb';
-import { Config, getLocale } from './../../configuration';
+import { getLocale } from './../../configuration';
 
 interface IAddress {
     country: string;

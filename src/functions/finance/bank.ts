@@ -7,13 +7,13 @@ export function IBAN(): string {
 
 }
 
-export function SWIFT() {
+// export function SWIFT() {
 
-}
+// }
 
-export function BIC() {
+// export function BIC() {
 
-}
+// }
 
 export function accountNumber(): number {
 	return parseInt(fromFormat('99999999'));
@@ -27,13 +27,13 @@ export function cardNumber() {
 	return fromFormat('9999-9999-9999-9999');
 }
 
-export function validFrom() {
+// export function validFrom() {
 
-}
+// }
 
-export function valitTo() {
+// export function validTo() {
 
-}
+// }
 
 export function CCV() {
 	return parseInt(fromFormat('999'));

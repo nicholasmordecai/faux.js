@@ -5,6 +5,7 @@ export class Register<T> {
 		this.dictionary = obj;
 	}
 
+	// todo - fix the property type any parameter
 	public add(key: keyof T, property: any) {
 		this.dictionary[key] = property;
 	}
@@ -17,11 +18,12 @@ export class Register<T> {
 		return this.traverseObject(this.dictionary, {});
 	}
 
+	// todo - fix the type any's in the parameters
 	private traverseObject(object: any, result: any): T {
 		for (const key in object) {
 			const item = object[key];
 			if (typeof item === 'function') {
-				const fn = item as Function;
+				const fn = item;
 				result[key] = fn();
 			} else if (typeof item === 'object') {
 				result[key] = this.traverseObject(item, {});

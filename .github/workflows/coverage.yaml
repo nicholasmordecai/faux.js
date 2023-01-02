@@ -1,11 +1,11 @@
 on: ["push", "pull_request"]
 
-name: Build
+name: Coverage
 
 jobs:
 
   build:
-    name: Build
+    name: Coverage
     runs-on: ubuntu-latest
     steps:
 
