@@ -36,7 +36,6 @@ export function validateConditions<T>(conditions: IProbability<T>[]): boolean {
     }
 }
 
-//! Sometimes this is failing...
 export function getConditionFromProbability<T>(conditions: IProbability<T>[]): IProbability<T> {
     const calculatedProb = rngFloat({ min: 0, max: 100 });
     let previousProb = 0;
@@ -44,6 +43,7 @@ export function getConditionFromProbability<T>(conditions: IProbability<T>[]): I
         if(calculatedProb >= previousProb && calculatedProb < previousProb + condition.probability) {
             return condition;
         }
+        previousProb = calculatedProb;
     }
 
     throw new Error('Could not generate a conditional value.');

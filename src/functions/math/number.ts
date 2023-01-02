@@ -1,5 +1,10 @@
 import { Config } from "../../configuration";
 
+export interface MathOptions {
+    min: number;
+    max: number;
+}
+
 export function randn_bm() {
     const u = 1 - mulberry32();
     const v = mulberry32();
@@ -37,7 +42,7 @@ export function mulberry32() {
     return result;
 }
 
-export function rngFloat(options?: { min: number, max: number }): number {
+export function rngFloat(options?: MathOptions): number {
     if (!options) {
         return mulberry32()
     }
@@ -45,12 +50,13 @@ export function rngFloat(options?: { min: number, max: number }): number {
     return mulberry32() * (options.max - options.min) + options.min;
 }
 
-export function rngInt(options?: { min: number, max: number }): number {
+export function rngInt(options?: MathOptions): number {
     if (!options) {
-        return mulberry32()
+        return Math.floor(mulberry32() * 100);
     }
 
     Config.seed += 1;
+    //? Does this need to also be multiplied by 100?
     return Math.floor(mulberry32() * (options.max - options.min + 1) + options.min)
 }
 
@@ -60,4 +66,12 @@ export function rngProbDist() {
 
 export function logDist() {
 
+}
+
+export function percent(options?: MathOptions): number {
+    return rngFloat(options);
+}
+
+export function percentString(options?: MathOptions): string {
+    return `${rngInt(options)}%`;
 }

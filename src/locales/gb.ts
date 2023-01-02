@@ -13,6 +13,9 @@ export const GB: ILocale = {
     streetSuffixes: ['Road', 'Street', 'Avenue', 'Crescent', 'Lane', 'Grove'],
     houseNameFormats: ['N', 'W'],
     houseNamePrefixes: ['The', 'Ivy', 'Sunny', 'Green', 'Red'],
-    houseNameSuffixes: ['Barn', 'Lodge', 'Cottage', 'Bungalow', 'House', 'Farm', 'Woodlands', 'Stables']
+    houseNameSuffixes: ['Barn', 'Lodge', 'Cottage', 'Bungalow', 'House', 'Farm', 'Woodlands', 'Stables'],
+    bank: {
+        iban:' AA99AAAA99999999999999'
+    }
 }
 

@@ -12,6 +12,9 @@ export interface ILocale {
     houseNameFormats: string[];
     houseNamePrefixes: string[];
     houseNameSuffixes: string[];
+    bank: {
+        iban: string;
+    }
 }
 
 export type localeSelectors = keyof typeof locales;

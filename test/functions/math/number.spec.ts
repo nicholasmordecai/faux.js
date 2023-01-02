@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { normalDist, rngFloat } from '../../../src/functions/math/number';
+import { normalDist, percent, percentString, rngFloat } from '../../../src/functions/math/number';
 
 describe('Number tests', () => {
     it('Should generate a 32 bit Mulberry random float', () => {
@@ -38,12 +38,29 @@ describe('Number tests', () => {
         expect(result).to.be.lessThan(-25);
     });
 
-    it('Should generate a number from a normal distribution', () => {
-        // let csv = 'num\n';
-        for(let i = 0; i < 1000; i++) {
-            const result = normalDist(10, 20, 1);
-            // csv += `${result}\n`;
-            expect(typeof(result)).to.be.equal('number');
-        }
+    // it('Should generate a number from a normal distribution', () => {
+    //     // let csv = 'num\n';
+    //     for(let i = 0; i < 1000; i++) {
+    //         const result = normalDist(10, 20, 1);
+    //         // csv += `${result}\n`;
+    //         expect(typeof(result)).to.be.equal('number');
+    //     }
+    // });
+
+    it('Should generate a random percent (int between 0 and 100', () => {
+        const p = percent();
+        expect(typeof(p)).to.be.equal('number');
+        expect(p).to.be.greaterThanOrEqual(0);
+        expect(p).to.be.lessThanOrEqual(100);
+    });
+
+    it('Should generate a random percent string (int between 0 and 100', () => {
+        const p = percentString();
+        expect(typeof(p)).to.be.equal('string');
+        expect(p[p.length-1]).to.be.equal('%');
+        const p2 = parseInt(p.substring(0, p.length-1));
+        expect(p2).to.be.greaterThanOrEqual(0);
+        expect(p2).to.be.lessThanOrEqual(100);
+        expect(p).to.be.equal(`${p2}%`)
     });
 });

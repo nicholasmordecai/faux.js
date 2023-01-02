@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { Config } from '../../src/configuration';
 import { IProbabilityOptions, Probability } from '../../src/core/probability';
 import { Register } from '../../src/core/register';
 
