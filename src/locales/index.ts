@@ -22,8 +22,8 @@ export type localeSelectors = keyof typeof locales;
 import { GB } from './gb';
 
 export const locales = {
-    gb: GB,
-    global: GB,
-    ca: GB,
-    usa: GB
-}
+	gb: GB,
+	global: GB,
+	ca: GB,
+	usa: GB
+};

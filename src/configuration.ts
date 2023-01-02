@@ -6,8 +6,8 @@ export interface IConfig {
 }
 
 export const Config: IConfig = {
-    seed: Date.now(),
-    locale: 'gb'
-}
+	seed: Date.now(),
+	locale: 'gb'
+};
 
-export let getLocale: ILocale = locales[Config.locale];
+export const getLocale: ILocale = locales[Config.locale];

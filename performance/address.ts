@@ -12,31 +12,31 @@ interface IResult {
 }
 
 export async function AddressPerformance(): Promise<IResult> {
-  return new Promise((resolve) => {
-    const suite = new Benchmark.Suite;
+	return new Promise((resolve) => {
+		const suite = new Benchmark.Suite;
 
-    const result: IResult = {
-      Lumis: {
-        city: -1
-      },
-      Faker: {
-        city: -1
-      }
-    }
+		const result: IResult = {
+			Lumis: {
+				city: -1
+			},
+			Faker: {
+				city: -1
+			}
+		};
 
-    suite.add('Faker', () => { faker.address.city() });
-    suite.add('Lumis', () => { city() });
+		suite.add('Faker', () => { faker.address.city(); });
+		suite.add('Lumis', () => { city(); });
 
-    suite.on('cycle', (event: Event) => {
-      const benchmark = event.target;
-      const key = benchmark.name as 'Lumis' | 'Faker';
-      result[key].city = benchmark.hz!;
-    });
+		suite.on('cycle', (event: Event) => {
+			const benchmark = event.target;
+			const key = benchmark.name as 'Lumis' | 'Faker';
+			result[key].city = benchmark.hz!;
+		});
 
-    suite.on('complete', (event: Event) => {
-      resolve(result);
-    });
+		suite.on('complete', (event: Event) => {
+			resolve(result);
+		});
 
-    suite.run({ async: true });
-  });
+		suite.run({ async: true });
+	});
 }
