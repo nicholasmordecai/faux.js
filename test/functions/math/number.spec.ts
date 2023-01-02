@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { normalDist, percent, percentString, rngFloat } from '../../../src/functions/math/number';
+import { normalDist, percent, percentString, rngFloat, rngInt } from '../../../src/functions/math/number';
 
 describe('Number tests', () => {
     it('Should generate a 32 bit Mulberry random float', () => {
@@ -62,5 +62,19 @@ describe('Number tests', () => {
         expect(p2).to.be.greaterThanOrEqual(0);
         expect(p2).to.be.lessThanOrEqual(100);
         expect(p).to.be.equal(`${p2}%`)
+    });
+
+    it('Should generate a random integer', () => {
+        const result = rngInt();
+        expect(typeof(result)).to.be.equal('number');
+        expect(result).to.be.greaterThanOrEqual(0);
+        expect(result).to.be.lessThan(100);
+    });
+
+    it('Should generate a random integer with min and max config', () => {
+        const result = rngInt({min: 25, max: 50});
+        expect(typeof(result)).to.be.equal('number');
+        expect(result).to.be.greaterThanOrEqual(25);
+        expect(result).to.be.lessThanOrEqual(50);
     });
 });
