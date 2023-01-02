@@ -56,7 +56,6 @@ export function rngInt(options?: MathOptions): number {
     }
 
     Config.seed += 1;
-    //? Does this need to also be multiplied by 100?
     return Math.floor(mulberry32() * (options.max - options.min + 1) + options.min)
 }
 
