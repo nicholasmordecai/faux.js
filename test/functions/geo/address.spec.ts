@@ -32,7 +32,6 @@ describe('Address module', () => {
 
     it('Should create a complete address as an object', () => {
         const result = address();
-        console.log(result);
         expect(typeof result).to.be.equal('object');
         expect(result).to.haveOwnProperty('country');
         expect(result).to.haveOwnProperty('county');
@@ -44,7 +43,6 @@ describe('Address module', () => {
 
     it('Should create a complete address as a string', () => {
         const result = addressString();
-        console.log(result);
         expect(typeof result).to.be.equal('string');
     });
 });

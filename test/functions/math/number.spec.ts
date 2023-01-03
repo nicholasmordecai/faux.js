@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { percent, percentString, rngFloat, rngInt } from '../../../src/functions/math/number';
+import { normalDist, percent, percentString, rngFloat, rngInt } from '../../../src/functions/math/number';
 
 describe('Number tests', () => {
     it('Should generate a 32 bit Mulberry random float', () => {
@@ -38,15 +38,6 @@ describe('Number tests', () => {
         expect(result).to.be.lessThan(-25);
     });
 
-    // it('Should generate a number from a normal distribution', () => {
-    //     // let csv = 'num\n';
-    //     for(let i = 0; i < 1000; i++) {
-    //         const result = normalDist(10, 20, 1);
-    //         // csv += `${result}\n`;
-    //         expect(typeof(result)).to.be.equal('number');
-    //     }
-    // });
-
     it('Should generate a random percent (int between 0 and 100', () => {
         const p = percent();
         expect(typeof (p)).to.be.equal('number');
@@ -76,5 +67,29 @@ describe('Number tests', () => {
         expect(typeof (result)).to.be.equal('number');
         expect(result).to.be.greaterThanOrEqual(25);
         expect(result).to.be.lessThanOrEqual(50);
+    });
+
+    it('Should generate a number from a normal distribution', () => {
+        const results: number[] = [];
+
+        for (let i = 0; i < 100000; i++) {
+            const result = normalDist(0, 10, 1);
+            results.push(Math.round(result));
+        }
+
+        const distribution: {[key: string]: number} = {};
+
+        for (const num of results) {
+            distribution[num] = distribution[num] ? distribution[num] + 1 : 1;
+        }
+
+        // Test the distribution to try to assertain if it is a normal distribution
+        expect(distribution['2']).to.be.within(500, 700);
+        expect(distribution['3']).to.be.within(5800, 6300);
+        expect(distribution['4']).to.be.within(23500, 24500);
+        expect(distribution['5']).to.be.within(37500, 39000);
+        expect(distribution['6']).to.be.within(23500, 24500);
+        expect(distribution['7']).to.be.within(5800, 6300);
+        expect(distribution['8']).to.be.within(500, 700);
     });
 });

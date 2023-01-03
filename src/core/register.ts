@@ -5,8 +5,7 @@ export class Register<T> {
 		this.dictionary = obj;
 	}
 
-	// todo - fix the property type any parameter
-	public add(key: keyof T, property: any) {
+	public add(key: keyof T, property: T[keyof T]) {
 		this.dictionary[key] = property;
 	}
 

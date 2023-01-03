@@ -1,4 +1,4 @@
-node_modules
+node_modules/
 dist
 src/factory/index.ts
 src/index.ts
