@@ -18,6 +18,7 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc -w",
+    "serve": "ts-node-dev src/api/server.ts",
     "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\"",
     "test:watch": "mocha --require ts-node/register --recursive --watch --watch-files \"test/**/*.spec.ts\",\"src/**/*\" \"test/**/*.spec.ts\"",
     "test:coverage": "nyc npm run test",
@@ -49,12 +50,14 @@
     "cross-env": "^7.0.3",
     "dpdm": "^3.10.0",
     "eslint": "^8.23.0",
+    "fastify": "^4.11.0",
     "jsdoc": "^3.6.11",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
     "nyc": "^15.1.0",
     "sinon": "^14.0.1",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0"
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",
