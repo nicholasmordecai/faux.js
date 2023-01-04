@@ -14,34 +14,34 @@ interface ServerConfig {
 type routes = { [key: string]: any };
 
 export class Server {
-    public static run(routes: routes, config: ServerConfig): FastifyInstance {
-        const server = fastify();
+	public static run(routes: routes, config: ServerConfig): FastifyInstance {
+		const server = fastify();
 
-        for (let route in routes) {
-            server.get(route, async (request: RequestQueryParameters, reply) => {
-                // do something with request.count
-                if (request.query.count) {
-                    const results = [];
-                    for (let i = request.query.count; i > 0; i--) {
-                        results.push(routes[route].build())
-                    }
-                    return results;
-                } else {
-                    return routes[route].build();
-                }
-            });
-        }
+		for (const route in routes) {
+			server.get(route, async (request: RequestQueryParameters, reply) => {
+				// do something with request.count
+				if (request.query.count) {
+					const results = [];
+					for (let i = request.query.count; i > 0; i--) {
+						results.push(routes[route].build());
+					}
+					return results;
+				} else {
+					return routes[route].build();
+				}
+			});
+		}
 
-        server.listen({ port: config.port || 3000 }, (err, address) => {
-            if (err) {
-                console.error(err)
-                process.exit(1)
-            }
-            console.log(`tseudo server listening at ${address}`)
-        });
+		server.listen({ port: config.port || 3000 }, (err, address) => {
+			if (err) {
+				console.error(err);
+				process.exit(1);
+			}
+			console.log(`tseudo server listening at ${address}`);
+		});
 
-        return server;
-    }
+		return server;
+	}
 }
 
 // const user = {
