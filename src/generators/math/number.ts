@@ -19,7 +19,7 @@ export function float(options?: MathOptions): number {
 	if (options && options.precision) {
 		return toFixedNumber(float, options.precision);
 	} else {
-		return float
+		return float;
 	}
 }
 
@@ -80,14 +80,14 @@ export default {
 	bool,
 	percent,
 	percentString
-}
+};
 
 
 /**
  * Internal Number Utils
  */
 
-function toFixedNumber(value: number, digits: number, base: number = 10): number {
+function toFixedNumber(value: number, digits: number, base = 10): number {
 	const pow = Math.pow(base, digits);
 	return Math.round(value * pow) / pow;
 }

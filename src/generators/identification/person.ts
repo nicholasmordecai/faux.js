@@ -23,18 +23,18 @@ export function nickname(): string {
 export function fullName(options?: PersonOptions): FullName {
 	let gen: Gender;
 	if(options && options.gender) {
-		gen = options.gender
+		gen = options.gender;
 	} else {
 		gen = gender();
 	}
 
 	return {
-		firstName: firstName({gender: gen}),
+		firstName: firstName({ gender: gen }),
 		lastName: lastName(),
 		middleNames: middleNames(),
 		gender: gen,
 		nickName: nickname()
-	}
+	};
 }
 
 export function firstName(options?: PersonOptions): string {
@@ -96,4 +96,4 @@ export default {
 	nickname,
 	fullName,
 	gender
-}
+};

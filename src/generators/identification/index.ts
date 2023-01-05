@@ -1,7 +1,7 @@
-import person from "./person";
-import uuid from "./uuid";
+import person from './person';
+import uuid from './uuid';
 
 export default {
-    person,
-    uuid
-}
+	person,
+	uuid
+};

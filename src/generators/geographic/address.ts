@@ -152,4 +152,4 @@ export default {
 	houseNameNumber,
 	address,
 	addressString
-}
+};

@@ -6,4 +6,4 @@ export function rngFromArray<T>(array: Array<T>): T {
 
 export default {
 	rngFromArray
-}
+};

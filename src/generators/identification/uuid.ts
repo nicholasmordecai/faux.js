@@ -6,4 +6,4 @@ export function uuid(): string {
 
 export default {
 	uuid
-}
+};

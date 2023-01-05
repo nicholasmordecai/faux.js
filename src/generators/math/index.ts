@@ -1,5 +1,5 @@
-import number from "./number";
+import number from './number';
 
 export default {
-    number
-}
+	number
+};

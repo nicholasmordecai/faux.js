@@ -24,4 +24,4 @@ export function fromFormat(format: string) {
 
 export default {
 	fromFormat
-}
+};
