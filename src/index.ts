@@ -1,9 +1,9 @@
 import { Config } from './configuration';
-import * as functions from './generators';
+import * as generators from './generators';
 import * as utils from './core';
  
 export default {
     Config,
-    functions,
+    generators,
     utils
 }

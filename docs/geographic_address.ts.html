@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> LatLong</title>
+  <title> geographic/address.ts</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,262 +75,173 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Interface</p>
-                    <h1>LatLong</h1>
+                    <p>Source</p>
+                    <h1>geographic/address.ts</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
-    
-        <h2>LatLong</h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class="description">Interface for a position object (latitude and longitude)</div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="geographic_map.ts.html" class="button">View Source</a>
-            <span>
-                <a href="geographic_map.ts.html">geographic/map.ts</a>, <a href="geographic_map.ts.html#line35">line 35</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-        
-    
-    </div>
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class='vertical-section'>
-            <h1>Members</h1>
-            <div class="members">
-            
-                <div class="member">
-
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
-        
-<code class="param-type">number</code>
-
-
-    </span>
-
-<h4 class="name" id="lat">
-    <a class="href-link" href="#lat">#</a>
-    
-    <span class="code-name">
-        lat
-    </span>
-    
-</h4>
-
-
-
-
-<div class="description">
-    Latitude
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="geographic_map.ts.html" class="button">View Source</a>
-            <span>
-                <a href="geographic_map.ts.html">geographic/map.ts</a>, <a href="geographic_map.ts.html#line42">line 42</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-</div>
-            
-                <div class="member">
-
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
-        
-<code class="param-type">number</code>
-
-
-    </span>
-
-<h4 class="name" id="long">
-    <a class="href-link" href="#long">#</a>
-    
-    <span class="code-name">
-        long
-    </span>
-    
-</h4>
-
-
-
-
-<div class="description">
-    Longitude
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="geographic_map.ts.html" class="button">View Source</a>
-            <span>
-                <a href="geographic_map.ts.html">geographic/map.ts</a>, <a href="geographic_map.ts.html#line49">line 49</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-</div>
-            
-            </div>
-        </div>
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { rngInt } from '../math/number';
+import { rngFromArray } from '../util/array';
+import { fromFormat } from '../util/string';
+
+import { getLocale } from '../../configuration';
+
+/**
+ * Address interface
+ *
+ * @interface IAddress
+ * @typedef {IAddress}
+ */
+interface IAddress {
+    /**
+	 * The country name
+	 *
+	 * @type {string}
+	 */
+	country: string;
+    /**
+	 * The county name
+	 *
+	 * @type {string}
+	 */
+	county: string;
+    /**
+	 * The city name
+	 *
+	 * @type {string}
+	 */
+	city: string;
+    /**
+	 * The street name
+	 *
+	 * @type {string}
+	 */
+	street: string;
+    /**
+	 * The house name or number
+	 *
+	 * @type {(string | number)}
+	 */
+	houseNumber: string | number;
+    /**
+	 * The postcode
+	 *
+	 * @type {string}
+	 */
+	postcode: string;
+}
+
+/**
+ * Generate a random postcode
+ *
+ * @export
+ * @returns {string}
+ */
+export function postcode(): string {
+	const format = rngFromArray(getLocale.zipcodeFormats);
+	return fromFormat(format);
+}
+
+/**
+ * Generate a random city name
+ *
+ * @export
+ * @returns {string}
+ */
+export function city(): string {
+	return rngFromArray(getLocale.cities);
+}
+
+/**
+ * Generate a random county
+ *
+ * @export
+ * @returns {string}
+ */
+export function county(): string {
+	return rngFromArray(getLocale.counties);
+}
+
+/**
+ * Generate a random street name
+ *
+ * @export
+ * @returns {string}
+ */
+export function street(): string {
+	return `${rngFromArray(getLocale.streets)} ${rngFromArray(getLocale.streetSuffixes)}`;
+}
+
+/**
+ * Generate a random house name or number
+ *
+ * @export
+ * @returns {(string | number)}
+ */
+export function houseNameNumber(): string | number {
+	const format = rngFromArray(getLocale.houseNameFormats);
+	if (format === 'N') {
+		return rngInt({ min: 1, max: 150 });
+	} else {
+		return `${rngFromArray(getLocale.houseNamePrefixes)} ${rngFromArray(getLocale.houseNameSuffixes)}`;
+	}
+}
+
+/**
+ * Generate a random country
+ *
+ * @export
+ * @returns {string}
+ */
+export function country(): string {
+	return getLocale.name;
+}
+
+/**
+ * Address generator
+ *
+ * @export
+ * @returns {IAddress}
+ */
+export function address(): IAddress {
+	return {
+		country: getLocale.name,
+		county: county(),
+		city: city(),
+		street: street(),
+		houseNumber: houseNameNumber(),
+		postcode: postcode()
+	};
+}
+
+/**
+ * Address described as a string
+ *
+ * @export
+ * @returns {string}
+ */
+export function addressString(): string {
+	const addr = address();
+	return `${addr.houseNumber} ${addr.street}, ${addr.county}, ${addr.city}, ${addr.country}, ${addr.postcode}`;
+}
+
+export default {
+	postcode,
+	city,
+	county,
+	country,
+	street,
+	houseNameNumber,
+	address,
+	addressString
+}</code></pre>
+        </article>
+    </section>
 
 
 

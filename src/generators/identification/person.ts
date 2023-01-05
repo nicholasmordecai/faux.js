@@ -1,6 +1,6 @@
 import { getLocale } from '../../configuration';
 import { rngFromArray } from '../util/array';
-import { rngBool, rngInt } from '../math/number';
+import { bool, int } from '../math/number';
 
 export interface FullName {
 	firstName: string;
@@ -27,7 +27,7 @@ export function fullName(options?: PersonOptions): FullName {
 	} else {
 		gen = gender();
 	}
-	
+
 	return {
 		firstName: firstName({gender: gen}),
 		lastName: lastName(),
@@ -45,7 +45,7 @@ export function firstName(options?: PersonOptions): string {
 			return rngFromArray(getLocale.names.female);
 		}
 	} else {
-		const male = rngBool();
+		const male = bool();
 		if(male) {
 			return rngFromArray(getLocale.names.male);
 		} else {
@@ -61,7 +61,7 @@ export function lastName(): string {
 // todo there is a roughly 0.0004% chance of generating two middle names that are identicle.
 // Should look at removing duplicates - but don't want to bog the code down on something superfluous
 export function middleNames(): string[] {
-	const count = rngInt({ min: 0, max: 2 });
+	const count = int({ min: 0, max: 2 });
 	const middleNames = [];
 
 	for (let i = count; i > 0; i--) {
@@ -72,7 +72,7 @@ export function middleNames(): string[] {
 }
 
 export function gender(): Gender {
-	const male = rngBool();
+	const male = bool();
 	if (male) {
 		return 'Male';
 	} else {
@@ -87,3 +87,13 @@ export function gender(): Gender {
 // export function title() {
 
 // }
+
+
+export default {
+	firstName,
+	lastName,
+	middleNames,
+	nickname,
+	fullName,
+	gender
+}

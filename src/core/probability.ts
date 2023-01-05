@@ -1,4 +1,4 @@
-import { rngFloat } from '../generators/math/number';
+import { float } from '../generators/math/number';
 
 type TGenerator<T> = (() => T) | T;
 
@@ -37,7 +37,7 @@ export function validateConditions<T>(conditions: IProbability<T>[]): boolean {
 }
 
 export function getConditionFromProbability<T>(conditions: IProbability<T>[]): IProbability<T> {
-	const calculatedProb = rngFloat({ min: 0, max: 100 });
+	const calculatedProb = float({ min: 0, max: 100 });
 	let previousProb = 0;
 	for (const condition of conditions) {
 		if(calculatedProb >= previousProb && calculatedProb < previousProb + condition.probability) {

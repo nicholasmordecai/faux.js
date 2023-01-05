@@ -1,4 +1,4 @@
-import { rngFloat } from "../math/number";
+import { int } from "../math/number";
 
 // Note: Precision is done mathematically not using a string, so unnessessary 0's will be removed from the end.
 // If you want to fix this, you can do: lat().toPrecision(9) and it will return a string representation including trailing 0's.
@@ -32,7 +32,7 @@ interface LatLong {
  * @export
  * @returns {LatLong}
  */
-export function LatLong(): LatLong {
+export function latLong(): LatLong {
     return {
         lat: lat(),
         long: long()
@@ -46,7 +46,7 @@ export function LatLong(): LatLong {
  * @returns {number}
  */
 export function lat(): number {
-    return rngFloat({ min: -180, max: 180, precision: 9 });
+    return int({ min: -180, max: 180, precision: 9 });
 }
 
 /**
@@ -56,5 +56,11 @@ export function lat(): number {
  * @returns {number}
  */
 export function long(): number {
-    return rngFloat({ min: -180, max: 180, precision: 9 });
+    return int({ min: -180, max: 180, precision: 9 });
+}
+
+export default { 
+    lat,
+    long,
+    latLong
 }

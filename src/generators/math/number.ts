@@ -6,21 +6,7 @@ export interface MathOptions {
 	precision?: number;
 }
 
-export function randn_bm() {
-	const u = 1 - mulberry32();
-	const v = mulberry32();
-	return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-}
-
-export function mulberry32() {
-	let t = Config.seed += 0x6D2B79F5;
-	t = Math.imul(t ^ t >>> 15, t | 1);
-	t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-	const result = ((t ^ t >>> 14) >>> 0) / 4294967296;
-	return result;
-}
-
-export function rngFloat(options?: MathOptions): number {
+export function float(options?: MathOptions): number {
 	let float: number;
 
 	if (options && options.min && options.max) {
@@ -37,7 +23,7 @@ export function rngFloat(options?: MathOptions): number {
 	}
 }
 
-export function rngInt(options?: MathOptions): number {
+export function int(options?: MathOptions): number {
 	if (!options) {
 		return Math.floor(mulberry32() * 100);
 	}
@@ -76,15 +62,24 @@ export function normalDist(min: number, max: number, skew: number) {
 // }
 
 export function percent(options?: MathOptions): number {
-	return rngFloat(options);
+	return float(options);
 }
 
 export function percentString(options?: MathOptions): string {
-	return `${rngInt(options)}%`;
+	return `${int(options)}%`;
 }
 
-export function rngBool(): boolean {
-	return rngFloat() > 0.5;
+export function bool(): boolean {
+	return float() > 0.5;
+}
+
+export default {
+	float,
+	int,
+	normalDist,
+	bool,
+	percent,
+	percentString
 }
 
 
@@ -95,4 +90,18 @@ export function rngBool(): boolean {
 function toFixedNumber(value: number, digits: number, base: number = 10): number {
 	const pow = Math.pow(base, digits);
 	return Math.round(value * pow) / pow;
+}
+
+function randn_bm() {
+	const u = 1 - mulberry32();
+	const v = mulberry32();
+	return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+}
+
+function mulberry32() {
+	let t = Config.seed += 0x6D2B79F5;
+	t = Math.imul(t ^ t >>> 15, t | 1);
+	t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+	const result = ((t ^ t >>> 14) >>> 0) / 4294967296;
+	return result;
 }

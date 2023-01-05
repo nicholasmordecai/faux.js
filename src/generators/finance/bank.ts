@@ -36,6 +36,14 @@ export function cardNumber() {
 
 // }
 
-export function CCV() {
+export function cvv() {
 	return parseInt(fromFormat('999'));
+}
+
+export default {
+	IBAN,
+	accountNumber,
+	sortCode,
+	cardNumber,
+	cvv
 }

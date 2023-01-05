@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { long, lat, LatLong } from './../../../src/generators/geographic/map';
+import { long, lat, latLong } from './../../../src/generators/geographic/map';
 import { countDecimals } from './../../utils/internal';
 
 describe('Map module', () => {
@@ -19,7 +19,7 @@ describe('Map module', () => {
     });
 
     it('Should create a lat long object', () => {
-        const latLng = LatLong();
+        const latLng = latLong();
         expect(latLng).to.haveOwnProperty('lat');
         expect(latLng).to.haveOwnProperty('long');
 

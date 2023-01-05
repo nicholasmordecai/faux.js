@@ -1,5 +1,9 @@
-import { rngInt } from '../math/number';
+import { int } from '../math/number';
 
 export function rngFromArray<T>(array: Array<T>): T {
-	return array[rngInt({ min: 0, max: array.length-1 })];
+	return array[int({ min: 0, max: array.length-1 })];
+}
+
+export default {
+	rngFromArray
 }
