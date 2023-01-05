@@ -66,7 +66,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Util</h2><h3>Interfaces</h3><ul><li><a href="IProbabilityOptions.html">IProbabilityOptions</a></li><li><a href="Probability.IProbability.html">IProbability</a></li></ul><h3>Global</h3><ul><li><a href="global.html#generate">generate</a></li><li><a href="global.html#Probability">Probability</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Interfaces</h3><ul><li><a href="global.html#LatLong">LatLong</a></li></ul><h3>Global</h3><ul><li><a href="global.html#lat">lat</a></li><li><a href="global.html#long">long</a></li><li><a href="global.html#toFixedNumber">toFixedNumber</a></li></ul></div>
                 
             </nav>
         </div>
@@ -101,22 +101,216 @@
 
     <section>
         <article><p><a href="https://www.typescriptlang.org/"><img src="https://badgen.net/badge/typescript/strict%20%F0%9F%92%AA/blue?icon=typescript" alt=""></a>
-<a href="https://app.circleci.com/pipelines/github/megmut/tseudo?branch=master"><img src="https://circleci.com/gh/megmut/tseudo.svg?style=svg" alt=""></a>
+<a href="https://github.com/megmut/tseudo/actions/workflows/test.yaml"><img src="https://github.com/megmut/tseudo/actions/workflows/test.yaml/badge.svg" alt=""></a>
+<a href="https://github.com/megmut/tseudo/actions/workflows/build.yaml"><img src="https://github.com/megmut/tseudo/actions/workflows/build.yaml/badge.svg" alt=""></a>
 <a href="https://github.com/prettier/prettier"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="code style: prettier"></a>
 <img src="https://img.shields.io/npm/v/tseudo?style=flat-square" alt="npm">
-<a href="https://coveralls.io/github/megmut/tseudo?branch=master"><img src="https://coveralls.io/repos/github/megmut/tseudo/badge.svg?branch=master" alt="Coverage Status"></a></p>
+<a href="https://coveralls.io/github/megmut/tseudo?branch=main"><img src="https://coveralls.io/repos/github/megmut/tseudo/badge.svg?branch=main" alt="Coverage Status"></a></p>
 <h1 id="tseudo">tseudo</h1>
 <h2 id="modern-performant-pseudo-random-data-generator">Modern performant pseudo random data generator</h2>
 <blockquote>
 <p>Please note, this is still very early development and has not been tested in a production envirnoment!</p>
 </blockquote>
+<h2 id="installing">Installing</h2>
+<pre class="prettyprint source lang-sh"><code>$ npm i tseudo
+# or
+$ yarn add tseudo
+</code></pre>
+<h2 id="examples">Examples</h2>
+<h3 id="using-generators">Using Generators</h3>
+<p>Generators are individual functions that return pseudo random data.</p>
+<p>Example 1: Create a random address</p>
+<pre class="prettyprint source lang-ts"><code>import { address } from 'tseudo';
+const address = address();
+
+/*
+	{
+	  country: 'United Kingdom',
+	  county: 'Devon',
+	  city: 'Birmingham',
+	  street: 'Green Lane',
+	  houseNumber: 'Red Stables',
+	  postcode: 'VX53 8ZF'
+	}
+*/
+</code></pre>
+<p>For a full break down of all generators, click here.</p>
+<h3 id="using-registers">Using Registers</h3>
+<p>Registers are kind of like factories. You can describe your object with built in, custom or inline functions to be group generators together for ease of use.</p>
+<p>Example 1:</p>
+<pre class="prettyprint source lang-ts"><code>import { Register, address, rngInt } from  '../core/register';
+
+const  user  = {
+	address: address,
+	age: () =>  rngInt({min: 18, max: 80})
+};
+
+const userRegister = new Register(user);
+</code></pre>
+<p>In order to generate a new user, you can call the <code>build</code> method on that register.
+Example 2a:</p>
+<pre class="prettyprint source lang-ts"><code>...
+const newUser = userRegister.build();
+
+/*
+{
+  address: {
+    country: 'United Kingdom',
+    county: 'Essex',
+    city: 'Bristol',
+    street: 'Kings Lane',
+    houseNumber: 7,
+    postcode: 'ET9 6WS'
+  },
+  age: 25
+}
+*/
+</code></pre>
+<h3 id="server">Server</h3>
+<p>If you're developing on the frontend, or are performing API integrations then you may find it very useful to couple registers up with an API. It's a fast and east way to generate data and fetch it through a restful API.</p>
+<p>Example 3.</p>
+<pre class="prettyprint source lang-ts"><code>import { Server } from 'tseudo';
+
+const server = new Server();
+
+// create registers
+const userRegister = new Register(user);
+const account = new Register(account);
+
+// define routes
+const routes = {
+    '/user': userRegister,
+	'/cart': cartRegister
+};
+
+server.run(routes);
+</code></pre>
+<h2 id="core-generators">Core Generators</h2>
+<h4 id="math">Math</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rngInt</td>
+<td>random integer</td>
+<td>number</td>
+</tr>
+<tr>
+<td>rngfloat</td>
+<td>random floating point</td>
+<td>number</td>
+</tr>
+<tr>
+<td>normalDist</td>
+<td>random float with a normal distribution</td>
+<td>number</td>
+</tr>
+<tr>
+<td>percent</td>
+<td>random float between 0 and 1</td>
+<td>number</td>
+</tr>
+<tr>
+<td>percentString</td>
+<td>percent but as a string eg: '45%'</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<h4 id="string-util">String Util</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fromFormat</td>
+<td>random string from format (ZZ99-99)</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<h4 id="array-util">Array Util</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rngFromArray</td>
+<td>pick a random element from an array</td>
+<td>elementType</td>
+</tr>
+</tbody>
+</table>
+<h4 id="geographic">Geographic</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>postcode</td>
+<td>postcode or zipcode</td>
+<td>string</td>
+</tr>
+<tr>
+<td>city</td>
+<td>the city</td>
+<td>string</td>
+</tr>
+<tr>
+<td>county</td>
+<td>the county</td>
+<td>string</td>
+</tr>
+<tr>
+<td>street</td>
+<td>the street</td>
+<td>string</td>
+</tr>
+<tr>
+<td>houseNameNumber</td>
+<td>the house name or number</td>
+<td>string</td>
+</tr>
+<tr>
+<td>address</td>
+<td>full address in object format</td>
+<td>IAddress</td>
+</tr>
+<tr>
+<td>addressString</td>
+<td>full address represented as a string</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
 <h2 id="contributing">Contributing</h2>
 <p>Please read <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> for details on our code of conduct, and the process for submitting pull requests to us.</p>
 <ol>
 <li>Fork it!</li>
 <li>Create your feature branch: <code>git checkout -b feat/my-new-feature</code></li>
 <li>Add your changes: <code>git add .</code></li>
-<li>Commit your changes: <code>git commit -am 'Add some feature'</code></li>
+<li>Commit your changes: <code>git commit -m 'Add some feature'</code></li>
 <li>Push to the branch: <code>git push origin my-new-feature</code></li>
 <li>Submit a pull request :sunglasses:</li>
 </ol>
@@ -128,7 +322,8 @@
 </ul>
 <p>See also the list of <a href="https://github.com/megmut/tseudo/contributors">contributors</a> who participated in this project.</p>
 <h2 id="license">License</h2>
-<h1 id="apache-2.0-license-%C2%A9-nicholas-mordecai"><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a> © Nicholas Mordecai</h1>
+<p><a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a> © Nicholas Mordecai</p>
+<p>=======</p>
 <h5 id="notes-to-self">Notes To Self</h5>
 <ul>
 <li>If a nested structure is optional, a config should be set to allow that nested property to be or not to be generated</li>
@@ -137,6 +332,7 @@
 <ol>
 <li>an object can lookup the values of a parent object for conditional statements / branches</li>
 <li>you should be able to wrap any fn in a probability factor to determine one of multiple outcomes</li>
+<li>Override any value / property from a function generator</li>
 </ol></article>
     </section>
 
