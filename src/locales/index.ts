@@ -15,6 +15,13 @@ export interface ILocale {
     bank: {
         iban: string;
     }
+    names: {
+        male: string[];
+        female: string[];
+        middleNames: string[];
+        lastNames: string[];
+        nicknames: string[];
+    }
 }
 
 export type localeSelectors = keyof typeof locales;

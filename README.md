@@ -58,7 +58,7 @@ const  user  = {
 const userRegister = new Register(user);
 ```
 In order to generate a new user, you can call the `build` method on that register.
-Example 1a:
+Example 2a:
 ```ts
 ...
 const newUser = userRegister.build();
@@ -78,7 +78,51 @@ const newUser = userRegister.build();
 */
 ```
 
+### Server
+If you're developing on the frontend, or are performing API integrations then you may find it very useful to couple registers up with an API. It's a fast and east way to generate data and fetch it through a restful API.
+
+Example 3.
+
+```ts
+import { Server } from 'tseudo';
+
+const server = new Server();
+
+// create registers
+const userRegister = new Register(user);
+const account = new Register(account);
+
+// define routes
+const routes = {
+    '/user': userRegister,
+	'/cart': cartRegister
+};
+
+server.run(routes);
+```
+
 ## Core Generators
+
+#### Math 
+
+| Name | Description | Type |
+|--|--|--|
+| rngInt | random integer | number |
+| rngfloat | random floating point | number |
+| normalDist | random float with a normal distribution | number |
+| percent | random float between 0 and 1 | number |
+| percentString | percent but as a string eg: '45%' | string |
+
+#### String Util
+| Name | Description | Type |
+|--|--|--|
+| fromFormat | random string from format (ZZ99-99) | string |
+
+#### Array Util
+| Name | Description | Type |
+|--|--|--|
+| rngFromArray | pick a random element from an array | elementType |
+
 #### Geographic
 | Name | Description | Type |
 |--|--|--|
@@ -93,11 +137,8 @@ const newUser = userRegister.build();
 
 ## Contributing
 
-  
-
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
   
-
 1. Fork it!
 2. Create your feature branch: `git checkout -b feat/my-new-feature`
 3. Add your changes: `git add .`
@@ -105,45 +146,25 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 5. Push to the branch: `git push origin my-new-feature`
 6. Submit a pull request :sunglasses:
 
-  
-
 ## Versioning
-
-  
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/megmut/tseudo/tags).
 
-  
-
 ## Authors
-
-  
 
 -  **Nicholas Mordecai**
 
-  
-
 See also the list of [contributors](https://github.com/megmut/tseudo/contributors) who participated in this project.
 
-  
-
 ## License
-
-  
 
 [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) © Nicholas Mordecai
 
 =======
 
-  
-
 ##### Notes To Self
 
 - If a nested structure is optional, a config should be set to allow that nested property to be or not to be generated
-
-  
-  
-  
 
 ### Need to write -
 
