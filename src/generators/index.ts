@@ -4,7 +4,7 @@ import math from './math';
 import util from './util';
 import finance from './finance';
 
-export const Generators = {
+export default {
 	finance,
 	geographic,
 	identification,

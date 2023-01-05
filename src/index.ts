@@ -1,9 +1,12 @@
 import { Config } from './configuration';
-import * as generators from './generators';
-import * as utils from './core';
+import Generators from './generators';
+import Core from './core';
+import API from './api';
+import { locales } from './locales';
  
 export default {
+    API,
     Config,
-    generators,
-    utils
+    Core,
+    Generators
 }

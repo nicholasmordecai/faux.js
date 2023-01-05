@@ -1,3 +1,9 @@
-export * as contingency from './contingency';
-export * as probability from './probability';
-export * as register from './register';
+import { Contingency } from './contingency';
+import { Probability } from './probability';
+import { Register } from './register';
+
+export default {
+    Contingency,
+    Probability,
+    Register
+}
