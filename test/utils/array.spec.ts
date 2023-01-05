@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { rngFromArray } from '../../src/functions/util/array';
+import { rngFromArray } from '../../src/generators/util/array';
 
 describe('Array Util', () => {
     it('Should pick the only item from an array of 1', () => {

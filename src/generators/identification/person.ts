@@ -1,13 +1,17 @@
 import { getLocale } from '../../configuration';
 import { rngFromArray } from '../util/array';
-import { rngBool, rngInt } from './../math/number';
+import { rngBool, rngInt } from '../math/number';
 
-export interface IPerson {
+export interface FullName {
 	firstName: string;
 	lastName: string;
-	middleNames?: string;
+	middleNames: string[];
 	nickName: string;
 	gender: Gender
+}
+
+export interface PersonOptions {
+	gender: Gender;
 }
 
 export type Gender = 'Male' | 'Female';
@@ -16,21 +20,37 @@ export function nickname(): string {
 	return rngFromArray(getLocale.names.nicknames);
 }
 
-export function fullName(): string {
-	const male = rngBool();
-	if (male) {
-		return rngFromArray(getLocale.names.male);
+export function fullName(options?: PersonOptions): FullName {
+	let gen: Gender;
+	if(options && options.gender) {
+		gen = options.gender
 	} else {
-		return rngFromArray(getLocale.names.female);
+		gen = gender();
+	}
+	
+	return {
+		firstName: firstName({gender: gen}),
+		lastName: lastName(),
+		middleNames: middleNames(),
+		gender: gen,
+		nickName: nickname()
 	}
 }
 
-export function firstName(): string {
-	const male = rngBool();
-	if (male) {
-		return rngFromArray(getLocale.names.male);
+export function firstName(options?: PersonOptions): string {
+	if (options && options.gender) {
+		if (options.gender === 'Male') {
+			return rngFromArray(getLocale.names.male);
+		} else {
+			return rngFromArray(getLocale.names.female);
+		}
 	} else {
-		return rngFromArray(getLocale.names.female);
+		const male = rngBool();
+		if(male) {
+			return rngFromArray(getLocale.names.male);
+		} else {
+			return rngFromArray(getLocale.names.female);
+		}
 	}
 }
 
@@ -43,8 +63,8 @@ export function lastName(): string {
 export function middleNames(): string[] {
 	const count = rngInt({ min: 0, max: 2 });
 	const middleNames = [];
-	
-	for(let i = count; i >= 0; i--) {
+
+	for (let i = count; i > 0; i--) {
 		middleNames.push(rngFromArray(getLocale.names.middleNames));
 	}
 

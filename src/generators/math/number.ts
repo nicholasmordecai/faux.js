@@ -1,8 +1,9 @@
 import { Config } from '../../configuration';
 
 export interface MathOptions {
-    min: number;
-    max: number;
+	min: number;
+	max: number;
+	precision?: number;
 }
 
 export function randn_bm() {
@@ -20,11 +21,20 @@ export function mulberry32() {
 }
 
 export function rngFloat(options?: MathOptions): number {
-	if (!options) {
-		return mulberry32();
+	let float: number;
+
+	if (options && options.min && options.max) {
+		float = mulberry32() * (options.max - options.min) + options.min;
+	} else {
+		float = mulberry32();
 	}
+
 	Config.seed += 1;
-	return mulberry32() * (options.max - options.min) + options.min;
+	if (options && options.precision) {
+		return toFixedNumber(float, options.precision);
+	} else {
+		return float
+	}
 }
 
 export function rngInt(options?: MathOptions): number {
@@ -75,4 +85,14 @@ export function percentString(options?: MathOptions): string {
 
 export function rngBool(): boolean {
 	return rngFloat() > 0.5;
+}
+
+
+/**
+ * Internal Number Utils
+ */
+
+function toFixedNumber(value: number, digits: number, base: number = 10): number {
+	const pow = Math.pow(base, digits);
+	return Math.round(value * pow) / pow;
 }

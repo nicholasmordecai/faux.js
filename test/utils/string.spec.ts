@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { fromFormat } from '../../src/functions/util/string';
+import { fromFormat } from '../../src/generators/util/string';
 
 describe('String Util', () => {
     it('Should create a string from a number and character format', () => {

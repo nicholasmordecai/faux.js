@@ -1,5 +1,5 @@
 import { fromFormat } from '../util/string';
-import { getLocale } from './../../configuration';
+import { getLocale } from '../../configuration';
 
 // https://www.iban.com/structure
 // https://www.investopedia.com/terms/i/iban.asp

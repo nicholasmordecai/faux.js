@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { postcode, city, county, houseNameNumber, street, address, addressString } from "../../../src/functions/geographic/address";
+import { postcode, city, county, houseNameNumber, street, address, addressString } from "../../../src/generators/geographic/address";
 import { GB } from "../../../src/locales/gb";
 
 describe('Address module', () => {

@@ -1,4 +1,4 @@
-import { rngFloat } from '../functions/math/number';
+import { rngFloat } from '../generators/math/number';
 
 type TGenerator<T> = (() => T) | T;
 

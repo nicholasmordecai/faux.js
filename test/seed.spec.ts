@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { Config } from '../src/configuration';
-import { rngFloat } from './../src/functions/math/number';
+import { rngFloat } from './../src/generators/math/number';
 
 describe('Seed', () => {
     it('Should create a random number', () => {
