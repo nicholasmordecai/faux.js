@@ -1,6 +1,6 @@
 {
   "name": "tseudo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Modern performant pseudo random data generator",
   "keywords": [
     "random",
