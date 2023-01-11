@@ -68,7 +68,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Interfaces</h3><ul><li><a href="IAddress.html">IAddress</a></li><li><a href="global.html#LatLong">LatLong</a></li></ul><h3>Global</h3><ul><li><a href="global.html#address">address</a></li><li><a href="global.html#addressString">addressString</a></li><li><a href="global.html#city">city</a></li><li><a href="global.html#country">country</a></li><li><a href="global.html#county">county</a></li><li><a href="global.html#houseNameNumber">houseNameNumber</a></li><li><a href="global.html#lat">lat</a></li><li><a href="global.html#long">long</a></li><li><a href="global.html#postcode">postcode</a></li><li><a href="global.html#street">street</a></li><li><a href="global.html#toFixedNumber">toFixedNumber</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-book.html">book</a></li></ul><h3>Interfaces</h3><ul><li><a href="IAddress.html">IAddress</a></li><li><a href="LatLong.html">LatLong</a></li></ul><h3>Global</h3><ul><li><a href="global.html#address">address</a></li><li><a href="global.html#addressString">addressString</a></li><li><a href="global.html#book">book</a></li><li><a href="global.html#city">city</a></li><li><a href="global.html#country">country</a></li><li><a href="global.html#county">county</a></li><li><a href="global.html#houseNameNumber">houseNameNumber</a></li><li><a href="global.html#lat">lat</a></li><li><a href="global.html#latLong">latLong</a></li><li><a href="global.html#long">long</a></li><li><a href="global.html#postcode">postcode</a></li><li><a href="global.html#street">street</a></li><li><a href="global.html#toFixedNumber">toFixedNumber</a></li></ul></div>
                 
             </nav>
         </div>
@@ -85,7 +85,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { rngInt } from '../math/number';
+            <pre class="prettyprint source linenums"><code>import { int } from '../math/number';
 import { rngFromArray } from '../util/array';
 import { fromFormat } from '../util/string';
 
@@ -186,7 +186,7 @@ export function street(): string {
 export function houseNameNumber(): string | number {
 	const format = rngFromArray(getLocale.houseNameFormats);
 	if (format === 'N') {
-		return rngInt({ min: 1, max: 150 });
+		return int({ min: 1, max: 150 });
 	} else {
 		return `${rngFromArray(getLocale.houseNamePrefixes)} ${rngFromArray(getLocale.houseNameSuffixes)}`;
 	}
@@ -239,7 +239,8 @@ export default {
 	houseNameNumber,
 	address,
 	addressString
-}</code></pre>
+};
+</code></pre>
         </article>
     </section>
 

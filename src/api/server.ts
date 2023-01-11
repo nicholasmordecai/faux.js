@@ -1,13 +1,29 @@
 import fastify, { FastifyInstance, FastifyRequest } from 'fastify';
+import { Register } from '../core/register';
+import address from '../generators/geographic/address';
+import { int, normalDist } from '../generators/math/number';
 
 type RequestQueryParameters = FastifyRequest<{
-    Querystring: {
-        count: number;
-    }
+	Querystring: {
+		count: number;
+	}
 }>
 
 interface ServerConfig {
-    port?: number;
+	port?: number;
+	defaultDelay?: number | { min: number, max: number };
+}
+
+export function buildResults(count: number, route: string) {
+	if (count) {
+		const results = [];
+		for (let i = count; i > 0; i--) {
+			results.push(routes[route].build());
+		}
+		return results;
+	} else {
+		return routes[route].build();
+	}
 }
 
 // todo - add a type for the register
@@ -18,16 +34,24 @@ export class Server {
 		const server = fastify();
 
 		for (const route in routes) {
-			server.get(route, async (request: RequestQueryParameters, reply) => {
-				// do something with request.count
-				if (request.query.count) {
-					const results = [];
-					for (let i = request.query.count; i > 0; i--) {
-						results.push(routes[route].build());
+			server.get(route, async (request: RequestQueryParameters) => {
+
+				const results = buildResults(request.query.count, route);
+
+				// If there is a default, wrap the returned response in a set timeout
+				if (config.defaultDelay) {
+
+					let delay: number;
+					if (typeof config.defaultDelay === 'number') {
+						delay = config.defaultDelay;
+					} else {
+						delay = int({ min: config.defaultDelay.min, max: config.defaultDelay.max });
 					}
+
+					await pause(delay);
 					return results;
 				} else {
-					return routes[route].build();
+					return results;
 				}
 			});
 		}
@@ -44,17 +68,21 @@ export class Server {
 	}
 }
 
-// const user = {
-//     address: address,
-//     age: () => Math.round(normalDist(20, 40, 1))
-// };
+async function pause(duration: number) {
+	return new Promise((resolve) => {
+		setTimeout(resolve, duration);
+	});
+}
 
-// const userRegister = new Register(user);
+const user = {
+	address: address,
+	age: () => Math.round(normalDist(20, 40, 1))
+};
 
-// const routes: { [key: string]: any } = {
-//     '/user': userRegister,
-// };
+const userRegister = new Register(user);
 
-// Server.run(routes, {});
+const routes: { [key: string]: any } = {
+	'/user': userRegister,
+};
 
-//? Also could add a delay param for a build in delay? Also could be drawn across a normal dist?
+Server.run(routes, { defaultDelay: { min: 100, max: 500 } });

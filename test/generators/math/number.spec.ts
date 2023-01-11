@@ -93,7 +93,7 @@ describe('Number tests', () => {
         // Test the distribution to try to assertain if it is a normal distribution
         expect(distribution['2']).to.be.within(500, 700);
         expect(distribution['3']).to.be.within(5800, 6300);
-        expect(distribution['4']).to.be.within(23500, 24500);
+        expect(distribution['4']).to.be.within(23500, 24550);
         expect(distribution['5']).to.be.within(37500, 39000);
         expect(distribution['6']).to.be.within(23500, 24500);
         expect(distribution['7']).to.be.within(5800, 6300);

@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "ts-node": "^10.9.1",
-    "tseudo": "^0.0.3"
+    "tseudo": "^0.0.4"
   }
 }

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> geographic/map.ts</title>
+  <title> ecommerce:book</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -68,92 +66,105 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-book.html">book</a></li></ul><h3>Interfaces</h3><ul><li><a href="IAddress.html">IAddress</a></li><li><a href="LatLong.html">LatLong</a></li></ul><h3>Global</h3><ul><li><a href="global.html#address">address</a></li><li><a href="global.html#addressString">addressString</a></li><li><a href="global.html#book">book</a></li><li><a href="global.html#city">city</a></li><li><a href="global.html#country">country</a></li><li><a href="global.html#county">county</a></li><li><a href="global.html#houseNameNumber">houseNameNumber</a></li><li><a href="global.html#lat">lat</a></li><li><a href="global.html#latLong">latLong</a></li><li><a href="global.html#long">long</a></li><li><a href="global.html#postcode">postcode</a></li><li><a href="global.html#street">street</a></li><li><a href="global.html#toFixedNumber">toFixedNumber</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="global.html#ecommerce:book">ecommerce:book</a></li><li><a href="module-book.html">book</a></li></ul><h3>Interfaces</h3><ul><li><a href="IAddress.html">IAddress</a></li><li><a href="LatLong.html">LatLong</a></li></ul><h3>Global</h3><ul><li><a href="global.html#address">address</a></li><li><a href="global.html#addressString">addressString</a></li><li><a href="global.html#book">book</a></li><li><a href="global.html#city">city</a></li><li><a href="global.html#country">country</a></li><li><a href="global.html#county">county</a></li><li><a href="global.html#ecommerce:book">ecommerce:book</a></li><li><a href="global.html#houseNameNumber">houseNameNumber</a></li><li><a href="global.html#lat">lat</a></li><li><a href="global.html#latLong">latLong</a></li><li><a href="global.html#long">long</a></li><li><a href="global.html#postcode">postcode</a></li><li><a href="global.html#street">street</a></li><li><a href="global.html#toFixedNumber">toFixedNumber</a></li></ul></div>
                 
             </nav>
         </div>
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Source</p>
-                    <h1>geographic/map.ts</h1>
+                    <p>Module</p>
+                    <h1>ecommerce:book</h1>
                 </header>
                 
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import { int } from '../math/number';
+</header>
 
-// Note: Precision is done mathematically not using a string, so unnessessary 0's will be removed from the end.
-// If you want to fix this, you can do: lat().toPrecision(9) and it will return a string representation including trailing 0's.
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Generates an 11 digit ISBN</div>
+        
 
-// todo give a starting point and give a maximum distance from and to
+        
 
-/**
- * Interface for a position object (latitude and longitude)
- *
- * @interface LatLong
- * @typedef {LatLong}
- */
-interface LatLong {
-    /**
-     * Latitude
-     *
-     * @type {number}
-     */
-    lat: number;
-    /**
-     * Longitude
-     *
-     * @type {number}
-     */
-    long: number;
-}
 
-/**
- * Generates a latitude and longitude object
- *
- * @export
- * @returns {LatLong}
- */
-export function latLong(): LatLong {
-	return {
-		lat: lat(),
-		long: long()
-	};
-}
+<dl class="details">
 
-/**
- * Generate a latitude
- *
- * @export
- * @returns {number}
- */
-export function lat(): number {
-	return int({ min: -180, max: 180, precision: 9 });
-}
+    
 
-/**
- * Generated a longitude
- *
- * @export
- * @returns {number}
- */
-export function long(): number {
-	return int({ min: -180, max: 180, precision: 9 });
-}
+    
 
-export default { 
-	lat,
-	long,
-	latLong
-};
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="ecommerce_book.ts.html" class="button">View Source</a>
+            <span>
+                <a href="ecommerce_book.ts.html">ecommerce/book.ts</a>, <a href="ecommerce_book.ts.html#line6">line 6</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

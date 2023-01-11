@@ -1,8 +1,8 @@
 import { Config } from '../../configuration';
 
 export interface MathOptions {
-	min: number;
-	max: number;
+	min?: number;
+	max?: number;
 	precision?: number;
 }
 
@@ -29,7 +29,13 @@ export function int(options?: MathOptions): number {
 	}
 
 	Config.seed += 1;
-	return Math.floor(mulberry32() * (options.max - options.min + 1) + options.min);
+
+	// check if null to prevent nullish checks in case they pass a 0, -1 or 1
+	if(options.min != null && options.max != null) {
+		return Math.floor(mulberry32() * (options.max - options.min + 1) + options.min);
+	}
+
+	return Math.floor(mulberry32() * 100);
 }
 
 export function normalDist(min: number, max: number, skew: number) {
@@ -92,11 +98,11 @@ function toFixedNumber(value: number, digits: number, base = 10): number {
 	return Math.round(value * pow) / pow;
 }
 
-function randn_bm() {
-	const u = 1 - mulberry32();
-	const v = mulberry32();
-	return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-}
+// function randn_bm() {
+// 	const u = 1 - mulberry32();
+// 	const v = mulberry32();
+// 	return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+// }
 
 function mulberry32() {
 	let t = Config.seed += 0x6D2B79F5;

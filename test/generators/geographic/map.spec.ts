@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { long, lat, latLong } from './../../../src/generators/geographic/map';
-import { countDecimals } from './../../utils/internal';
+import { long, lat, latLong } from '../../../src/generators/geographic/map';
+import { countDecimals } from '../../utils/internal';
 
 describe('Map module', () => {
     it('Should create a random long', () => {
@@ -28,5 +28,5 @@ describe('Map module', () => {
 
         expect(latLng.long).to.be.within(-180, 180);
         expect(countDecimals(latLng.long)).to.be.lessThanOrEqual(9);
-    })
+    });
 });
