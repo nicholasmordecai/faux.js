@@ -7,15 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-### Fixed
-
+## 0.0.5 - 2023-01-11
 ### Added
 - Server now has a delay configuration - this waits for N ms before returning the results. This is to simulate boat normal and abnormal response times.
 - Password generator MD5 hash function
 - Password generator has Salt function
 - Authentication generator has a JWT function
-
-### Changed
 
 ### Fixed
 - Added missing dist files
