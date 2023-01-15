@@ -33,7 +33,7 @@ export class Server {
 	public static run(routes: routes, config: ServerConfig): FastifyInstance {
 		const server = fastify();
 
-		buildRoutes(server, config)
+		buildRoutes(server, config);
 
 		server.listen({ port: config.port || 3000 }, (err, address) => {
 			if (err) handleError(err);

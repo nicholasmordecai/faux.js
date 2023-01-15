@@ -87,7 +87,7 @@ export function bool(): boolean {
  * @returns { number }
  */
 export function sets(sets: Pick<MathOptions, 'min' | 'max'>[]): number {
-	const set = int({min: 0, max: sets.length -1});
+	const set = int({ min: 0, max: sets.length -1 });
 	return int(sets[set]);
 }
 

@@ -17,10 +17,10 @@ export function JWT(payload: string | object | Buffer = '', privateKey = '', opt
 	return sign(payload, privateKey, options);
 }
 
-export function token(len: number = 10): string {
+export function token(len = 10): string {
 	return alphaN(len);
 }
 
 export const authentication = {
 	JWT
-}
+};

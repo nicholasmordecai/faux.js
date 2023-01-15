@@ -51,4 +51,4 @@ export function salt(len = 10): string {
 export const password = {
 	md5,
 	salt
-}
+};

@@ -14,4 +14,4 @@ export const Generators = {
 	identification,
 	math,
 	util
-}
+};
