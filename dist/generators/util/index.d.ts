@@ -3,6 +3,7 @@ declare const _default: {
         rngFromArray: typeof import("./array").rngFromArray;
     };
     string: {
+        alphaN: typeof import("./string").alphaN;
         fromFormat: typeof import("./string").fromFormat;
     };
 };

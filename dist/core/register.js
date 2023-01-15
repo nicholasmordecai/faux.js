@@ -23,7 +23,12 @@ var Register = /** @class */ (function () {
                 result[key] = fn();
             }
             else if (typeof item === 'object') {
-                result[key] = this.traverseObject(item, {});
+                if (item instanceof Register) {
+                    result[key] = item.build();
+                }
+                else {
+                    result[key] = this.traverseObject(item, {});
+                }
             }
             else {
                 result[key] = item;

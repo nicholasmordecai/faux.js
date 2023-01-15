@@ -1,4 +1,7 @@
-declare const _default: {
+/**
+ * @category Generators
+ */
+export declare const Generators: {
     finance: {
         bank: {
             IBAN: typeof import("./finance/bank").IBAN;
@@ -50,11 +53,14 @@ declare const _default: {
     };
     util: {
         array: {
+            /**
+             * @category Generators
+             */
             rngFromArray: typeof import("./util/array").rngFromArray;
         };
         string: {
+            alphaN: typeof import("./util/string").alphaN;
             fromFormat: typeof import("./util/string").fromFormat;
         };
     };
 };
-export default _default;

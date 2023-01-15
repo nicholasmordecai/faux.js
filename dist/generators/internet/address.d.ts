@@ -1,6 +1,6 @@
 /**
  * @category Generators
- * @subcategory Geographic
+ * @subcategory Internet
  */
 interface IAddress {
     country: string;

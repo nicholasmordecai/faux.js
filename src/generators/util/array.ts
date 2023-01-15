@@ -4,6 +4,6 @@ export function rngFromArray<T>(array: Array<T>): T {
 	return array[int({ min: 0, max: array.length-1 })];
 }
 
-export default {
+export const array =  {
 	rngFromArray
 };

@@ -2,6 +2,11 @@ import { getLocale } from '../../configuration';
 import { rngFromArray } from '../util/array';
 import { bool, int } from '../math/number';
 
+/**
+ * @category Generators
+ * @subcategory Identification
+ */
+
 export interface FullName {
 	firstName: string;
 	lastName: string;

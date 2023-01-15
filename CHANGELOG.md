@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Added an alpha numeric generator
+- Added a 'from sets' function in the maths number generator
+
+### Changed
+- Removed docs for now as they weren't working correctly
+- Removed performance scripts as they're just cluttering up the repo - will probably add them back in at a later date, or make a clean repo for it.
+
+
 ## 0.0.5 - 2023-01-11
 ### Added
 - Server now has a delay configuration - this waits for N ms before returning the results. This is to simulate boat normal and abnormal response times.
