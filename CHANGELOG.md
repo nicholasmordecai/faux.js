@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 0.0.6 - 2023-01-15
 ### Added
 - Added an alpha numeric generator
 - Added a 'from sets' function in the maths number generator
@@ -14,10 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Removed docs for now as they weren't working correctly
 - Removed performance scripts as they're just cluttering up the repo - will probably add them back in at a later date, or make a clean repo for it.
-- Bump @types/jsonwebtoken from 9.0.0 to 9.0.1 
+- Bump @types/jsonwebtoken from 9.0.0 to 9.0.1
 - Bump @typescript-eslint/parser from 5.48.0 to 5.48.1
 - Bump @typescript-eslint/eslint-plugin from 5.48.0 to 5.48.1
-
 
 ## 0.0.5 - 2023-01-11
 ### Added
