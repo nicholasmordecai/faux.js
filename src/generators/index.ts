@@ -4,7 +4,11 @@ import math from './math';
 import util from './util';
 import finance from './finance';
 
-export default {
+/**
+ * @category Generators
+ */
+
+export const Generators = {
 	finance,
 	geographic,
 	identification,

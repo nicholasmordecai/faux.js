@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { long, lat, latLong } from '../../../src/generators/geographic/map';
-import { countDecimals } from '../../utils/internal';
+import { countDecimals } from '../utils/internal';
 
 describe('Map module', () => {
     it('Should create a random long', () => {

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.bool = exports.percentString = exports.percent = exports.normalDist = exports.int = exports.float = void 0;
+exports.sets = exports.bool = exports.percentString = exports.percent = exports.normalDist = exports.int = exports.float = void 0;
 var configuration_1 = require("../../configuration");
 function float(options) {
     var float;
@@ -24,7 +24,11 @@ function int(options) {
         return Math.floor(mulberry32() * 100);
     }
     configuration_1.Config.seed += 1;
-    return Math.floor(mulberry32() * (options.max - options.min + 1) + options.min);
+    // check if null to prevent nullish checks in case they pass a 0, -1 or 1
+    if (options.min != null && options.max != null) {
+        return Math.floor(mulberry32() * (options.max - options.min + 1) + options.min);
+    }
+    return Math.floor(mulberry32() * 100);
 }
 exports.int = int;
 function normalDist(min, max, skew) {
@@ -62,6 +66,18 @@ function bool() {
     return float() > 0.5;
 }
 exports.bool = bool;
+/**
+ * Will return a random integer from a set of min and max values.
+ * This is a basic implementation and should be improved at a later date.
+ * It picks a random number between 0 and the number of sets passed and then
+ * picks between the min and max of that set.
+ * @returns { number }
+ */
+function sets(sets) {
+    var set = int({ min: 0, max: sets.length - 1 });
+    return int(sets[set]);
+}
+exports.sets = sets;
 exports.default = {
     float: float,
     int: int,
@@ -73,16 +89,26 @@ exports.default = {
 /**
  * Internal Number Utils
  */
+/**
+ *
+ * @param value
+ * @param digits
+ * @param base
+ * @returns { number }
+ */
 function toFixedNumber(value, digits, base) {
     if (base === void 0) { base = 10; }
     var pow = Math.pow(base, digits);
     return Math.round(value * pow) / pow;
 }
-function randn_bm() {
-    var u = 1 - mulberry32();
-    var v = mulberry32();
-    return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-}
+// function randn_bm() {
+// 	const u = 1 - mulberry32();
+// 	const v = mulberry32();
+// 	return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+// }
+/**
+ * @returns { number }
+ */
 function mulberry32() {
     var t = configuration_1.Config.seed += 0x6D2B79F5;
     t = Math.imul(t ^ t >>> 15, t | 1);

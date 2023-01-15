@@ -31,7 +31,7 @@ export function int(options?: MathOptions): number {
 	Config.seed += 1;
 
 	// check if null to prevent nullish checks in case they pass a 0, -1 or 1
-	if(options.min != null && options.max != null) {
+	if (options.min != null && options.max != null) {
 		return Math.floor(mulberry32() * (options.max - options.min + 1) + options.min);
 	}
 
@@ -79,6 +79,18 @@ export function bool(): boolean {
 	return float() > 0.5;
 }
 
+/**
+ * Will return a random integer from a set of min and max values.
+ * This is a basic implementation and should be improved at a later date.
+ * It picks a random number between 0 and the number of sets passed and then 
+ * picks between the min and max of that set.
+ * @returns { number }
+ */
+export function sets(sets: Pick<MathOptions, 'min' | 'max'>[]): number {
+	const set = int({ min: 0, max: sets.length -1 });
+	return int(sets[set]);
+}
+
 export default {
 	float,
 	int,
@@ -93,6 +105,13 @@ export default {
  * Internal Number Utils
  */
 
+/**
+ * 
+ * @param value 
+ * @param digits 
+ * @param base 
+ * @returns { number }
+ */
 function toFixedNumber(value: number, digits: number, base = 10): number {
 	const pow = Math.pow(base, digits);
 	return Math.round(value * pow) / pow;
@@ -104,7 +123,10 @@ function toFixedNumber(value: number, digits: number, base = 10): number {
 // 	return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
 // }
 
-function mulberry32() {
+/**
+ * @returns { number }
+ */
+function mulberry32(): number {
 	let t = Config.seed += 0x6D2B79F5;
 	t = Math.imul(t ^ t >>> 15, t | 1);
 	t ^= t + Math.imul(t ^ t >>> 7, t | 61);

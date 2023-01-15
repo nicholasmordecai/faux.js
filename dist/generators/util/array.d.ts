@@ -1,5 +1,4 @@
 export declare function rngFromArray<T>(array: Array<T>): T;
-declare const _default: {
+export declare const array: {
     rngFromArray: typeof rngFromArray;
 };
-export default _default;

@@ -1,3 +1,7 @@
+/**
+ * @category Generators
+ * @subcategory Finance
+ */
 export declare function IBAN(): string;
 export declare function accountNumber(): number;
 export declare function sortCode(): number;

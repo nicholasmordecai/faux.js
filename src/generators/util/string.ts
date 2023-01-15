@@ -1,4 +1,9 @@
-import { int } from '../math/number';
+import { int, sets } from '../math/number';
+
+const capitalCharCodes = { min: 65, max: 90 };
+const lowerCaseCharCodes = { min: 97, max: 122 };
+
+const alphaNumerics = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 export function fromFormat(format: string) {
 	let result = '';
@@ -9,11 +14,11 @@ export function fromFormat(format: string) {
 			result += int({ min: 0, max: 9 });
 			// upper case alpha (A-Z)
 		} else if (char === 'A') {
-			result += String.fromCharCode(int({ min: 65, max: 90 }));
+			result += String.fromCharCode(int(capitalCharCodes));
 		}
 		// lower case alpha (a-z)
 		else if (char === 'a') {
-			result += String.fromCharCode(int({ min: 97, max: 122 }));
+			result += String.fromCharCode(int(lowerCaseCharCodes));
 		} else {
 			result += char;
 		}
@@ -22,6 +27,16 @@ export function fromFormat(format: string) {
 	return result;
 }
 
-export default {
+export function alphaN(length: number): string {
+	let result = '';
+	const charLen = alphaNumerics.length - 1;
+	for (let i = length; i > 0; i--) {
+		result += alphaNumerics[int({ min: 0, max: charLen })];
+	}
+	return result;
+}
+
+export const string = {
+	alphaN,
 	fromFormat
 };

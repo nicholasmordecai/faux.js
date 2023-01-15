@@ -31,8 +31,6 @@
     "test:coverage": "nyc npm run test",
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint --ext .ts . --fix",
-    "performance": "ts-node scripts/run-performance",
-    "build-docs": "jsdoc -c jsdoc.json",
     "circular-dep-check": "dpdm --exit-code circular:1 ./src/cli/index.ts"
   },
   "dependencies": {
@@ -56,13 +54,11 @@
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
     "benchmark": "^2.1.4",
-    "better-docs": "^2.7.2",
     "chai": "^4.3.6",
     "cross-env": "^7.0.3",
     "dpdm": "^3.10.0",
     "eslint": "^8.23.0",
     "fastify": "^4.11.0",
-    "jsdoc": "^3.6.11",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.19",
     "nyc": "^15.1.0",
