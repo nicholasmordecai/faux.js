@@ -1,5 +1,5 @@
-import array from './array';
-import string from './string';
+import { array } from './array';
+import { string } from './string';
 
 export default {
 	array,

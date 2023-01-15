@@ -1,3 +1,7 @@
+/**
+ * @category Generators
+ * @subcategory Identification
+ */
 export interface FullName {
     firstName: string;
     lastName: string;

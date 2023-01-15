@@ -1,5 +1,6 @@
 export declare function fromFormat(format: string): string;
-declare const _default: {
+export declare function alphaN(length: number): string;
+export declare const string: {
+    alphaN: typeof alphaN;
     fromFormat: typeof fromFormat;
 };
-export default _default;

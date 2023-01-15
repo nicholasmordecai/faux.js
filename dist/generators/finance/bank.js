@@ -3,6 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.cvv = exports.cardNumber = exports.sortCode = exports.accountNumber = exports.IBAN = void 0;
 var string_1 = require("../util/string");
 var configuration_1 = require("../../configuration");
+/**
+ * @category Generators
+ * @subcategory Finance
+ */
 // https://www.iban.com/structure
 // https://www.investopedia.com/terms/i/iban.asp
 function IBAN() {

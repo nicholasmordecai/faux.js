@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { normalDist, percent, percentString, float, int, bool } from '../../../src/generators/math/number';
+import { normalDist, percent, percentString, float, int, bool, sets } from '../../../src/generators/math/number';
 
 describe('Number tests', () => {
     it('Should generate a 32 bit Mulberry random float', () => {
@@ -98,5 +98,12 @@ describe('Number tests', () => {
         expect(distribution['6']).to.be.within(23500, 24500);
         expect(distribution['7']).to.be.within(5800, 6300);
         expect(distribution['8']).to.be.within(500, 700);
+    });
+
+    //! needs finishing off
+    it('Should pick from a set of numbers', () => {
+        const input = [{min: 5, max: 10}, {min: 34, max: 81}];
+        const result = sets(input);
+        expect(typeof result).to.be.equal('number');
     });
 });

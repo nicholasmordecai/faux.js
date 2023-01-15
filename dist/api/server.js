@@ -39,41 +39,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Server = void 0;
+exports.Server = exports.buildResults = void 0;
 var fastify_1 = __importDefault(require("fastify"));
+var register_1 = require("../core/register");
+var address_1 = __importDefault(require("../generators/geographic/address"));
+var number_1 = require("../generators/math/number");
+function buildResults(count, route) {
+    if (count) {
+        var results = [];
+        for (var i = count; i > 0; i--) {
+            results.push(routes[route].build());
+        }
+        return results;
+    }
+    else {
+        return routes[route].build();
+    }
+}
+exports.buildResults = buildResults;
 var Server = /** @class */ (function () {
     function Server() {
     }
     Server.run = function (routes, config) {
-        var _this = this;
         var server = (0, fastify_1.default)();
-        var _loop_1 = function (route) {
-            server.get(route, function (request, reply) { return __awaiter(_this, void 0, void 0, function () {
-                var results, i;
-                return __generator(this, function (_a) {
-                    // do something with request.count
-                    if (request.query.count) {
-                        results = [];
-                        for (i = request.query.count; i > 0; i--) {
-                            results.push(routes[route].build());
-                        }
-                        return [2 /*return*/, results];
-                    }
-                    else {
-                        return [2 /*return*/, routes[route].build()];
-                    }
-                    return [2 /*return*/];
-                });
-            }); });
-        };
-        for (var route in routes) {
-            _loop_1(route);
-        }
+        buildRoutes(server, config);
         server.listen({ port: config.port || 3000 }, function (err, address) {
-            if (err) {
-                console.error(err);
-                process.exit(1);
-            }
+            if (err)
+                handleError(err);
             console.log("tseudo server listening at ".concat(address));
         });
         return server;
@@ -81,13 +73,61 @@ var Server = /** @class */ (function () {
     return Server;
 }());
 exports.Server = Server;
-// const user = {
-//     address: address,
-//     age: () => Math.round(normalDist(20, 40, 1))
-// };
-// const userRegister = new Register(user);
-// const routes: { [key: string]: any } = {
-//     '/user': userRegister,
-// };
-// Server.run(routes, {});
-//? Also could add a delay param for a build in delay? Also could be drawn across a normal dist?
+function handleError(err) {
+    console.error(err);
+    process.exit(1);
+}
+function buildRoutes(server, config) {
+    return __awaiter(this, void 0, void 0, function () {
+        var _loop_1, route;
+        var _this = this;
+        return __generator(this, function (_a) {
+            _loop_1 = function (route) {
+                server.get(route, function (request) { return __awaiter(_this, void 0, void 0, function () {
+                    var results, delay;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                results = buildResults(request.query.count, route);
+                                if (!config.defaultDelay) return [3 /*break*/, 2];
+                                delay = void 0;
+                                if (typeof config.defaultDelay === 'number') {
+                                    delay = config.defaultDelay;
+                                }
+                                else {
+                                    delay = (0, number_1.int)({ min: config.defaultDelay.min, max: config.defaultDelay.max });
+                                }
+                                return [4 /*yield*/, pause(delay)];
+                            case 1:
+                                _a.sent();
+                                return [2 /*return*/, results];
+                            case 2: return [2 /*return*/, results];
+                        }
+                    });
+                }); });
+            };
+            for (route in routes) {
+                _loop_1(route);
+            }
+            return [2 /*return*/];
+        });
+    });
+}
+function pause(duration) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, new Promise(function (resolve) {
+                    setTimeout(resolve, duration);
+                })];
+        });
+    });
+}
+var user = {
+    address: address_1.default,
+    age: function () { return Math.round((0, number_1.normalDist)(20, 40, 2)); }
+};
+var userRegister = new register_1.Register(user);
+var routes = {
+    '/user': userRegister,
+};
+Server.run(routes, {});
