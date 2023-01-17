@@ -26,7 +26,7 @@
     <nav>
         <ul class="space-y-3">
             {#each links as link, i}
-                <li><ScrollAnchor href="#postcode">{link.name}</ScrollAnchor></li>
+                <li><ScrollAnchor href="#{link.id}">{link.name}</ScrollAnchor></li>
             {/each}
         </ul>
     </nav>
