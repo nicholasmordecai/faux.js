@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Created a sveltekit project for the documentation
+
+### Changed
+- Bump @typescript-eslint/eslint-plugin from 5.48.1 to 5.48.2
+- Bump @typescript-eslint/parser from 5.48.1 to 5.48.2
+- Bump dpdm from 3.10.0 to 3.11.0
+- Bump eslint from 8.31.0 to 8.32.0
+
 ## 0.0.6 - 2023-01-15
 ### Added
 - Added an alpha numeric generator

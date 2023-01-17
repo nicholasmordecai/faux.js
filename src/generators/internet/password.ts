@@ -25,7 +25,7 @@ export function md5(input?: string): string {
 
 /**
  * @description Generates a salt
- * @param len length of the salt - defaults to 10
+ * @param { number } len length of the salt - defaults to 10
  * @returns { string }
  */
 export function salt(len = 10): string {
