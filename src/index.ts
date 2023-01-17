@@ -5,9 +5,9 @@ import API from './api';
 import { locales as Locales } from './locales';
 
 export const Tseudo = {
-    API,
-    Config,
-    Core,
-    Generators,
-    Locales,
-}
+	API,
+	Config,
+	Core,
+	Generators,
+	Locales,
+};
