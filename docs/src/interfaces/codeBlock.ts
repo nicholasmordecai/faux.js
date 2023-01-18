@@ -1,6 +1,6 @@
 export interface CodeBlock {
     name: string;
-    description: string;
+    description: string | null;
     params?: Parameters[];
     
     returns: {
@@ -10,12 +10,13 @@ export interface CodeBlock {
     example: string;
     fileName?: string;
     lineNumber?: number;
+    exported: boolean;
 };
 
 export interface Parameters {
     name: string;
     type: string;
     attributes: string;
-    default: string;
+    default: string | null;
     description: string;
 }
