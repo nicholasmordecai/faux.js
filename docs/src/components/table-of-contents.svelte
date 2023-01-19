@@ -4,14 +4,22 @@
     import FaRegArrowAltCircleUp from 'svelte-icons/fa/FaRegArrowAltCircleUp.svelte';
     
     import ScrollAnchor from "./ui/scrollAnchor.svelte";
+	import type { Doc } from '../interfaces/docs';
+	import type { CodeBlock } from '../interfaces/codeBlock';
+    import { selectedDoc } from '../store';
 
-    const links = [
-        { name: 'Postcode', id: 'postcode' },
-        { name: 'Address', id: 'address' },
-        { name: 'House Name Number', id: 'houseNameNumber' },
-    ];
+    let links: {name: string, id: string}[] = [];
+    selectedDoc.subscribe((doc) => {
+        if(!doc) return;
 
-    const scrollBack = true;
+        links = Object.entries(doc.blocks).map((block: [string, CodeBlock]) => {
+            return {
+                name: block[1].name as string,
+                id: block[1].name as string
+            }
+        });
+    });
+
     let y: number;
 </script>
 

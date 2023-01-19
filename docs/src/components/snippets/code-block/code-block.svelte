@@ -6,9 +6,10 @@
 	import Parameters from './parameters.svelte';
 
     function nameClick(event: any) {
-        console.log(event.target.innerHTML)
-        const url = `${window.location.href}#${event.target.innerHTML}`;
-        navigator.clipboard.writeText(url);
+        // console.log(event.target.innerHTML)
+        //! there's a bug here where if you're already at an element ID with a hash, it just appends that
+        // const url = `${window.location.href}#${event.target.innerHTML}`;
+        // navigator.clipboard.writeText(url);
     }
 
     export let block: CodeBlock;
@@ -32,15 +33,19 @@
         </div>
     {/if}
 
-    <div class="px-6 pt-4 pb-2">
-        <span>Returns:</span>
-        {block.returns.description} {'{'} {block.returns.type} {'}'}
-    </div>
+    {#if block.returns}
+        <div class="px-6 pt-4 pb-2">
+            <span>Returns:</span>
+            {block.returns.description} {'{'} {block.returns.type} {'}'}
+        </div>
+    {/if}
 
-    <div class="px-6 pt-4 pb-2">
-        <span>Example:</span>
-          <pre><code class="language-ts">{@html Prism.highlight(block.example, Prism.languages.javascript, 'javascript')}</code></pre>
-    </div>
+    {#if block.example}
+        <div class="px-6 pt-4 pb-2">
+            <span>Example:</span>
+            <pre><code class="language-ts">{@html Prism.highlight(block.example, Prism.languages.javascript, 'javascript')}</code></pre>
+        </div>
+    {/if}
 
     <div class="px-6 pt-4 pb-2">
         <span>Source:</span>

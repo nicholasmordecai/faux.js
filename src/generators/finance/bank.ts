@@ -1,10 +1,7 @@
 import { fromFormat } from '../util/string';
 import { getLocale } from '../../configuration';
 
-/**
- * @category Generators
- * @subcategory Finance
- */
+
 
 // https://www.iban.com/structure
 // https://www.investopedia.com/terms/i/iban.asp

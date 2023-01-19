@@ -4,10 +4,6 @@ import { fromFormat } from '../util/string';
 
 import { getLocale } from '../../configuration';
 
-/**
- * @category Generators
- * @subcategory Geographic
- */
 
 interface IAddress {
 	country: string;
@@ -19,7 +15,7 @@ interface IAddress {
 }
 
 /**
- * @description Generate a random postcode
+ * Generate a random postcode
  *
  * @returns {string}
  */
@@ -29,7 +25,7 @@ export function postcode(): string {
 }
 
 /**
- * @description Generate a random city name
+ * Generate a random city name
  *
  * @returns {string}
  */

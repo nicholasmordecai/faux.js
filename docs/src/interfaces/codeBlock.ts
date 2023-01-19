@@ -1,13 +1,13 @@
 export interface CodeBlock {
-    name: string;
+    name: string | null;
     description: string | null;
     params?: Parameters[];
     
     returns: {
         type: string;
         description: string;
-    };
-    example: string;
+    } | null;
+    example: string | null;
     fileName?: string;
     lineNumber?: number;
     exported: boolean;

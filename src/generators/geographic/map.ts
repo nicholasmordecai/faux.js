@@ -1,10 +1,5 @@
 import { int } from '../math/number';
 
-/**
- * @category Generators
- * @subcategory Geographic
- */
-
 // Note: Precision is done mathematically not using a string, so unnessessary 0's will be removed from the end.
 // If you want to fix this, you can do: lat().toPrecision(9) and it will return a string representation including trailing 0's.
 

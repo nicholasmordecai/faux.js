@@ -1,0 +1,55 @@
+{
+    "Getting Started": {
+        "groups": {}
+    },
+    "Generators": {
+        "groups": {
+            "Finance": {
+                "Bank": {
+                    "source": "src/generators/finance/bank.ts"
+                }
+            },
+            "Internet": {
+                "Authentication": {
+                    "source": "src/generators/internet/authentication.ts"
+                },
+                "HTTP": {
+                    "source": "src/generators/internet/http.ts"
+                },
+                "Password": {
+                    "source": "src/generators/internet/password.ts"
+                }
+            },
+            "Geography": {
+                "Addres": {
+                    "source": "src/generators/geographic/address.ts"
+                },
+                "Map": {
+                    "source": "src/generators/geographic/map.ts"
+                }
+            },
+            "Identification": {
+                "Person": {
+                    "source": "src/generators/identification/person.ts"
+                },
+                "UUID": {
+                    "source": "src/generators/identification/uuid.ts"
+                }
+            },
+            "Math": {
+                "Number": {
+                    "source": "src/generators/math/number.ts"
+                }
+            }
+        }
+    },
+    "Core": {
+        "groups": {}
+    },
+    "API": {
+        "groups": {}
+    },
+    "Utils": {
+        "groups": {}
+    }
+}
