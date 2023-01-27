@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { Contingency } from "../../src/core/contingency";
-import { Register } from "../../src/core/register";
+import { Factory } from "../../src/core/factory";
 import { int } from './../../src/generators/math/number'
 
 describe('Contingency Funciton Test', () => {
@@ -19,7 +19,7 @@ describe('Contingency Funciton Test', () => {
             analytis,
         };
 
-        const register2 = new Register(people);
+        const register2 = new Factory(people);
         const peopleResult = register2.build();
 
         expect(peopleResult).to.be.deep.equal({
@@ -42,7 +42,7 @@ describe('Contingency Funciton Test', () => {
             analytis,
         };
 
-        const register2 = new Register(people);
+        const register2 = new Factory(people);
         const peopleResult = register2.build();
 
         expect(peopleResult).to.be.deep.equal({
@@ -55,7 +55,7 @@ describe('Contingency Funciton Test', () => {
         const analytics = {
             id: int
         }
-        const analyticsRegister = new Register(analytics);
+        const analyticsRegister = new Factory(analytics);
         expect(typeof analyticsRegister.build().id).to.be.equal('number');
 
         // create the person register
@@ -64,7 +64,7 @@ describe('Contingency Funciton Test', () => {
             analytics: analytics
         };
 
-        const personRegister = new Register(person);
+        const personRegister = new Factory(person);
         expect(typeof personRegister.build().age).to.be.equal('number');
     });
 });

@@ -1,18 +1,21 @@
 /// <reference types="node" />
 import { SignOptions } from 'jsonwebtoken';
 /**
- * @description Generates a new Json Web Token
+ * @description Generates a new json web token (JWT)
  *
  * @example
  * const token = sign({some: payload});
  *
- * @param { string | object | buffer } payload
- * @param { string } privateKey
- * @param { SignOptions } options
- * @returns { string }
  */
 export declare function JWT(payload?: string | object | Buffer, privateKey?: string, options?: SignOptions): string;
+/**
+ * @description generates a random alpha numeric token
+ *
+ * @example
+ * const t = token(); // hA76dcB12l
+ */
 export declare function token(len?: number): string;
 export declare const authentication: {
     JWT: typeof JWT;
+    token: typeof token;
 };

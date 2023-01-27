@@ -1,5 +1,5 @@
 import fastify, { FastifyInstance, FastifyRequest } from 'fastify';
-import { Register } from '../core/register';
+import { Factory } from '../core/factory';
 import address from '../generators/geographic/address';
 import { int, normalDist } from '../generators/math/number';
 
@@ -85,7 +85,7 @@ const user = {
 	age: () => Math.round(normalDist(20, 40, 2))
 };
 
-const userRegister = new Register(user);
+const userRegister = new Factory(user);
 
 const routes: { [key: string]: any } = {
 	'/user': userRegister,

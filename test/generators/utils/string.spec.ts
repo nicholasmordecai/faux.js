@@ -22,7 +22,7 @@ describe('String Util', () => {
         expect(parseInt(result[2])).to.be.NaN;
     });
 
-    it.only('Should generate a alpha numeric string from charcodes', () => {
+    it('Should generate a alpha numeric string from charcodes', () => {
         const str = alphaN(12);
         expect(str).to.be.string;
         expect(str.length).to.be.equal(12);

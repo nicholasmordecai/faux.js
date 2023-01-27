@@ -6,7 +6,7 @@ export declare const Tseudo: {
     Core: {
         Contingency: typeof import("./core/contingency").Contingency;
         Probability: typeof import("./core/probability").Probability;
-        Register: typeof import("./core/register").Register;
+        Factory: typeof import("./core/factory").Factory;
     };
     Generators: {
         finance: {
