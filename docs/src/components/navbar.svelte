@@ -1,7 +1,8 @@
 <script>
   import DiGithubBadge from 'svelte-icons/di/DiGithubBadge.svelte'
-  import Search from './search.svelte';
-  import VersionSelect from './ui/versionSelect.svelte';
+
+  import Search from '@components/search.svelte';
+  import VersionSelect from '@ui/versionSelect.svelte';
 </script>
 
 	<div class="bg-white border-b" id="navbar">

@@ -10,15 +10,13 @@ import { fromFormat } from '../util/string';
  */
 
 /**
- * Hash any string input with MD5
+ * @function md5
+ * @description Hash any string input with MD5
  * 
  * @param {string} [input] input string to hash
  * @returns {string} the hashed string
  * 
- * @example const hash = md5('my-string');
- * 
- * @function md5
- * @export
+ * @example typescript const hash = md5('my-string');
  */
 export function md5(input?: string): string {
 	let rngString;
@@ -32,6 +30,17 @@ export function md5(input?: string): string {
 	return md5Lib(rngString);
 }
 
+/**
+ * @function salt
+ * @description Generates a random salt
+ * 
+ * @param {number} [len=10] input string to hash
+ * @returns {string} the hashed string
+ * 
+ * @example const randomSalt = salt();
+ * 
+ * const randomSalt2 = salt(12);
+ */
 export function salt(len = 10): string {
 	return fromFormat('A'.repeat(len));
 }

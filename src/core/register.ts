@@ -1,3 +1,13 @@
+
+
+/**
+ * @class Register
+ * Description placeholder
+ *
+ * @typedef {Register}
+ * @template T
+ * @export
+ */
 export class Register<T> {
 	private dictionary: T;
 
@@ -5,14 +15,34 @@ export class Register<T> {
 		this.dictionary = obj;
 	}
 
+	/**
+	 * @function add
+	 * 
+	 * @param key 
+	 * @param property 
+	 * 
+	 * @returns { void }
+	 */
 	public add(key: keyof T, property: T[keyof T]) {
 		this.dictionary[key] = property;
 	}
 
-	public get<K extends keyof T>(key: K) {
+	/**
+	 * @function get
+	 * 
+	 * @param key 
+	 * 
+	 * @returns { T[K] }
+	 */
+	public get<K extends keyof T>(key: K): T[K] {
 		return this.dictionary[key];
 	}
 
+	/**
+	 * @function build
+	 * 
+	 * @returns { T }
+	 */
 	public build(): T {
 		return this.traverseObject(this.dictionary, {});
 	}
@@ -25,7 +55,7 @@ export class Register<T> {
 				const fn = item;
 				result[key] = fn();
 			} else if (typeof item === 'object') {
-				if(item instanceof Register) {
+				if (item instanceof Register) {
 					result[key] = item.build();
 				} else {
 					result[key] = this.traverseObject(item, {});

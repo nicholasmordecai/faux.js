@@ -1,19 +1,37 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
+  import { page } from "$app/stores"; 
+  import { onMount } from 'svelte';
+
   import FaAngleDown from 'svelte-icons/fa/FaAngleDown.svelte';
   import TiDivide from 'svelte-icons/ti/TiDivide.svelte';
+
   import routes from './../data/sidebar.json';
   import docs from './../data/docs.json';
 
-  import { selectedDoc } from './../store';
+  import { selectedDoc } from '@store';
   
-  import type { IRoutes } from './../interfaces/sidebar';
-	import type { Docs } from 'src/interfaces/docs';
+  import type { IRoutes } from '@interfaces/sidebar';
+	import type { Docs } from '@interfaces/docs';
   const typedRoutes: IRoutes = routes;
   const typedDocs: Docs = docs;
 
   function navigateToDoc(source: string) {
+    const urlSearchParams = $page.url.searchParams;
+    urlSearchParams.set('doc', source);
+    goto(`?${urlSearchParams.toString()}`);
+
     selectedDoc.set(typedDocs[source]);
   }
+
+  onMount(async () => {
+    const urlSearchParams = $page.url.searchParams;
+    const docParam = urlSearchParams.get('doc');
+    if(!docParam || docParam === '') return;
+
+    selectedDoc.set(typedDocs[docParam]);
+
+	});
 </script>
 
 <div id="sidebar"class="bg-white md:block shadow-xl px-3 w-30 md:w-60 lg:w-60 transition-transform duration-300 ease-in-out">

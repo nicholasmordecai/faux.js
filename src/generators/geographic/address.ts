@@ -4,7 +4,6 @@ import { fromFormat } from '../util/string';
 
 import { getLocale } from '../../configuration';
 
-
 interface IAddress {
 	country: string;
 	county: string;
@@ -15,7 +14,8 @@ interface IAddress {
 }
 
 /**
- * Generate a random postcode
+ * @function postcode
+ * @description Generate a random postcode
  *
  * @returns {string}
  */
@@ -25,7 +25,8 @@ export function postcode(): string {
 }
 
 /**
- * Generate a random city name
+ * @function city
+ * @description Generate a random city name
  *
  * @returns {string}
  */
@@ -34,7 +35,8 @@ export function city(): string {
 }
 
 /**
- * Generate a random county
+ * @function county
+ * @description Generate a random county
  *
  * @returns {string}
  */
@@ -43,7 +45,8 @@ export function county(): string {
 }
 
 /**
- * Generate a random street name
+ * @function street
+ * @description Generate a random street name
  *
  * @returns {string}
  */
@@ -52,7 +55,8 @@ export function street(): string {
 }
 
 /**
- * Generate a random house name or number
+ * @function houseNameNumber
+ * @description Generate a random house name or number
  *
  * @returns {(string | number)}
  */
@@ -66,7 +70,8 @@ export function houseNameNumber(): string | number {
 }
 
 /**
- * Generate a random country
+ * @function country
+ * @description Generate a random country
  *
  * @returns {string}
  */
@@ -75,7 +80,8 @@ export function country(): string {
 }
 
 /**
- * Address generator
+ * @function address
+ * @description Address generator
  *
  * @returns {IAddress}
  */
@@ -91,7 +97,8 @@ export function address(): IAddress {
 }
 
 /**
- * Address described as a string
+ * @function addressString
+ * @description Address described as a string
  *
  * @returns {string}
  */

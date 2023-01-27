@@ -1,1 +1,517 @@
-{"src/.DS_Store":{"module":null,"blocks":[]},"src/api/index.ts":{"module":null,"blocks":[]},"src/api/server.ts":{"module":null,"blocks":[]},"src/configuration.ts":{"module":null,"blocks":[]},"src/core/contingency.ts":{"module":null,"blocks":[]},"src/core/index.ts":{"module":null,"blocks":[]},"src/core/probability.ts":{"module":null,"blocks":[]},"src/core/register.ts":{"module":null,"blocks":[]},"src/data/dictionary.ts":{"module":null,"blocks":[]},"src/data/pets.ts":{"module":null,"blocks":[]},"src/generators/finance/bank.ts":{"module":null,"blocks":[]},"src/generators/finance/index.ts":{"module":null,"blocks":[]},"src/generators/geographic/address.ts":{"module":null,"blocks":[{"name":null,"description":"Generate a random postcode","returns":{"type":"string","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/address.ts","lineNumber":16,"function":false},{"name":null,"description":"Generate a random city name","returns":{"type":"string","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/address.ts","lineNumber":26,"function":false},{"name":null,"description":"Generate a random county","returns":{"type":"string","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/address.ts","lineNumber":35,"function":false},{"name":null,"description":"Generate a random street name","returns":{"type":"string","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/address.ts","lineNumber":44,"function":false},{"name":null,"description":"Generate a random house name or number","returns":{"type":"(string | number)","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/address.ts","lineNumber":53,"function":false},{"name":null,"description":"Generate a random country","returns":{"type":"string","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/address.ts","lineNumber":67,"function":false},{"name":null,"description":"Address generator","returns":{"type":"IAddress","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/address.ts","lineNumber":76,"function":false},{"name":null,"description":"Address described as a string","returns":{"type":"string","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/address.ts","lineNumber":92,"function":false}]},"src/generators/geographic/index.ts":{"module":null,"blocks":[]},"src/generators/geographic/map.ts":{"module":null,"blocks":[{"name":null,"description":"Generates a latitude and longitude object","returns":{"type":"LatLong","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/map.ts","lineNumber":13,"function":false},{"name":null,"description":"Generate a latitude","returns":{"type":"number","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/map.ts","lineNumber":25,"function":false},{"name":null,"description":"Generated a longitude","returns":{"type":"number","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/geographic/map.ts","lineNumber":34,"function":false}]},"src/generators/identification/index.ts":{"module":null,"blocks":[]},"src/generators/identification/person.ts":{"module":null,"blocks":[]},"src/generators/identification/uuid.ts":{"module":null,"blocks":[]},"src/generators/index.ts":{"module":null,"blocks":[]},"src/generators/internet/authentication.ts":{"module":null,"blocks":[{"name":null,"description":"","returns":null,"params":[],"example":"const token = sign({some: payload});","exported":false,"fileName":"src/generators/internet/authentication.ts","lineNumber":3,"function":false},{"name":null,"description":"","returns":null,"params":[],"example":"const t = token(); // hA76dcB12l","exported":false,"fileName":"src/generators/internet/authentication.ts","lineNumber":15,"function":false}]},"src/generators/internet/http.ts":{"module":null,"blocks":[]},"src/generators/internet/index.ts":{"module":null,"blocks":[]},"src/generators/internet/password.ts":{"module":{"name":"","description":"","fileName":"src/generators/internet/password.ts","category":"","subCategory":""},"blocks":[{"name":"md5","description":"Hash any string input with MD5","returns":{"type":"string","description":"hashed string"},"params":[{"name":"input","type":"string","default":null,"description":"input string to hash","attributes":"optional"}],"example":"hash = md5('my-string');","exported":true,"fileName":"src/generators/internet/password.ts","lineNumber":11,"function":true}]},"src/generators/math/index.ts":{"module":null,"blocks":[]},"src/generators/math/number.ts":{"module":null,"blocks":[{"name":null,"description":"Will return a random integer from a set of min and max values. This is a basic implementation and should be improved at a later date. It picks a random number between 0 and the number of sets passed and then picks between the min and max of that set.","returns":{"type":"number","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/math/number.ts","lineNumber":81,"function":false},{"name":null,"description":"Internal Number Utils","returns":null,"params":[],"example":null,"exported":false,"fileName":"src/generators/math/number.ts","lineNumber":103,"function":false},{"name":null,"description":"","returns":{"type":"number","description":""},"params":[{"name":"value","type":"","default":null,"description":"","attributes":""},{"name":"digits","type":"","default":null,"description":"","attributes":""},{"name":"base","type":"","default":null,"description":"","attributes":""}],"example":null,"exported":false,"fileName":"src/generators/math/number.ts","lineNumber":107,"function":false},{"name":null,"description":"","returns":{"type":"number","description":""},"params":[],"example":null,"exported":false,"fileName":"src/generators/math/number.ts","lineNumber":125,"function":false}]},"src/generators/util/array.ts":{"module":null,"blocks":[]},"src/generators/util/index.ts":{"module":null,"blocks":[]},"src/generators/util/string.ts":{"module":null,"blocks":[]},"src/index.ts":{"module":null,"blocks":[]},"src/locales/ca.ts":{"module":null,"blocks":[]},"src/locales/gb.ts":{"module":null,"blocks":[]},"src/locales/index.ts":{"module":null,"blocks":[]},"src/locales/usa.ts":{"module":null,"blocks":[]}}
+{
+    "src/.DS_Store": {
+        "module": null,
+        "blocks": []
+    },
+    "src/api/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/api/server.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/configuration.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/core/contingency.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/core/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/core/probability.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/core/register.ts": {
+        "module": null,
+        "blocks": [
+            {
+                "name": null,
+                "description": "",
+                "returns": null,
+                "params": [],
+                "example": null,
+                "exported": true,
+                "fileName": "src/core/register.ts",
+                "lineNumber": 2,
+                "function": false
+            },
+            {
+                "name": "add",
+                "description": "",
+                "returns": {
+                    "type": "void",
+                    "description": ""
+                },
+                "params": [
+                    {
+                        "name": "key",
+                        "type": "",
+                        "default": null,
+                        "description": "",
+                        "attributes": ""
+                    },
+                    {
+                        "name": "property",
+                        "type": "",
+                        "default": null,
+                        "description": "",
+                        "attributes": ""
+                    }
+                ],
+                "example": null,
+                "exported": false,
+                "fileName": "src/core/register.ts",
+                "lineNumber": 17,
+                "function": true
+            },
+            {
+                "name": "get",
+                "description": "",
+                "returns": {
+                    "type": "T[K]",
+                    "description": ""
+                },
+                "params": [
+                    {
+                        "name": "key",
+                        "type": "",
+                        "default": null,
+                        "description": "",
+                        "attributes": ""
+                    }
+                ],
+                "example": null,
+                "exported": false,
+                "fileName": "src/core/register.ts",
+                "lineNumber": 29,
+                "function": true
+            },
+            {
+                "name": "build",
+                "description": "",
+                "returns": {
+                    "type": "T",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/core/register.ts",
+                "lineNumber": 40,
+                "function": true
+            }
+        ]
+    },
+    "src/data/dictionary.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/data/pets.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/finance/bank.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/finance/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/geographic/address.ts": {
+        "module": null,
+        "blocks": [
+            {
+                "name": "postcode",
+                "description": "",
+                "returns": {
+                    "type": "string",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/address.ts",
+                "lineNumber": 15,
+                "function": true
+            },
+            {
+                "name": "city",
+                "description": "",
+                "returns": {
+                    "type": "string",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/address.ts",
+                "lineNumber": 26,
+                "function": true
+            },
+            {
+                "name": "county",
+                "description": "",
+                "returns": {
+                    "type": "string",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/address.ts",
+                "lineNumber": 36,
+                "function": true
+            },
+            {
+                "name": "street",
+                "description": "",
+                "returns": {
+                    "type": "string",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/address.ts",
+                "lineNumber": 46,
+                "function": true
+            },
+            {
+                "name": "houseNameNumber",
+                "description": "",
+                "returns": {
+                    "type": "(string | number)",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/address.ts",
+                "lineNumber": 56,
+                "function": true
+            },
+            {
+                "name": "country",
+                "description": "",
+                "returns": {
+                    "type": "string",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/address.ts",
+                "lineNumber": 71,
+                "function": true
+            },
+            {
+                "name": "address",
+                "description": "",
+                "returns": {
+                    "type": "IAddress",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/address.ts",
+                "lineNumber": 81,
+                "function": true
+            },
+            {
+                "name": "addressString",
+                "description": "",
+                "returns": {
+                    "type": "string",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/address.ts",
+                "lineNumber": 98,
+                "function": true
+            }
+        ]
+    },
+    "src/generators/geographic/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/geographic/map.ts": {
+        "module": null,
+        "blocks": [
+            {
+                "name": null,
+                "description": "Generates a latitude and longitude object",
+                "returns": {
+                    "type": "LatLong",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/map.ts",
+                "lineNumber": 13,
+                "function": false
+            },
+            {
+                "name": null,
+                "description": "Generate a latitude",
+                "returns": {
+                    "type": "number",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/map.ts",
+                "lineNumber": 25,
+                "function": false
+            },
+            {
+                "name": null,
+                "description": "Generated a longitude",
+                "returns": {
+                    "type": "number",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/geographic/map.ts",
+                "lineNumber": 34,
+                "function": false
+            }
+        ]
+    },
+    "src/generators/identification/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/identification/person.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/identification/uuid.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/internet/authentication.ts": {
+        "module": null,
+        "blocks": [
+            {
+                "name": null,
+                "description": "",
+                "returns": null,
+                "params": [],
+                "example": "const token = sign({some: payload});",
+                "exported": false,
+                "fileName": "src/generators/internet/authentication.ts",
+                "lineNumber": 3,
+                "function": false
+            },
+            {
+                "name": null,
+                "description": "",
+                "returns": null,
+                "params": [],
+                "example": "const t = token(); // hA76dcB12l",
+                "exported": false,
+                "fileName": "src/generators/internet/authentication.ts",
+                "lineNumber": 15,
+                "function": false
+            }
+        ]
+    },
+    "src/generators/internet/http.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/internet/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/internet/password.ts": {
+        "module": {
+            "name": "",
+            "description": "",
+            "fileName": "src/generators/internet/password.ts",
+            "category": "",
+            "subCategory": ""
+        },
+        "blocks": [
+            {
+                "name": "md5",
+                "description": "",
+                "returns": {
+                    "type": "string",
+                    "description": "hashed string"
+                },
+                "params": [
+                    {
+                        "name": "input",
+                        "type": "string",
+                        "default": null,
+                        "description": "input string to hash",
+                        "attributes": "optional"
+                    }
+                ],
+                "example": "const hash = md5('my-string');",
+                "exported": false,
+                "fileName": "src/generators/internet/password.ts",
+                "lineNumber": 11,
+                "function": true
+            },
+            {
+                "name": "salt",
+                "description": "",
+                "returns": {
+                    "type": "string",
+                    "description": "hashed string"
+                },
+                "params": [
+                    {
+                        "name": "len",
+                        "type": "number",
+                        "default": "10",
+                        "description": "input string to hash",
+                        "attributes": "optional"
+                    }
+                ],
+                "example": "randomSalt = salt(); const randomSalt2 = salt(12);",
+                "exported": false,
+                "fileName": "src/generators/internet/password.ts",
+                "lineNumber": 32,
+                "function": true
+            }
+        ]
+    },
+    "src/generators/math/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/math/number.ts": {
+        "module": null,
+        "blocks": [
+            {
+                "name": null,
+                "description": "Will return a random integer from a set of min and max values. This is a basic implementation and should be improved at a later date. It picks a random number between 0 and the number of sets passed and then picks between the min and max of that set.",
+                "returns": {
+                    "type": "number",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/math/number.ts",
+                "lineNumber": 81,
+                "function": false
+            },
+            {
+                "name": null,
+                "description": "Internal Number Utils",
+                "returns": null,
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/math/number.ts",
+                "lineNumber": 103,
+                "function": false
+            },
+            {
+                "name": null,
+                "description": "",
+                "returns": {
+                    "type": "number",
+                    "description": ""
+                },
+                "params": [
+                    {
+                        "name": "value",
+                        "type": "",
+                        "default": null,
+                        "description": "",
+                        "attributes": ""
+                    },
+                    {
+                        "name": "digits",
+                        "type": "",
+                        "default": null,
+                        "description": "",
+                        "attributes": ""
+                    },
+                    {
+                        "name": "base",
+                        "type": "",
+                        "default": null,
+                        "description": "",
+                        "attributes": ""
+                    }
+                ],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/math/number.ts",
+                "lineNumber": 107,
+                "function": false
+            },
+            {
+                "name": null,
+                "description": "",
+                "returns": {
+                    "type": "number",
+                    "description": ""
+                },
+                "params": [],
+                "example": null,
+                "exported": false,
+                "fileName": "src/generators/math/number.ts",
+                "lineNumber": 125,
+                "function": false
+            }
+        ]
+    },
+    "src/generators/util/array.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/util/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/util/string.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/locales/ca.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/locales/gb.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/locales/index.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/locales/usa.ts": {
+        "module": null,
+        "blocks": []
+    }
+}

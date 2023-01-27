@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { Doc } from './interfaces/docs';
+import type { Doc } from '@types/docs';
 
 export const selectedVersion = writable('0.0.6');
 export const selectedModule = writable<null | string>(null);

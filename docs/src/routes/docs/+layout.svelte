@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Sidebar from "../../components/sidebar.svelte";
-	import TableOfContents from "../../components/table-of-contents.svelte";
+  import Sidebar from "@components/sidebar.svelte";
+	import TableOfContents from "@components/table-of-contents.svelte";
 </script>
 
   <div class="flex">

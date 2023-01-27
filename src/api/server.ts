@@ -2,6 +2,7 @@ import fastify, { FastifyInstance, FastifyRequest } from 'fastify';
 import { Register } from '../core/register';
 import address from '../generators/geographic/address';
 import { int, normalDist } from '../generators/math/number';
+import { fromFormat } from '../generators/util/string';
 
 type RequestQueryParameters = FastifyRequest<{
 	Querystring: {
@@ -80,9 +81,27 @@ async function pause(duration: number) {
 	});
 }
 
+
+
+
+
+
+
+
+
+
+const cardDetails = {
+	cardNumber : fromFormat('9999-9999-9999-9999'),
+	expiresAt: fromFormat('99-99-99'),
+	cvv: fromFormat('999')
+}
+
+const cardRegister = new Register(cardDetails);
+
 const user = {
 	address: address,
-	age: () => Math.round(normalDist(20, 40, 2))
+	age: () => Math.round(normalDist(20, 40, 2)),
+	cardInfo: cardRegister
 };
 
 const userRegister = new Register(user);

@@ -44,7 +44,11 @@
         }
     },
     "Core": {
-        "groups": {}
+        "groups": {
+            "Register": {
+                "source": "src/core/register.ts"
+            }
+        }
     },
     "API": {
         "groups": {}

@@ -3,10 +3,9 @@
     import FaAlignLeft from 'svelte-icons/fa/FaAlignLeft.svelte'
     import FaRegArrowAltCircleUp from 'svelte-icons/fa/FaRegArrowAltCircleUp.svelte';
     
-    import ScrollAnchor from "./ui/scrollAnchor.svelte";
-	import type { Doc } from '../interfaces/docs';
-	import type { CodeBlock } from '../interfaces/codeBlock';
-    import { selectedDoc } from '../store';
+    import ScrollAnchor from "@ui/scrollAnchor.svelte";
+	import type { CodeBlock } from '@interfaces/codeBlock';
+    import { selectedDoc } from '@store';
 
     let links: {name: string, id: string}[] = [];
     selectedDoc.subscribe((doc) => {
