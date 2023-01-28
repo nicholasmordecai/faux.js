@@ -72,11 +72,8 @@ describe('Factory tests', () => {
 
     it('Should fake nested factories', () => {
         const address = {
-            address: {
-                street: 'baker street',
-                number: 221,
-                foo: () => 11
-            }
+            street: 'baker street',
+            number: 221,
         }
 
         const addressFactory = new Factory(address);
@@ -89,7 +86,15 @@ describe('Factory tests', () => {
 
         const userFactory = new Factory(user);
         const newUser = userFactory.fake();
-        console.log(newUser);
+
+        expect(newUser).to.deep.equal({
+            name: 'Shirlock Holmes',
+            age: 40,
+            address: {
+                street: 'baker street',
+                number: 221
+            }
+        });
     });
 
     it('Should build a factory', () => {
@@ -101,10 +106,57 @@ describe('Factory tests', () => {
         const productFactory = new Factory(product);
 
         const newProduct = productFactory.build({
-            name: 'this',
+            name: 'bike',
             price: 100
         });
+
+        expect(newProduct).does.deep.equal({
+            name: 'bike',
+            price: 100
+        });
+    });
+
+    it('Should build a partial factory', () => {
+        const product = {
+            name: 'wardrobe',
+            price: 14.99
+        }
+
+        const productFactory = new Factory(product);
+
+        const newProduct = productFactory.buildPartial({
+            name: 'sofa',
+        });
+
+        newProduct.price = 12.99;
+
+        expect(newProduct).to.deep.equal({
+            name: 'sofa',
+            price: 12.99
+        });
+    });
+
+    it.only('Should validate a partial factory object', () => {
+        const product = {
+            name: 'wardrobe',
+            price: 14.99,
+            stock: {
+                inStock: 100,
+                onOrder: 12
+            }
+        }
+
+        const productFactory = new Factory(product);
+
+        const newProduct = productFactory.buildPartial({
+            name: 'sofa',
+            stock: {
+                inStock: 50,
+            }
+        });
         
-        console.log(newProduct);
+        newProduct.price = 12.99;
+
+        productFactory.validate(newProduct);
     });
 });
