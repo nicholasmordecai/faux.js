@@ -9,40 +9,17 @@ export class Factory<T> {
 		this.dictionary[key] = property;
 	}
 
-	// public get<K extends keyof T>(key: K) {
-	// 	return this.dictionary[key];
-	// }
-
-	public get instance(): T {
-		return this.dictionary;
+	public get<K extends keyof T>(key: K) {
+		return this.dictionary[key];
 	}
 
-	public build(): T {
+	public build(properties: T): T {
+		return properties;
+	}
+
+	public fake(): T {
+		//? Should this be restricted by an envirnoment variable?
 		return this.traverseObject(this.dictionary, {});
-	}
-
-	public build2(): T {
-		return this.do(this.dictionary, {});
-	}
-
-	private do(object: any, result: any): T {
-		for (const key in object) {
-			const item = object[key];
-			if (typeof item === 'function') {
-				const fn = item;
-				result[key] = fn();
-			} else if (typeof item === 'object') {
-				if(item instanceof Factory) {
-					result[key] = item.build();
-				} else {
-					result[key] = this.traverseObject(item, {});
-				}
-			} else {
-				result[key] = item;
-			}
-		}
-
-		return result;
 	}
 
 	private traverseObject(object: any, result: any): T {
@@ -53,7 +30,7 @@ export class Factory<T> {
 				result[key] = fn();
 			} else if (typeof item === 'object') {
 				if(item instanceof Factory) {
-					result[key] = item.build();
+					result[key] = item.fake();
 				} else {
 					result[key] = this.traverseObject(item, {});
 				}

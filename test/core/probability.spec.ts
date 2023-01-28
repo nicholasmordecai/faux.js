@@ -13,7 +13,7 @@ describe('Probability Function', () => {
             name: Probability(options),
         };
 
-        const result = new Factory(person).build();
+        const result = new Factory(person).fake();
         expect(result).to.deep.equal({
             name: 'hello-world'
         });
@@ -31,7 +31,7 @@ describe('Probability Function', () => {
 
         const register = new Factory(person);
         try {
-            register.build();
+            register.fake();
         } catch (error) {
             const typedError = error as Error;
             expect(error as Error).to.be.instanceOf(Error);
@@ -54,7 +54,7 @@ describe('Probability Function', () => {
         };
 
         const register = new Factory(person);
-        const result = register.build();
+        const result = register.fake();
         expect(result.name).to.be.oneOf(['hello-world', 'some-other-world']);
     });
 });

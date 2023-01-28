@@ -20,7 +20,7 @@ describe('Contingency Funciton Test', () => {
         };
 
         const register2 = new Factory(people);
-        const peopleResult = register2.build();
+        const peopleResult = register2.fake();
 
         expect(peopleResult).to.be.deep.equal({
             person: { age: 19 }, analytis: { track: true }
@@ -43,7 +43,7 @@ describe('Contingency Funciton Test', () => {
         };
 
         const register2 = new Factory(people);
-        const peopleResult = register2.build();
+        const peopleResult = register2.fake();
 
         expect(peopleResult).to.be.deep.equal({
             person: { age: 17 }, analytis: { track: false }
@@ -56,7 +56,7 @@ describe('Contingency Funciton Test', () => {
             id: int
         }
         const analyticsRegister = new Factory(analytics);
-        expect(typeof analyticsRegister.build().id).to.be.equal('number');
+        expect(typeof analyticsRegister.fake().id).to.be.equal('number');
 
         // create the person register
         const person = {
@@ -65,6 +65,6 @@ describe('Contingency Funciton Test', () => {
         };
 
         const personRegister = new Factory(person);
-        expect(typeof personRegister.build().age).to.be.equal('number');
+        expect(typeof personRegister.fake().age).to.be.equal('number');
     });
 });
