@@ -7,11 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 0.0.7 - 2023-01-29
 ### Added
 - Better test covergae
-
-### Fixed
-- Exports of the bank generator were not quite right
 
 ### Changed
 - Changed Register keyword to Factory as it makes more sense given what it does.
@@ -21,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump @types/glob from 8.0.0 to 8.0.1
 - Bump dpdm from 3.10.0 to 3.11.0
 - Bump eslint from 8.31.0 to 8.32.0
+
+### Fixed
+- Exports of the bank generator were not quite right
 
 ## 0.0.6 - 2023-01-15
 ### Added
