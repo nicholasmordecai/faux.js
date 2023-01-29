@@ -8,11 +8,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
-- Created a sveltekit project for the documentation
+- Better test covergae
+
+### Fixed
+- Exports of the bank generator were not quite right
 
 ### Changed
-- Bump @typescript-eslint/eslint-plugin from 5.48.1 to 5.48.2
-- Bump @typescript-eslint/parser from 5.48.1 to 5.48.2
+- Changed Register keyword to Factory as it makes more sense given what it does.
+- Bump @typescript-eslint/eslint-plugin from 5.48.2 to 5.49.0
+- Bump @typescript-eslint/parser from 5.48.2 to 5.49.0
+- Bump fastify from 4.11.0 to 4.12.0
+- Bump @types/glob from 8.0.0 to 8.0.1
 - Bump dpdm from 3.10.0 to 3.11.0
 - Bump eslint from 8.31.0 to 8.32.0
 

@@ -1,9 +1,9 @@
 import { Contingency } from './contingency';
 import { Probability } from './probability';
-import { Register } from './register';
+import { Factory } from './factory';
 declare const _default: {
     Contingency: typeof Contingency;
     Probability: typeof Probability;
-    Register: typeof Register;
+    Factory: typeof Factory;
 };
 export default _default;

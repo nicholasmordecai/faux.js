@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { Contingency } from "../../src/core/contingency";
-import { Register } from "../../src/core/register";
+import { Factory } from "../../src/core/factory";
 import { int } from './../../src/generators/math/number'
 
 describe('Contingency Funciton Test', () => {
@@ -19,8 +19,8 @@ describe('Contingency Funciton Test', () => {
             analytis,
         };
 
-        const register2 = new Register(people);
-        const peopleResult = register2.build();
+        const register2 = new Factory(people);
+        const peopleResult = register2.fake();
 
         expect(peopleResult).to.be.deep.equal({
             person: { age: 19 }, analytis: { track: true }
@@ -42,8 +42,8 @@ describe('Contingency Funciton Test', () => {
             analytis,
         };
 
-        const register2 = new Register(people);
-        const peopleResult = register2.build();
+        const register2 = new Factory(people);
+        const peopleResult = register2.fake();
 
         expect(peopleResult).to.be.deep.equal({
             person: { age: 17 }, analytis: { track: false }
@@ -55,8 +55,8 @@ describe('Contingency Funciton Test', () => {
         const analytics = {
             id: int
         }
-        const analyticsRegister = new Register(analytics);
-        expect(typeof analyticsRegister.build().id).to.be.equal('number');
+        const analyticsRegister = new Factory(analytics);
+        expect(typeof analyticsRegister.fake().id).to.be.equal('number');
 
         // create the person register
         const person = {
@@ -64,7 +64,7 @@ describe('Contingency Funciton Test', () => {
             analytics: analytics
         };
 
-        const personRegister = new Register(person);
-        expect(typeof personRegister.build().age).to.be.equal('number');
+        const personRegister = new Factory(person);
+        expect(typeof personRegister.fake().age).to.be.equal('number');
     });
 });

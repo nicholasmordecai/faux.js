@@ -41,7 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Server = exports.buildResults = void 0;
 var fastify_1 = __importDefault(require("fastify"));
-var register_1 = require("../core/register");
+var factory_1 = require("../core/factory");
 var address_1 = __importDefault(require("../generators/geographic/address"));
 var number_1 = require("../generators/math/number");
 function buildResults(count, route) {
@@ -126,7 +126,7 @@ var user = {
     address: address_1.default,
     age: function () { return Math.round((0, number_1.normalDist)(20, 40, 2)); }
 };
-var userRegister = new register_1.Register(user);
+var userRegister = new factory_1.Factory(user);
 var routes = {
     '/user': userRegister,
 };

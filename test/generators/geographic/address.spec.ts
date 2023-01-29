@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { postcode, city, county, houseNameNumber, street, address, addressString } from "../../../src/generators/geographic/address";
+import { postcode, city, county, country, houseNameNumber, street, address, addressString } from "../../../src/generators/geographic/address";
 import { GB } from "../../../src/locales/gb";
 
 describe('Address module', () => {
@@ -18,6 +18,12 @@ describe('Address module', () => {
         const result = county();
         expect(typeof result).to.be.equal('string');
         expect(GB.counties).to.include(result);
+    });
+
+    it('Should create a country', () => {
+        const result = country();
+        expect(typeof result).to.be.equal('string');
+        expect(result).to.be.equal(GB.name);
     });
 
     it('Should create a street name', () => {
