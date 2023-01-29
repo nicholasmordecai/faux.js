@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed 
+- Moved typescript to a dev dependency
+- Added TSUP for building the dist files
+
 ## 0.0.7 - 2023-01-29
 ### Added
 - Better test covergae

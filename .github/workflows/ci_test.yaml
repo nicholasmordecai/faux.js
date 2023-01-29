@@ -4,6 +4,9 @@ on:
     branches:
       - "**"
 
+env:
+    - NODE_ENV: development
+
 jobs:
 
   test:
