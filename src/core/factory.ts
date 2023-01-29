@@ -1,6 +1,5 @@
 import { RecursivePartial } from "../types";
 
-
 export class Factory<T> {
 	private dictionary: T;
 
@@ -31,8 +30,8 @@ export class Factory<T> {
 	 * @description Like the build function, but all properties are optional so you can build the object as you go.
 	 * It is advised to use this in conjunction with the validate function.
 	 * 
-	 * @param {RecursivePartial<T>} properties 
-	 * @returns {RecursivePartial<T>} The new object from the factory schema, but with all keys as optional
+	 * @param { RecursivePartial<T> } properties 
+	 * @returns { RecursivePartial<T> } The new object from the factory schema, but with all keys as optional
 	 */
 	public buildPartial(properties: RecursivePartial<T>): RecursivePartial<T> {
 		return properties;
@@ -43,11 +42,10 @@ export class Factory<T> {
 	 * @description Takes an object that is meant to be the same as what's described above. However, due to the partial keyword, it is possible to have missed
 	 * some of the properties, so use this function to ensure the object fully meets the criteria of the schema.
 	 * @param object 
-	 * @returns 
+	 * @returns { boolean } True if the object is valid
 	 */
-	public validate(object: RecursivePartial<T>) {
-		this.traverseValidate(this.dictionary, object)
-		// return properties;
+	public validate(object: RecursivePartial<T>): boolean {
+		return this.traverseValidate(this.dictionary, object)
 	}
 
 	public fake(): T {
@@ -59,11 +57,11 @@ export class Factory<T> {
 		for (const key in referenceObject) {
 			const referenceItem = referenceObject[key];
 			const item = object[key];
-
+			//? Should we worry about function types here?
 			if (typeof item === 'object') {
 				return this.traverseValidate(referenceItem, item);
 			} else {
-				if(this.itemsAreSameType(referenceItem, item)) {
+				if (this.itemsAreSameType(referenceItem, item)) {
 					continue;
 				} else {
 					throw new Error(`Could not validate object. Item ${key} can not be matched as ${typeof item} against ${typeof referenceItem}`)
@@ -75,8 +73,7 @@ export class Factory<T> {
 	}
 
 	private itemsAreSameType(referenceItem: unknown, item: unknown) {
-		console.log(referenceItem, item)
-		if(typeof referenceItem !== typeof item) {
+		if (typeof referenceItem !== typeof item) {
 			return false;
 		}
 
@@ -90,7 +87,7 @@ export class Factory<T> {
 				const fn = item;
 				result[key] = fn();
 			} else if (typeof item === 'object') {
-				if(item instanceof Factory) {
+				if (item instanceof Factory) {
 					result[key] = item.fake();
 				} else {
 					result[key] = this.traverseObject(item, {});

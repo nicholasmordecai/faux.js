@@ -1,8 +1,5 @@
 import { expect } from "chai";
 import { Factory } from "../../src/core/factory";
-import { fromFormat } from './../../src/generators/util/string';
-import { address } from './../../src/generators/geographic/address';
-import { int } from "../../src/generators/math/number";
 
 const obj = {
     'test': () => 1,
@@ -136,7 +133,7 @@ describe('Factory tests', () => {
         });
     });
 
-    it.only('Should validate a partial factory object', () => {
+    it('Should validate a partial factory object', () => {
         const product = {
             name: 'wardrobe',
             price: 14.99,
@@ -152,11 +149,53 @@ describe('Factory tests', () => {
             name: 'sofa',
             stock: {
                 inStock: 50,
+                onOrder: 10
             }
         });
         
         newProduct.price = 12.99;
 
-        productFactory.validate(newProduct);
+        const valid = productFactory.validate(newProduct);
+        expect(valid).to.be.true;
+    });
+
+    it('Should fail to validate a partial factory object', () => {
+        const product = {
+            name: 'wardrobe',
+            price: 14.99,
+        }
+
+        const productFactory = new Factory(product);
+
+        const newProduct = productFactory.buildPartial({
+            name: 'sofa',
+        });
+
+        expect(() => productFactory.validate(newProduct))
+            .to.throw('Could not validate object. Item price can not be matched as undefined against number');
+    });
+
+    it('Should fail to validate a complex partial factory object', () => {
+        const product = {
+            name: 'wardrobe',
+            price: 14.99,
+            stock: {
+                inStock: 50,
+                onOrder: 10
+            }
+        }
+
+        const productFactory = new Factory(product);
+
+        const newProduct = productFactory.buildPartial({
+            name: 'sofa',
+            price: 14.99,
+            stock: {
+                inStock: 50,
+            }
+        });
+
+        expect(() => productFactory.validate(newProduct))
+            .to.throw('Could not validate object. Item onOrder can not be matched as undefined against number');
     });
 });
