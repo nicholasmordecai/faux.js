@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed 
 - Moved typescript to a dev dependency
 - Added TSUP for building the dist files
+- Moved eslint.json to eslint.js so the EOF rule cna be OS specific
+- Added a matrix for testing Unix, Linux and Win32 based OS.
 
 ## 0.0.7 - 2023-01-29
 ### Added
