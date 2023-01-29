@@ -14,7 +14,7 @@ interface ServerConfig {
 	defaultDelay?: number | { min: number, max: number };
 }
 
-export function buildResults(count: number, route: string) {
+export function buildResults(count: number, routes: Record<string, any>, route: string) {
 	if (count) {
 		const results = [];
 		for (let i = count; i > 0; i--) {
@@ -26,14 +26,12 @@ export function buildResults(count: number, route: string) {
 	}
 }
 
-// todo - add a type for the register
-type routes = { [key: string]: any };
 
 export class Server {
-	public static run(routes: routes, config: ServerConfig): FastifyInstance {
+	public static run(routes: Record<string, any>, config: ServerConfig): FastifyInstance {
 		const server = fastify();
 
-		buildRoutes(server, config);
+		buildRoutes(server, routes, config);
 
 		server.listen({ port: config.port || 3000 }, (err, address) => {
 			if (err) handleError(err);
@@ -49,11 +47,11 @@ function handleError(err: Error) {
 	process.exit(1);
 }
 
-async function buildRoutes(server: FastifyInstance, config: ServerConfig) {
+async function buildRoutes(server: FastifyInstance, routes: Record<string, any>, config: ServerConfig) {
 	for (const route in routes) {
 		server.get(route, async (request: RequestQueryParameters) => {
 
-			const results = buildResults(request.query.count, route);
+			const results = buildResults(request.query.count, routes, route);
 
 			// If there is a default, wrap the returned response in a set timeout
 			if (config.defaultDelay) {
@@ -80,15 +78,15 @@ async function pause(duration: number) {
 	});
 }
 
-const user = {
-	address: address,
-	age: () => Math.round(normalDist(20, 40, 2))
-};
+// const user = {
+// 	address: address,
+// 	age: () => Math.round(normalDist(20, 40, 2))
+// };
 
-const userRegister = new Factory(user);
+// const userRegister = new Factory(user);
 
-const routes: { [key: string]: any } = {
-	'/user': userRegister,
-};
+// const routes: { [key: string]: any } = {
+// 	'/user': userRegister,
+// };
 
-Server.run(routes, {});
+// Server.run(routes, {});
