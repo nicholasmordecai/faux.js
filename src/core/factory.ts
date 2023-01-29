@@ -1,4 +1,4 @@
-import { RecursivePartial } from "../types";
+import { RecursivePartial } from '../types';
 
 export class Factory<T> {
 	private dictionary: T;
@@ -45,7 +45,7 @@ export class Factory<T> {
 	 * @returns { boolean } True if the object is valid
 	 */
 	public validate(object: RecursivePartial<T>): boolean {
-		return this.traverseValidate(this.dictionary, object)
+		return this.traverseValidate(this.dictionary, object);
 	}
 
 	public fake(): T {
@@ -64,7 +64,7 @@ export class Factory<T> {
 				if (this.itemsAreSameType(referenceItem, item)) {
 					continue;
 				} else {
-					throw new Error(`Could not validate object. Item ${key} can not be matched as ${typeof item} against ${typeof referenceItem}`)
+					throw new Error(`Could not validate object. Item ${key} can not be matched as ${typeof item} against ${typeof referenceItem}`);
 				}
 			}
 		}

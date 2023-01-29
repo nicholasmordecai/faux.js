@@ -6,4 +6,4 @@ export const Finance = {
 
 export default {
 	Bank
-}
+};
