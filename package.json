@@ -13,6 +13,7 @@
   "url": "https://github.com/megmut/tseudo",
   "license": "Apache-2.0",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
@@ -23,7 +24,7 @@
   },
   "preferGlobal": true,
   "scripts": {
-    "build": "tsc",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
     "build:watch": "tsc -w",
     "serve": "ts-node-dev src/api/server.ts",
     "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\"",

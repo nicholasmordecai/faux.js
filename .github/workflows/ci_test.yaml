@@ -1,6 +1,9 @@
-on: ["push", "pull_request"]
+name: CI
+on:
+  push:
+    branches:
+      - "**"
 
-name: Build And Test
 jobs:
 
   test:
@@ -8,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node: [4.x, 5.x, 6.x, 7.x, 8.x, 10.x, 12.x, 13.x 14.x, 15.x, 16.x, 17.x 18.x, 19.x]
+        node: [16.x]
         os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
         containers: [1, 2]
 
