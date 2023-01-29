@@ -30,8 +30,8 @@
     "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\"",
     "test:watch": "mocha --require ts-node/register --recursive --watch --watch-files \"test/**/*.spec.ts\",\"src/**/*\" \"test/**/*.spec.ts\"",
     "test:coverage": "nyc npm run test",
-    "lint": "eslint --ext .ts .",
-    "lint:fix": "eslint --ext .ts . --fix",
+    "lint": "eslint --ext .ts ./src/ --config eslint.js",
+    "lint:fix": "eslint --ext .ts ./src/ --config eslint.js --fix",
     "circular-dep-check": "dpdm --exit-code circular:1 ./src/cli/index.ts"
   },
   "dependencies": {
@@ -66,8 +66,7 @@
     "sinon": "^15.0.1",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
-    "tsup": "^6.5.0",
-    "typescript": "^4.9.4"
+    "tsup": "^6.5.0"
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",
