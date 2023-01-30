@@ -1,6 +1,6 @@
 {
   "name": "tseudo",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Modern performant pseudo random data generator",
   "keywords": [
     "random",
@@ -13,6 +13,7 @@
   "url": "https://github.com/megmut/tseudo",
   "license": "Apache-2.0",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
@@ -23,20 +24,19 @@
   },
   "preferGlobal": true,
   "scripts": {
-    "build": "tsc",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
     "build:watch": "tsc -w",
     "serve": "ts-node-dev src/api/server.ts",
     "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\"",
     "test:watch": "mocha --require ts-node/register --recursive --watch --watch-files \"test/**/*.spec.ts\",\"src/**/*\" \"test/**/*.spec.ts\"",
     "test:coverage": "nyc npm run test",
-    "lint": "eslint --ext .ts .",
-    "lint:fix": "eslint --ext .ts . --fix",
+    "lint": "eslint --ext .ts ./src/ --config eslint.js",
+    "lint:fix": "eslint --ext .ts ./src/ --config eslint.js --fix",
     "circular-dep-check": "dpdm --exit-code circular:1 ./src/cli/index.ts"
   },
   "dependencies": {
     "jsonwebtoken": "^9.0.0",
     "md5": "^2.3.0",
-    "typescript": "^4.8.3",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -66,7 +66,8 @@
     "nyc": "^15.1.0",
     "sinon": "^15.0.1",
     "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0"
+    "ts-node-dev": "^2.0.0",
+    "tsup": "^6.5.0"
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",

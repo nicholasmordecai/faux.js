@@ -42,7 +42,7 @@ export function cvv() {
 	return parseInt(fromFormat('999'));
 }
 
-export default {
+export const Bank = {
 	IBAN,
 	accountNumber,
 	sortCode,

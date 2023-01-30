@@ -7,7 +7,6 @@ describe('Map module', () => {
         const lng = long();
         expect(typeof lng).to.be.equal('number');
         expect(lng).to.be.within(-180, 180);
-        console.log(lng);
         expect(countDecimals(lng)).to.be.lessThanOrEqual(9);
     });
 

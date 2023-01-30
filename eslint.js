@@ -1,30 +1,22 @@
-{
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
+module.exports = {
+    extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended"
     ],
-    "overrides": [],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+    parser: "@typescript-eslint/parser",
+    parserOptions: {
+        "sourceType": "module",
+        "ecmaVersion": "ES2016"
     },
-    "plugins": [
+    plugins: [
         "@typescript-eslint"
     ],
-    "rules": {
+    rules: {
         "indent": [
             "error",
             "tab"
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
+        "linebreak-style": ["error", (process.platform === "win32" ? "windows" : "unix")],
         "quotes": [
             "error",
             "single"
@@ -39,4 +31,4 @@
             "always"
         ]
     }
-}
+};

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { Config } from '../../src/configuration';
 import { IProbabilityOptions, Probability } from '../../src/core/probability';
-import { Register } from '../../src/core/register';
+import { Factory } from "../../src/core/factory";
 
 describe('Probability Function', () => {
     it('Should return a value with a probability of 100%', () => {
@@ -13,7 +13,7 @@ describe('Probability Function', () => {
             name: Probability(options),
         };
 
-        const result = new Register(person).build();
+        const result = new Factory(person).fake();
         expect(result).to.deep.equal({
             name: 'hello-world'
         });
@@ -29,9 +29,9 @@ describe('Probability Function', () => {
         };
 
 
-        const register = new Register(person);
+        const register = new Factory(person);
         try {
-            register.build();
+            register.fake();
         } catch (error) {
             const typedError = error as Error;
             expect(error as Error).to.be.instanceOf(Error);
@@ -53,8 +53,8 @@ describe('Probability Function', () => {
             name: Probability(options),
         };
 
-        const register = new Register(person);
-        const result = register.build();
+        const register = new Factory(person);
+        const result = register.fake();
         expect(result.name).to.be.oneOf(['hello-world', 'some-other-world']);
     });
 });

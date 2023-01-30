@@ -1,11 +1,11 @@
 import { Contingency } from './contingency';
 import { Probability } from './probability';
-import { Register } from './register';
+import { Factory } from './factory';
 
 
 
 export default {
 	Contingency,
 	Probability,
-	Register
+	Factory
 };

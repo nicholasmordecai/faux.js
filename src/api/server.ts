@@ -1,5 +1,5 @@
 import fastify, { FastifyInstance, FastifyRequest } from 'fastify';
-import { Register } from '../core/register';
+import { Factory } from '../core/factory';
 import address from '../generators/geographic/address';
 import { int, normalDist } from '../generators/math/number';
 import { fromFormat } from '../generators/util/string';
@@ -15,7 +15,7 @@ interface ServerConfig {
 	defaultDelay?: number | { min: number, max: number };
 }
 
-export function buildResults(count: number, route: string) {
+export function buildResults(count: number, routes: Record<string, any>, route: string) {
 	if (count) {
 		const results = [];
 		for (let i = count; i > 0; i--) {
@@ -27,14 +27,12 @@ export function buildResults(count: number, route: string) {
 	}
 }
 
-// todo - add a type for the register
-type routes = { [key: string]: any };
 
 export class Server {
-	public static run(routes: routes, config: ServerConfig): FastifyInstance {
+	public static run(routes: Record<string, any>, config: ServerConfig): FastifyInstance {
 		const server = fastify();
 
-		buildRoutes(server, config);
+		buildRoutes(server, routes, config);
 
 		server.listen({ port: config.port || 3000 }, (err, address) => {
 			if (err) handleError(err);
@@ -50,11 +48,11 @@ function handleError(err: Error) {
 	process.exit(1);
 }
 
-async function buildRoutes(server: FastifyInstance, config: ServerConfig) {
+async function buildRoutes(server: FastifyInstance, routes: Record<string, any>, config: ServerConfig) {
 	for (const route in routes) {
 		server.get(route, async (request: RequestQueryParameters) => {
 
-			const results = buildResults(request.query.count, route);
+			const results = buildResults(request.query.count, routes, route);
 
 			// If there is a default, wrap the returned response in a set timeout
 			if (config.defaultDelay) {
@@ -81,33 +79,15 @@ async function pause(duration: number) {
 	});
 }
 
+// const user = {
+// 	address: address,
+// 	age: () => Math.round(normalDist(20, 40, 2))
+// };
 
+// const userRegister = new Factory(user);
 
+// const routes: { [key: string]: any } = {
+// 	'/user': userRegister,
+// };
 
-
-
-
-
-
-
-const cardDetails = {
-	cardNumber : fromFormat('9999-9999-9999-9999'),
-	expiresAt: fromFormat('99-99-99'),
-	cvv: fromFormat('999')
-};
-
-const cardRegister = new Register(cardDetails);
-
-const user = {
-	address: address,
-	age: () => Math.round(normalDist(20, 40, 2)),
-	cardInfo: cardRegister
-};
-
-const userRegister = new Register(user);
-
-const routes: { [key: string]: any } = {
-	'/user': userRegister,
-};
-
-Server.run(routes, {});
+// Server.run(routes, {});
