@@ -1,6 +1,6 @@
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/kit/vite';
-import { mdsvex } from 'mdsvex'
+import { mdsvex } from 'mdsvex';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -15,7 +15,14 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-
+		alias: {
+			'@store': './src/store.ts',
+			'@ui': './src/components/ui/*',
+			'@snippets': './src/components/snippets/*',
+			'@components': './src/components/*',
+			'@interfaces': './src/interfaces/*',
+			'@utils': './src/utils/*',
+		}
 	}
 };
 

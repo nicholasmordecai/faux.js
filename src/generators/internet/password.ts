@@ -1,15 +1,22 @@
-import * as md5Lib from 'md5';
+import md5Lib from 'md5';
 
 import { fromFormat } from '../util/string';
 
 /**
+ * @module
  * @category Generators
  * @subcategory Internet
+ * @description Some awesome description for this generator...
  */
 
 /**
- * @description Generates an MD5 Hash
- * @returns { string }
+ * @function md5
+ * @description Hash any string input with MD5
+ * 
+ * @param {string} [input] input string to hash
+ * @returns {string} the hashed string
+ * 
+ * @example typescript const hash = md5('my-string');
  */
 export function md5(input?: string): string {
 	let rngString;
@@ -20,13 +27,19 @@ export function md5(input?: string): string {
 		rngString = input;
 	}
 
-	return md5Lib.default(rngString);
+	return md5Lib(rngString);
 }
 
 /**
- * @description Generates a salt
- * @param { number } len length of the salt - defaults to 10
- * @returns { string }
+ * @function salt
+ * @description Generates a random salt
+ * 
+ * @param {number} [len=10] input string to hash
+ * @returns {string} the hashed string
+ * 
+ * @example const randomSalt = salt();
+ * 
+ * const randomSalt2 = salt(12);
  */
 export function salt(len = 10): string {
 	return fromFormat('A'.repeat(len));
