@@ -45,9 +45,9 @@
     <div class="px-6 pt-4 pb-2">
         <span>Source:</span>
         
-        <a href="https://github.com/megmut/tseudo/tree/main/src/generators/internet/password.ts" target="_blank" rel="noopener noreferrer" class="text-blue-500">password.ts</a>
+        <a href="https://github.com/megmut/faux.js/tree/main/src/generators/internet/password.ts" target="_blank" rel="noopener noreferrer" class="text-blue-500">password.ts</a>
 
-        <a href="https://github.com/megmut/tseudo/tree/main/src/generators/internet/password.ts#L6" target="_blank" rel="noopener noreferrer" class="text-blue-500">line 6</a>
+        <a href="https://github.com/megmut/faux.js/tree/main/src/generators/internet/password.ts#L6" target="_blank" rel="noopener noreferrer" class="text-blue-500">line 6</a>
     </div>
 
     <div class="px-6 pt-4 pb-2">

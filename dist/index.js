@@ -43215,7 +43215,7 @@ ${body}`);
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
-  Tseudo: () => Tseudo
+  fauxjs: () => fauxjs
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -43713,7 +43713,7 @@ var Server = class {
     server.listen({ port: config.port || 3e3 }, (err, address2) => {
       if (err)
         handleError(err);
-      console.log(`tseudo server listening at ${address2}`);
+      console.log(`faux.js server listening at ${address2}`);
     });
     return server;
   }
@@ -43757,7 +43757,7 @@ var api_default = {
 };
 
 // src/index.ts
-var Tseudo = {
+var fauxjs = {
   API: api_default,
   Config,
   Core: core_default,
@@ -43766,7 +43766,7 @@ var Tseudo = {
 };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  Tseudo
+  fauxjs
 });
 /*!
  * cookie

@@ -43712,7 +43712,7 @@ var Server = class {
     server.listen({ port: config.port || 3e3 }, (err, address2) => {
       if (err)
         handleError(err);
-      console.log(`tseudo server listening at ${address2}`);
+      console.log(`faux.js server listening at ${address2}`);
     });
     return server;
   }
@@ -43756,7 +43756,7 @@ var api_default = {
 };
 
 // src/index.ts
-var Tseudo = {
+var fauxjs = {
   API: api_default,
   Config,
   Core: core_default,
@@ -43764,7 +43764,7 @@ var Tseudo = {
   Locales: locales
 };
 export {
-  Tseudo
+  fauxjs
 };
 /*!
  * cookie

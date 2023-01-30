@@ -1,4 +1,4 @@
-import { int, sets } from '../math/number';
+import { int } from '../math/number';
 
 const capitalCharCodes = { min: 65, max: 90 };
 const lowerCaseCharCodes = { min: 97, max: 122 };

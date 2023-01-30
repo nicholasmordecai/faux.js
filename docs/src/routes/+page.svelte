@@ -60,7 +60,7 @@
 </script>
 
 <!-- <MacTerminal>
-    <p class="pb-1">user@macbook dir$ npm install --save tseudo</p>
+    <p class="pb-1">user@macbook dir$ npm install --save faux.js</p>
 </MacTerminal> -->
 {#each fns as funct, i}
     <CodeBlock block={funct}/>

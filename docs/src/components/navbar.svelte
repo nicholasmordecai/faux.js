@@ -8,7 +8,7 @@
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between py-4">
         <div>
-          <span>tseudo</span>
+          <span>faux.js</span>
         </div>
 
         <div class="hidden sm:flex sm:items-center">
@@ -17,7 +17,7 @@
 
         <div class="hidden sm:flex sm:items-center">
           <VersionSelect/>
-          <a href="https://github.com/megmut/tseudo" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/megmut/faux.js" target="_blank" rel="noopener noreferrer">
             <div class="icon w-8">
               <DiGithubBadge />
             </div>
@@ -30,7 +30,7 @@
           <Search/>
           <div class="flex justify-between items-center border-t-2 pt-2">
             <VersionSelect/>
-            <a href="https://github.com/megmut/tseudo" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/megmut/faux.js" target="_blank" rel="noopener noreferrer">
               <div class="icon w-8">
                 <DiGithubBadge />
               </div>

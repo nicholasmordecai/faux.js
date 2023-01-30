@@ -1,7 +1,5 @@
 import fastify, { FastifyInstance, FastifyRequest } from 'fastify';
-import { Factory } from '../core/factory';
-import address from '../generators/geographic/address';
-import { int, normalDist } from '../generators/math/number';
+import { int } from '../generators/math/number';
 
 type RequestQueryParameters = FastifyRequest<{
 	Querystring: {
@@ -35,7 +33,7 @@ export class Server {
 
 		server.listen({ port: config.port || 3000 }, (err, address) => {
 			if (err) handleError(err);
-			console.log(`tseudo server listening at ${address}`);
+			console.log(`faux.js server listening at ${address}`);
 		});
 
 		return server;

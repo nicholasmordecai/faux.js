@@ -4,7 +4,7 @@ import Core from './core';
 import API from './api';
 import { locales as Locales } from './locales';
 
-export const Tseudo = {
+export const fauxjs = {
 	API,
 	Config,
 	Core,

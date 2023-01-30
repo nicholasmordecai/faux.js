@@ -243,7 +243,7 @@ declare class Server {
     static run(routes: Record<string, any>, config: ServerConfig): FastifyInstance;
 }
 
-declare const Tseudo: {
+declare const fauxjs: {
     API: {
         Server: typeof Server;
     };
@@ -321,4 +321,4 @@ declare const Tseudo: {
     };
 };
 
-export { Tseudo };
+export { fauxjs };
