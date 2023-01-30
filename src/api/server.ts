@@ -2,6 +2,7 @@ import fastify, { FastifyInstance, FastifyRequest } from 'fastify';
 import { Factory } from '../core/factory';
 import address from '../generators/geographic/address';
 import { int, normalDist } from '../generators/math/number';
+import { fromFormat } from '../generators/util/string';
 
 type RequestQueryParameters = FastifyRequest<{
 	Querystring: {

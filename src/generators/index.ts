@@ -4,10 +4,6 @@ import math from './math';
 import util from './util';
 import finance from './finance';
 
-/**
- * @category Generators
- */
-
 export const Generators = {
 	finance,
 	geographic,

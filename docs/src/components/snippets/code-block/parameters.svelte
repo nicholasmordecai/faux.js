@@ -1,31 +1,29 @@
 <script lang="ts">
-    import type { Parameters } from './../../../interfaces/codeBlock';
+    import type { Parameters } from '@interfaces/codeBlock';
 
     export let parameters: Parameters[];
 </script>
 
 <div class="w-full max-w-2xl bg-white">
-    <header class="px-5 py-4 border-b border-gray-100">
+    <header class="py-4 border-b border-gray-100">
         <h2 class="font-semibold text-gray-800">Parameters</h2>
     </header>
         <div class="overflow-x-auto">
             <table class="table-auto w-full">
-                <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+                <thead class="text-xs uppercase text-gray-400 bg-gray-50 px-2">
                     <tr>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Name</div>
+                        <th class="whitespace-nowrap">Name</th>
+                        <th class="whitespace-nowrap">
+                            <div class="font-semibold">Type</div>
                         </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Type</div>
+                        <th class="whitespace-nowrap">
+                            <div class="font-semibold">Attributes</div>
                         </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-left">Attributes</div>
+                        <th class="whitespace-nowrap">
+                            <div class="font-semibold">Default</div>
                         </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-center">Default</div>
-                        </th>
-                        <th class="p-2 whitespace-nowrap">
-                            <div class="font-semibold text-center">Description</div>
+                        <th class="">
+                            <div class="font-semibold">Description</div>
                         </th>
                     </tr>
                 </thead>

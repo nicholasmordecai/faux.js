@@ -17,3 +17,7 @@
       </div>
     </div> 
   </div>
+
+
+  <!-- <p class="pb-1">user@macbook dir$ npm install --save tseudo</p> -->
+  

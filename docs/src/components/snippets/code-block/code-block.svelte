@@ -1,22 +1,28 @@
 <script lang="ts">
-    import Prism from 'prismjs';
     import FaLink from 'svelte-icons/fa/FaLink.svelte';
+    import { Highlight, LineNumbers } from "svelte-highlight";
+    import typescript from "svelte-highlight/languages/typescript";
+    import tokyoNightDark from "svelte-highlight/styles/tokyo-night-dark";
 
-    import type { CodeBlock } from '../../../interfaces/codeBlock';
+    import type { CodeBlock } from '@interfaces/codeBlock';
 	import Parameters from './parameters.svelte';
 
     function nameClick(event: any) {
-        console.log(event.target.innerHTML)
+        // ! there's a bug here where if you're already at an element ID with a hash, it just appends that
         const url = `${window.location.href}#${event.target.innerHTML}`;
         navigator.clipboard.writeText(url);
     }
 
     export let block: CodeBlock;
-
 </script>
+
+<svelte:head>
+  {@html tokyoNightDark}
+</svelte:head>
 
 <div class="rounded overflow-hidden shadow bg-white mb-4" id="{block.name}">
     <div class="px-6 py-4">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="font-bold text-2xl mb-2 hover:underline group cursor-pointer flex flex-row" on:click={event => nameClick(event)}>
             <span id="block-name">{ block.name }</span>
             <div class="icon w-4 ml-1 mt-2 invisible group-hover:visible">
@@ -32,22 +38,25 @@
         </div>
     {/if}
 
-    <div class="px-6 pt-4 pb-2">
-        <span>Returns:</span>
-        {block.returns.description} {'{'} {block.returns.type} {'}'}
-    </div>
+    {#if block.returns}
+        <div class="px-6 pt-4 pb-2">
+            <span>Returns:</span>
+            {block.returns.description} {'{'} {block.returns.type} {'}'}
+        </div>
+    {/if}
 
-    <div class="px-6 pt-4 pb-2">
-        <span>Example:</span>
-          <pre><code class="language-ts">{@html Prism.highlight(block.example, Prism.languages.javascript, 'javascript')}</code></pre>
-    </div>
+    {#if block.example}
+        <div class="px-6 pt-4 pb-2">
+            <span>Example:</span>
+            <Highlight language={typescript} code={block.example} let:highlighted>
+                <LineNumbers {highlighted} />
+            </Highlight>
+        </div>
+    {/if}
 
     <div class="px-6 pt-4 pb-2">
         <span>Source:</span>
-        
-        <a href="https://github.com/megmut/tseudo/tree/main/src/generators/internet/password.ts" target="_blank" rel="noopener noreferrer" class="text-blue-500">password.ts</a>
-
-        <a href="https://github.com/megmut/tseudo/tree/main/src/generators/internet/password.ts#L6" target="_blank" rel="noopener noreferrer" class="text-blue-500">line 6</a>
+        <a href="https://github.com/megmut/tseudo/tree/main/{block.fileName}#L{block.lineNumber}" target="_blank" rel="noopener noreferrer" class="text-blue-500">line {block.lineNumber}</a>
     </div>
 
     <div class="px-6 pt-4 pb-2">

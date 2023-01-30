@@ -3,15 +3,22 @@
     import FaAlignLeft from 'svelte-icons/fa/FaAlignLeft.svelte'
     import FaRegArrowAltCircleUp from 'svelte-icons/fa/FaRegArrowAltCircleUp.svelte';
     
-    import ScrollAnchor from "./ui/scrollAnchor.svelte";
+    import ScrollAnchor from "@ui/scrollAnchor.svelte";
+	import type { CodeBlock } from '@interfaces/codeBlock';
+    import { selectedDoc } from '@store';
 
-    const links = [
-        { name: 'Postcode', id: 'postcode' },
-        { name: 'Address', id: 'address' },
-        { name: 'House Name Number', id: 'houseNameNumber' },
-    ];
+    let links: {name: string, id: string}[] = [];
+    selectedDoc.subscribe((doc) => {
+        if(!doc) return;
 
-    const scrollBack = true;
+        links = Object.entries(doc.blocks).map((block: [string, CodeBlock]) => {
+            return {
+                name: block[1].name as string,
+                id: block[1].name as string
+            }
+        });
+    });
+
     let y: number;
 </script>
 
@@ -26,7 +33,7 @@
     <nav>
         <ul class="space-y-3">
             {#each links as link, i}
-                <li><ScrollAnchor href="#postcode">{link.name}</ScrollAnchor></li>
+                <li><ScrollAnchor href="#{link.id}">{link.name}</ScrollAnchor></li>
             {/each}
         </ul>
     </nav>

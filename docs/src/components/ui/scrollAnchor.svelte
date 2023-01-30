@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { scrollIntoView } from './../../utils/util';
+    import { scrollIntoView } from '@utils/util';
 
     export let href: string;
 </script>
