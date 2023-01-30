@@ -94,7 +94,7 @@ const cardDetails = {
 	cardNumber : fromFormat('9999-9999-9999-9999'),
 	expiresAt: fromFormat('99-99-99'),
 	cvv: fromFormat('999')
-}
+};
 
 const cardRegister = new Register(cardDetails);
 

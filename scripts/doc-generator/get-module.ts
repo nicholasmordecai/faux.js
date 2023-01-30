@@ -9,11 +9,11 @@ export interface ModuleBlock {
 }
 
 export function parseModule(comment: Block, absolutePath: string) {
-    return {
-        name: '',
-        description: '',
-        fileName: absolutePath,
-        category: '',
-        subCategory: '',
-    }
+	return {
+		name: '',
+		description: '',
+		fileName: absolutePath,
+		category: '',
+		subCategory: '',
+	};
 }
