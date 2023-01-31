@@ -18,7 +18,7 @@
 
         <div class="hidden sm:flex sm:items-center">
           <VersionSelect/>
-          <a href="https://github.com/megmut/faux.js" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/nicholasmordecai/faux.js" target="_blank" rel="noopener noreferrer">
             <div class="icon w-8">
               <DiGithubBadge />
             </div>
@@ -31,7 +31,7 @@
           <Search/>
           <div class="flex justify-between items-center border-t-2 pt-2">
             <VersionSelect/>
-            <a href="https://github.com/megmut/faux.js" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/nicholasmordecai/faux.js" target="_blank" rel="noopener noreferrer">
               <div class="icon w-8">
                 <DiGithubBadge />
               </div>

@@ -56,7 +56,7 @@
 
     <div class="px-6 pt-4 pb-2">
         <span>Source:</span>
-        <a href="https://github.com/megmut/tseudo/tree/main/{block.fileName}#L{block.lineNumber}" target="_blank" rel="noopener noreferrer" class="text-blue-500">line {block.lineNumber}</a>
+        <a href="https://github.com/nicholasmordecai/tseudo/tree/main/{block.fileName}#L{block.lineNumber}" target="_blank" rel="noopener noreferrer" class="text-blue-500">line {block.lineNumber}</a>
     </div>
 
     <div class="px-6 pt-4 pb-2">

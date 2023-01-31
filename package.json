@@ -1,5 +1,5 @@
 {
-  "name": "@nicholasmordecai/faux.js",
+  "name": "@fauxjs/faux.js",
   "version": "0.0.7",
   "description": "Modern performant pseudo random data generator",
   "keywords": [
@@ -25,7 +25,6 @@
   "preferGlobal": true,
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
-    "build:watch": "tsc -w",
     "serve": "ts-node-dev src/api/server.ts",
     "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\"",
     "test:watch": "mocha --require ts-node/register --recursive --watch --watch-files \"test/**/*.spec.ts\",\"src/**/*\" \"test/**/*.spec.ts\"",
