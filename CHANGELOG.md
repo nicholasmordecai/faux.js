@@ -7,12 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 0.1.0 - 2023-01-31
 ### Changed
 - Renamed repository to Faux.js. Tseudo has been depreciated
 - Merged the docs branch (WIP) into main to keep it in line
-
-
-### Changed 
 - Moved typescript to a dev dependency
 - Added TSUP for building the dist files
 - Moved eslint.json to eslint.js so the EOF rule cna be OS specific
