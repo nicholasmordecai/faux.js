@@ -1,5 +1,5 @@
 {
-  "name": "faux.js",
+  "name": "@nicholasmordecai/faux.js",
   "version": "0.0.7",
   "description": "Modern performant pseudo random data generator",
   "keywords": [
@@ -10,7 +10,7 @@
     "testing"
   ],
   "author": "Nicholas Mordecai",
-  "url": "https://github.com/megmut/faux.js",
+  "url": "https://github.com/mecardo/faux.js",
   "license": "Apache-2.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

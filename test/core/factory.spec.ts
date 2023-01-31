@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { Factory } from "../../src/core/factory";
+import { RecursivePartial } from "../../src/types";
 
 const obj = {
     'test': () => 1,
