@@ -1087,7 +1087,7 @@ var require_supports_color = __commonJS({
         return 1;
       }
       if ("CI" in env) {
-        if (["TRAVIS", "CIRCLECI", "APPVEYOR", "GITLAB_CI", "GITHUB_ACTIONS", "BUILDKITE"].some((sign) => sign in env) || env.CI_NAME === "codeship") {
+        if (["TRAVIS", "CIRCLECI", "APPVEYOR", "GITLAB_CI", "GITHUB_ACTIONS", "BUILDKITE"].some((sign2) => sign2 in env) || env.CI_NAME === "codeship") {
           return 1;
         }
         return min;
@@ -6356,20 +6356,20 @@ var require_safe_stable_stringify = __commonJS({
       result += str.slice(last);
       return result;
     }
-    function insertSort(array2) {
-      if (array2.length > 200) {
-        return array2.sort();
+    function insertSort(array) {
+      if (array.length > 200) {
+        return array.sort();
       }
-      for (let i = 1; i < array2.length; i++) {
-        const currentValue = array2[i];
+      for (let i = 1; i < array.length; i++) {
+        const currentValue = array[i];
         let position = i;
-        while (position !== 0 && array2[position - 1] > currentValue) {
-          array2[position] = array2[position - 1];
+        while (position !== 0 && array[position - 1] > currentValue) {
+          array[position] = array[position - 1];
           position--;
         }
-        array2[position] = currentValue;
+        array[position] = currentValue;
       }
-      return array2;
+      return array;
     }
     var typedArrayPrototypeGetSymbolToStringTag = Object.getOwnPropertyDescriptor(
       Object.getPrototypeOf(
@@ -6382,14 +6382,14 @@ var require_safe_stable_stringify = __commonJS({
     function isTypedArrayWithEntries(value) {
       return typedArrayPrototypeGetSymbolToStringTag.call(value) !== void 0 && value.length !== 0;
     }
-    function stringifyTypedArray(array2, separator, maximumBreadth) {
-      if (array2.length < maximumBreadth) {
-        maximumBreadth = array2.length;
+    function stringifyTypedArray(array, separator, maximumBreadth) {
+      if (array.length < maximumBreadth) {
+        maximumBreadth = array.length;
       }
       const whitespace = separator === "," ? "" : " ";
-      let res = `"0":${whitespace}${array2[0]}`;
+      let res = `"0":${whitespace}${array[0]}`;
       for (let i = 1; i < maximumBreadth; i++) {
-        res += `${separator}"${i}":${whitespace}${array2[i]}`;
+        res += `${separator}"${i}":${whitespace}${array[i]}`;
       }
       return res;
     }
@@ -17555,19 +17555,19 @@ var require_uri_all = __commonJS({
     })(exports, function(exports2) {
       "use strict";
       function merge() {
-        for (var _len = arguments.length, sets2 = Array(_len), _key = 0; _key < _len; _key++) {
-          sets2[_key] = arguments[_key];
+        for (var _len = arguments.length, sets = Array(_len), _key = 0; _key < _len; _key++) {
+          sets[_key] = arguments[_key];
         }
-        if (sets2.length > 1) {
-          sets2[0] = sets2[0].slice(0, -1);
-          var xl = sets2.length - 1;
+        if (sets.length > 1) {
+          sets[0] = sets[0].slice(0, -1);
+          var xl = sets.length - 1;
           for (var x = 1; x < xl; ++x) {
-            sets2[x] = sets2[x].slice(1, -1);
+            sets[x] = sets[x].slice(1, -1);
           }
-          sets2[xl] = sets2[xl].slice(1);
-          return sets2.join("");
+          sets[xl] = sets[xl].slice(1);
+          return sets.join("");
         } else {
-          return sets2[0];
+          return sets[0];
         }
       }
       function subexp(str) {
@@ -17679,11 +17679,11 @@ var require_uri_all = __commonJS({
       function error$1(type) {
         throw new RangeError(errors[type]);
       }
-      function map(array2, fn) {
+      function map(array, fn) {
         var result = [];
-        var length = array2.length;
+        var length = array.length;
         while (length--) {
-          result[length] = fn(array2[length]);
+          result[length] = fn(array[length]);
         }
         return result;
       }
@@ -17719,8 +17719,8 @@ var require_uri_all = __commonJS({
         }
         return output;
       }
-      var ucs2encode = function ucs2encode2(array2) {
-        return String.fromCodePoint.apply(String, toConsumableArray(array2));
+      var ucs2encode = function ucs2encode2(array) {
+        return String.fromCodePoint.apply(String, toConsumableArray(array));
       };
       var basicToDigit = function basicToDigit2(codePoint) {
         if (codePoint - 48 < 10) {
@@ -21323,19 +21323,19 @@ var require_utils = __commonJS({
         return { host, isIPV6: false };
       }
     }
-    function stripLeadingZeros(str, token) {
+    function stripLeadingZeros(str, token2) {
       let out = "";
       let skip = true;
       const l = str.length;
       for (let i = 0; i < l; i++) {
         const c = str[i];
         if (c === "0" && skip) {
-          if (i + 1 <= l && str[i + 1] === token || i + 1 === l) {
+          if (i + 1 <= l && str[i + 1] === token2 || i + 1 === l) {
             out += c;
             skip = false;
           }
         } else {
-          if (c === token) {
+          if (c === token2) {
             skip = true;
           } else {
             skip = false;
@@ -21345,10 +21345,10 @@ var require_utils = __commonJS({
       }
       return out;
     }
-    function findToken(str, token) {
+    function findToken(str, token2) {
       let ind = 0;
       for (let i = 0; i < str.length; i++) {
-        if (str[i] === token)
+        if (str[i] === token2)
           ind++;
       }
       return ind;
@@ -37302,7 +37302,7 @@ var require_sets = __commonJS({
 var require_util4 = __commonJS({
   "node_modules/ret/lib/util.js"(exports) {
     var types = require_types5();
-    var sets2 = require_sets();
+    var sets = require_sets();
     var CTRL = "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^ ?";
     var SLSH = { "0": 0, "t": 9, "n": 10, "v": 11, "f": 12, "r": 13 };
     exports.strToChars = function(str) {
@@ -37326,17 +37326,17 @@ var require_util4 = __commonJS({
       var rs, c;
       while ((rs = regexp.exec(str)) != null) {
         if (rs[1]) {
-          tokens.push(sets2.words());
+          tokens.push(sets.words());
         } else if (rs[2]) {
-          tokens.push(sets2.ints());
+          tokens.push(sets.ints());
         } else if (rs[3]) {
-          tokens.push(sets2.whitespace());
+          tokens.push(sets.whitespace());
         } else if (rs[4]) {
-          tokens.push(sets2.notWords());
+          tokens.push(sets.notWords());
         } else if (rs[5]) {
-          tokens.push(sets2.notInts());
+          tokens.push(sets.notInts());
         } else if (rs[6]) {
-          tokens.push(sets2.notWhitespace());
+          tokens.push(sets.notWhitespace());
         } else if (rs[7]) {
           tokens.push({
             type: types.RANGE,
@@ -37376,7 +37376,7 @@ var require_lib2 = __commonJS({
   "node_modules/ret/lib/index.js"(exports, module) {
     var util = require_util4();
     var types = require_types5();
-    var sets2 = require_sets();
+    var sets = require_sets();
     var positions = require_positions();
     module.exports = (regexpStr) => {
       var i = 0, l, c, start = { type: types.ROOT, stack: [] }, lastGroup = start, last = start.stack, groupStack = [];
@@ -37398,22 +37398,22 @@ var require_lib2 = __commonJS({
                 last.push(positions.nonWordBoundary());
                 break;
               case "w":
-                last.push(sets2.words());
+                last.push(sets.words());
                 break;
               case "W":
-                last.push(sets2.notWords());
+                last.push(sets.notWords());
                 break;
               case "d":
-                last.push(sets2.ints());
+                last.push(sets.ints());
                 break;
               case "D":
-                last.push(sets2.notInts());
+                last.push(sets.notInts());
                 break;
               case "s":
-                last.push(sets2.whitespace());
+                last.push(sets.whitespace());
                 break;
               case "S":
-                last.push(sets2.notWhitespace());
+                last.push(sets.notWhitespace());
                 break;
               default:
                 if (/\d/.test(c)) {
@@ -37446,7 +37446,7 @@ var require_lib2 = __commonJS({
             });
             break;
           case ".":
-            last.push(sets2.anyChar());
+            last.push(sets.anyChar());
             break;
           case "(":
             var group = {
@@ -43285,23 +43285,6 @@ function int(options) {
   }
   return Math.floor(mulberry32() * 100);
 }
-function normalDist(min, max, skew) {
-  let u = 0, v = 0;
-  while (u === 0)
-    u = mulberry32();
-  while (v === 0)
-    v = mulberry32();
-  let num = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
-  num = num / 10 + 0.5;
-  if (num > 1 || num < 0) {
-    num = normalDist(min, max, skew);
-  } else {
-    num = Math.pow(num, skew);
-    num *= max - min;
-    num += min;
-  }
-  return num;
-}
 function percent(options) {
   return float(options);
 }
@@ -43311,10 +43294,9 @@ function percentString(options) {
 function bool() {
   return float() > 0.5;
 }
-var number_default = {
+var Number2 = {
   float,
   int,
-  normalDist,
   bool,
   percent,
   percentString
@@ -43332,11 +43314,11 @@ function mulberry32() {
 }
 
 // src/generators/util/array.ts
-function rngFromArray(array2) {
-  return array2[int({ min: 0, max: array2.length - 1 })];
+function fromArray(array) {
+  return array[int({ min: 0, max: array.length - 1 })];
 }
-var array = {
-  rngFromArray
+var Array2 = {
+  fromArray
 };
 
 // src/generators/util/string.ts
@@ -43373,24 +43355,24 @@ var string = {
 
 // src/generators/geographic/address.ts
 function postcode() {
-  const format = rngFromArray(getLocale.zipcodeFormats);
+  const format = fromArray(getLocale.zipcodeFormats);
   return fromFormat(format);
 }
 function city() {
-  return rngFromArray(getLocale.cities);
+  return fromArray(getLocale.cities);
 }
 function county() {
-  return rngFromArray(getLocale.counties);
+  return fromArray(getLocale.counties);
 }
 function street() {
-  return `${rngFromArray(getLocale.streets)} ${rngFromArray(getLocale.streetSuffixes)}`;
+  return `${fromArray(getLocale.streets)} ${fromArray(getLocale.streetSuffixes)}`;
 }
 function houseNameNumber() {
-  const format = rngFromArray(getLocale.houseNameFormats);
+  const format = fromArray(getLocale.houseNameFormats);
   if (format === "N") {
     return int({ min: 1, max: 150 });
   } else {
-    return `${rngFromArray(getLocale.houseNamePrefixes)} ${rngFromArray(getLocale.houseNameSuffixes)}`;
+    return `${fromArray(getLocale.houseNamePrefixes)} ${fromArray(getLocale.houseNameSuffixes)}`;
   }
 }
 function country() {
@@ -43410,7 +43392,7 @@ function addressString() {
   const addr = address();
   return `${addr.houseNumber} ${addr.street}, ${addr.county}, ${addr.city}, ${addr.country}, ${addr.postcode}`;
 }
-var address_default = {
+var Address = {
   postcode,
   city,
   county,
@@ -43434,21 +43416,21 @@ function lat() {
 function long() {
   return int({ min: -180, max: 180, precision: 9 });
 }
-var map_default = {
+var Map2 = {
   lat,
   long,
   latLong
 };
 
 // src/generators/geographic/index.ts
-var geographic_default = {
-  address: address_default,
-  map: map_default
+var Geographic = {
+  Address,
+  Map: Map2
 };
 
 // src/generators/identification/person.ts
 function nickname() {
-  return rngFromArray(getLocale.names.nicknames);
+  return fromArray(getLocale.names.nicknames);
 }
 function fullName(options) {
   let gen;
@@ -43468,27 +43450,27 @@ function fullName(options) {
 function firstName(options) {
   if (options && options.gender) {
     if (options.gender === "Male") {
-      return rngFromArray(getLocale.names.male);
+      return fromArray(getLocale.names.male);
     } else {
-      return rngFromArray(getLocale.names.female);
+      return fromArray(getLocale.names.female);
     }
   } else {
     const male = bool();
     if (male) {
-      return rngFromArray(getLocale.names.male);
+      return fromArray(getLocale.names.male);
     } else {
-      return rngFromArray(getLocale.names.female);
+      return fromArray(getLocale.names.female);
     }
   }
 }
 function lastName() {
-  return rngFromArray(getLocale.names.lastNames);
+  return fromArray(getLocale.names.lastNames);
 }
 function middleNames() {
   const count = int({ min: 0, max: 2 });
   const middleNames2 = [];
   for (let i = count; i > 0; i--) {
-    middleNames2.push(rngFromArray(getLocale.names.middleNames));
+    middleNames2.push(fromArray(getLocale.names.middleNames));
   }
   return middleNames2;
 }
@@ -43500,7 +43482,7 @@ function gender() {
     return "Female";
   }
 }
-var person_default = {
+var Person = {
   firstName,
   lastName,
   middleNames,
@@ -43519,19 +43501,42 @@ var uuid_default = {
 };
 
 // src/generators/identification/index.ts
-var identification_default = {
-  person: person_default,
+var Identification = {
+  Person,
   uuid: uuid_default
 };
 
+// src/generators/math/statistics.ts
+function normalDist(min, max, skew) {
+  let u = 0, v = 0;
+  while (u === 0)
+    u = mulberry32();
+  while (v === 0)
+    v = mulberry32();
+  let num = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  num = num / 10 + 0.5;
+  if (num > 1 || num < 0) {
+    num = normalDist(min, max, skew);
+  } else {
+    num = Math.pow(num, skew);
+    num *= max - min;
+    num += min;
+  }
+  return num;
+}
+
 // src/generators/math/index.ts
-var math_default = {
-  number: number_default
+var Math2 = {
+  int,
+  float,
+  bool,
+  percent,
+  normalDist
 };
 
 // src/generators/util/index.ts
-var util_default = {
-  array,
+var Util = {
+  Array: Array2,
   string
 };
 
@@ -43560,17 +43565,17 @@ var Bank = {
 };
 
 // src/generators/finance/index.ts
-var finance_default = {
+var Finance = {
   Bank
 };
 
 // src/generators/index.ts
 var Generators = {
-  finance: finance_default,
-  geographic: geographic_default,
-  identification: identification_default,
-  math: math_default,
-  util: util_default
+  Finance,
+  Geographic,
+  Identification,
+  Math: Math2,
+  Util
 };
 
 // src/core/contingency.ts
@@ -43640,9 +43645,6 @@ var Factory = class {
   validate(object) {
     return this.traverseValidate(this.dictionary, object);
   }
-  fake() {
-    return this.traverseObject(this.dictionary, {});
-  }
   traverseValidate(referenceObject, object) {
     for (const key in referenceObject) {
       const referenceItem = referenceObject[key];
@@ -43665,6 +43667,9 @@ var Factory = class {
     }
     return true;
   }
+  fake() {
+    return this.traverseObject(this.dictionary, {});
+  }
   traverseObject(object, result) {
     for (const key in object) {
       const item = object[key];
@@ -43686,7 +43691,7 @@ var Factory = class {
 };
 
 // src/core/index.ts
-var core_default = {
+var Core = {
   Contingency,
   Probability,
   Factory
@@ -43751,20 +43756,62 @@ function pause(duration) {
 }
 
 // src/api/index.ts
-var api_default = {
+var API = {
   Server
 };
 
-// src/index.ts
-var fauxjs = {
-  API: api_default,
-  Config,
-  Core: core_default,
-  Generators,
-  Locales: locales
+// src/generators/internet/authentication.ts
+import { sign } from "jsonwebtoken";
+function JWT(payload = "", privateKey = "", options = {}) {
+  if (!privateKey)
+    privateKey = fromFormat("aAaAaAaAaAaAaAaA");
+  return sign(payload, privateKey, options);
+}
+function token(len = 10) {
+  return alphaN(len);
+}
+var Authentication = {
+  JWT,
+  token
+};
+
+// src/generators/internet/password.ts
+import md5Lib from "md5";
+function md5(input) {
+  let rngString;
+  if (!input) {
+    rngString = fromFormat("AAAAAAAAAA");
+  } else {
+    rngString = input;
+  }
+  return md5Lib(rngString);
+}
+function salt(len = 10) {
+  return fromFormat("A".repeat(len));
+}
+var Password = {
+  md5,
+  salt
 };
 export {
-  fauxjs
+  API,
+  Address,
+  Array2 as Array,
+  Authentication,
+  Bank,
+  Config,
+  Contingency,
+  Core,
+  Factory,
+  Generators,
+  locales as Locales,
+  Map2 as Map,
+  Number2 as Number,
+  Password,
+  Person,
+  Probability,
+  Server,
+  string
 };
 /*!
  * cookie

@@ -1,7 +1,7 @@
-import { array } from './array';
+import { Array } from './array';
 import { string } from './string';
 
-export default {
-	array,
+export const Util = {
+	Array,
 	string
 };

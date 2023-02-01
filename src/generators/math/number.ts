@@ -38,26 +38,6 @@ export function int(options?: MathOptions): number {
 	return Math.floor(mulberry32() * 100);
 }
 
-export function normalDist(min: number, max: number, skew: number) {
-	let u = 0, v = 0;
-	while (u === 0) u = mulberry32(); //Converting [0,1) to (0,1)
-	while (v === 0) v = mulberry32();
-	let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-
-	num = num / 10.0 + 0.5; // Translate to 0 -> 1
-
-	if (num > 1 || num < 0) {
-		num = normalDist(min, max, skew); // resample between 0 and 1 if out of range
-	}
-
-	else {
-		num = Math.pow(num, skew);
-		num *= max - min;
-		num += min;
-	}
-
-	return num;
-}
 
 // export function rngProbDist() {
 
@@ -91,10 +71,9 @@ export function sets(sets: Pick<MathOptions, 'min' | 'max'>[]): number {
 	return int(sets[set]);
 }
 
-export default {
+export const Number = {
 	float,
 	int,
-	normalDist,
 	bool,
 	percent,
 	percentString
@@ -126,7 +105,7 @@ function toFixedNumber(value: number, digits: number, base = 10): number {
 /**
  * @returns { number }
  */
-function mulberry32(): number {
+export function mulberry32(): number {
 	let t = Config.seed += 0x6D2B79F5;
 	t = Math.imul(t ^ t >>> 15, t | 1);
 	t ^= t + Math.imul(t ^ t >>> 7, t | 61);

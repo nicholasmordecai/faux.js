@@ -61,7 +61,7 @@ export function salt(len = 10): string {
 
 // }
 
-export const password = {
+export const Password = {
 	md5,
 	salt
 };

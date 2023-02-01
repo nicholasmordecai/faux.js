@@ -48,11 +48,6 @@ export class Factory<T> {
 		return this.traverseValidate(this.dictionary, object);
 	}
 
-	public fake(): T {
-		//? Should this be restricted by an envirnoment variable?
-		return this.traverseObject(this.dictionary, {});
-	}
-
 	private traverseValidate(referenceObject: any, object: any): boolean {
 		for (const key in referenceObject) {
 			const referenceItem = referenceObject[key];
@@ -78,6 +73,11 @@ export class Factory<T> {
 		}
 
 		return true;
+	}
+
+	public fake(): T {
+		//? Should this be restricted by an envirnoment variable?
+		return this.traverseObject(this.dictionary, {});
 	}
 
 	private traverseObject(object: any, result: any): T {

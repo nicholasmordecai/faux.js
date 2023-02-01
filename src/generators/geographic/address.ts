@@ -1,5 +1,5 @@
 import { int } from '../math/number';
-import { rngFromArray } from '../util/array';
+import { fromArray } from '../util/array';
 import { fromFormat } from '../util/string';
 
 import { getLocale } from '../../configuration';
@@ -20,7 +20,7 @@ interface IAddress {
  * @returns {string}
  */
 export function postcode(): string {
-	const format = rngFromArray(getLocale.zipcodeFormats);
+	const format = fromArray(getLocale.zipcodeFormats);
 	return fromFormat(format);
 }
 
@@ -31,7 +31,7 @@ export function postcode(): string {
  * @returns {string}
  */
 export function city(): string {
-	return rngFromArray(getLocale.cities);
+	return fromArray(getLocale.cities);
 }
 
 /**
@@ -41,7 +41,7 @@ export function city(): string {
  * @returns {string}
  */
 export function county(): string {
-	return rngFromArray(getLocale.counties);
+	return fromArray(getLocale.counties);
 }
 
 /**
@@ -51,7 +51,7 @@ export function county(): string {
  * @returns {string}
  */
 export function street(): string {
-	return `${rngFromArray(getLocale.streets)} ${rngFromArray(getLocale.streetSuffixes)}`;
+	return `${fromArray(getLocale.streets)} ${fromArray(getLocale.streetSuffixes)}`;
 }
 
 /**
@@ -61,11 +61,11 @@ export function street(): string {
  * @returns {(string | number)}
  */
 export function houseNameNumber(): string | number {
-	const format = rngFromArray(getLocale.houseNameFormats);
+	const format = fromArray(getLocale.houseNameFormats);
 	if (format === 'N') {
 		return int({ min: 1, max: 150 });
 	} else {
-		return `${rngFromArray(getLocale.houseNamePrefixes)} ${rngFromArray(getLocale.houseNameSuffixes)}`;
+		return `${fromArray(getLocale.houseNamePrefixes)} ${fromArray(getLocale.houseNameSuffixes)}`;
 	}
 }
 
@@ -107,7 +107,7 @@ export function addressString(): string {
 	return `${addr.houseNumber} ${addr.street}, ${addr.county}, ${addr.city}, ${addr.country}, ${addr.postcode}`;
 }
 
-export default {
+export const Address = {
 	postcode,
 	city,
 	county,

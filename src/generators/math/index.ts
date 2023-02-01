@@ -1,5 +1,10 @@
-import number from './number';
+import { int, float, bool, percent } from './number';
+import { normalDist } from './statistics';
 
-export default {
-	number
-};
+export const Math = {
+    int,
+    float,
+    bool,
+    percent,
+    normalDist
+}

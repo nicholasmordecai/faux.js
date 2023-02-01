@@ -1,4 +1,5 @@
 import { FastifyInstance } from 'fastify';
+import { SignOptions } from 'jsonwebtoken';
 
 interface ILocale {
     code: string;
@@ -33,10 +34,25 @@ declare const locales: {
     usa: ILocale;
 };
 
+interface IConfig {
+    seed: number;
+    locale: localeSelectors;
+}
+declare const Config: IConfig;
+
 declare function fromFormat(format: string): string;
 declare function alphaN(length: number): string;
+declare const string: {
+    alphaN: typeof alphaN;
+    fromFormat: typeof fromFormat;
+};
 
-declare function rngFromArray<T>(array: Array<T>): T;
+declare function fromArray<T>(array: Array<T>): T;
+declare const Array: {
+    fromArray: typeof fromArray;
+};
+
+declare function normalDist(min: number, max: number, skew: number): number;
 
 interface MathOptions {
     min?: number;
@@ -45,21 +61,19 @@ interface MathOptions {
 }
 declare function float(options?: MathOptions): number;
 declare function int(options?: MathOptions): number;
-declare function normalDist(min: number, max: number, skew: number): number;
 declare function percent(options?: MathOptions): number;
 declare function percentString(options?: MathOptions): string;
 declare function bool(): boolean;
+declare const Number: {
+    float: typeof float;
+    int: typeof int;
+    bool: typeof bool;
+    percent: typeof percent;
+    percentString: typeof percentString;
+};
 
-/**
- * @category Generators
- * @subcategory Identification
- */
 declare function uuid(): string;
 
-/**
- * @category Generators
- * @subcategory Identification
- */
 interface FullName {
     firstName: string;
     lastName: string;
@@ -77,11 +91,15 @@ declare function firstName(options?: PersonOptions): string;
 declare function lastName(): string;
 declare function middleNames(): string[];
 declare function gender(): Gender;
+declare const Person: {
+    firstName: typeof firstName;
+    lastName: typeof lastName;
+    middleNames: typeof middleNames;
+    nickname: typeof nickname;
+    fullName: typeof fullName;
+    gender: typeof gender;
+};
 
-/**
- * @category Generators
- * @subcategory Geographic
- */
 interface LatLong {
     lat: number;
     long: number;
@@ -104,11 +122,12 @@ declare function lat(): number;
  * @returns {number}
  */
 declare function long(): number;
+declare const Map: {
+    lat: typeof lat;
+    long: typeof long;
+    latLong: typeof latLong;
+};
 
-/**
- * @category Generators
- * @subcategory Geographic
- */
 interface IAddress {
     country: string;
     county: string;
@@ -118,63 +137,154 @@ interface IAddress {
     postcode: string;
 }
 /**
+ * @function postcode
  * @description Generate a random postcode
  *
  * @returns {string}
  */
 declare function postcode(): string;
 /**
+ * @function city
  * @description Generate a random city name
  *
  * @returns {string}
  */
 declare function city(): string;
 /**
- * Generate a random county
+ * @function county
+ * @description Generate a random county
  *
  * @returns {string}
  */
 declare function county(): string;
 /**
- * Generate a random street name
+ * @function street
+ * @description Generate a random street name
  *
  * @returns {string}
  */
 declare function street(): string;
 /**
- * Generate a random house name or number
+ * @function houseNameNumber
+ * @description Generate a random house name or number
  *
  * @returns {(string | number)}
  */
 declare function houseNameNumber(): string | number;
 /**
- * Generate a random country
+ * @function country
+ * @description Generate a random country
  *
  * @returns {string}
  */
 declare function country(): string;
 /**
- * Address generator
+ * @function address
+ * @description Address generator
  *
  * @returns {IAddress}
  */
 declare function address(): IAddress;
 /**
- * Address described as a string
+ * @function addressString
+ * @description Address described as a string
  *
  * @returns {string}
  */
 declare function addressString(): string;
+declare const Address: {
+    postcode: typeof postcode;
+    city: typeof city;
+    county: typeof county;
+    country: typeof country;
+    street: typeof street;
+    houseNameNumber: typeof houseNameNumber;
+    address: typeof address;
+    addressString: typeof addressString;
+};
 
-/**
- * @category Generators
- * @subcategory Finance
- */
 declare function IBAN(): string;
 declare function accountNumber(): number;
 declare function sortCode(): number;
 declare function cardNumber(): string;
 declare function cvv(): number;
+declare const Bank: {
+    IBAN: typeof IBAN;
+    accountNumber: typeof accountNumber;
+    sortCode: typeof sortCode;
+    cardNumber: typeof cardNumber;
+    cvv: typeof cvv;
+};
+
+declare const Generators: {
+    Finance: {
+        Bank: {
+            IBAN: typeof IBAN;
+            accountNumber: typeof accountNumber;
+            sortCode: typeof sortCode;
+            cardNumber: typeof cardNumber;
+            cvv: typeof cvv;
+        };
+    };
+    Geographic: {
+        Address: {
+            postcode: typeof postcode;
+            city: typeof city;
+            county: typeof county;
+            country: typeof country;
+            street: typeof street;
+            houseNameNumber: typeof houseNameNumber;
+            address: typeof address;
+            addressString: typeof addressString;
+        };
+        Map: {
+            lat: typeof lat;
+            long: typeof long;
+            latLong: typeof latLong;
+        };
+    };
+    Identification: {
+        Person: {
+            firstName: typeof firstName;
+            lastName: typeof lastName;
+            middleNames: typeof middleNames;
+            nickname: typeof nickname;
+            fullName: typeof fullName;
+            gender: typeof gender;
+        };
+        uuid: {
+            uuid: typeof uuid;
+        };
+    };
+    Math: {
+        int: typeof int;
+        float: typeof float;
+        bool: typeof bool;
+        percent: typeof percent;
+        normalDist: typeof normalDist;
+    };
+    Util: {
+        Array: {
+            fromArray: typeof fromArray;
+        };
+        string: {
+            alphaN: typeof alphaN;
+            fromFormat: typeof fromFormat;
+        };
+    };
+};
+
+declare function Contingency<T, P>(parameters: P, generator: () => T): T;
+
+type TGenerator<T> = (() => T) | T;
+interface IProbability<T> {
+    probability: number;
+    generator: TGenerator<T>;
+}
+interface IProbabilityOptions<T> {
+    conditions: IProbability<T>[];
+}
+declare function Probability<T>(options: IProbabilityOptions<T>): (options: IProbabilityOptions<T>) => T;
 
 type RecursivePartial<T> = {
     [P in keyof T]?: T[P] extends (infer U)[] ? RecursivePartial<U>[] : T[P] extends object ? RecursivePartial<T[P]> : T[P];
@@ -209,28 +319,17 @@ declare class Factory<T> {
      * @returns { boolean } True if the object is valid
      */
     validate(object: RecursivePartial<T>): boolean;
-    fake(): T;
     private traverseValidate;
     private itemsAreSameType;
+    fake(): T;
     private traverseObject;
 }
 
-type TGenerator<T> = (() => T) | T;
-interface IProbability<T> {
-    probability: number;
-    generator: TGenerator<T>;
-}
-interface IProbabilityOptions<T> {
-    conditions: IProbability<T>[];
-}
-declare function Probability<T>(options: IProbabilityOptions<T>): (options: IProbabilityOptions<T>) => T;
-
-declare function Contingency<T, P>(parameters: P, generator: () => T): T;
-
-interface IConfig {
-    seed: number;
-    locale: localeSelectors;
-}
+declare const Core: {
+    Contingency: typeof Contingency;
+    Probability: typeof Probability;
+    Factory: typeof Factory;
+};
 
 interface ServerConfig {
     port?: number;
@@ -243,82 +342,61 @@ declare class Server {
     static run(routes: Record<string, any>, config: ServerConfig): FastifyInstance;
 }
 
-declare const fauxjs: {
-    API: {
-        Server: typeof Server;
-    };
-    Config: IConfig;
-    Core: {
-        Contingency: typeof Contingency;
-        Probability: typeof Probability;
-        Factory: typeof Factory;
-    };
-    Generators: {
-        finance: {
-            Bank: {
-                IBAN: typeof IBAN;
-                accountNumber: typeof accountNumber;
-                sortCode: typeof sortCode;
-                cardNumber: typeof cardNumber;
-                cvv: typeof cvv;
-            };
-        };
-        geographic: {
-            address: {
-                postcode: typeof postcode;
-                city: typeof city;
-                county: typeof county;
-                country: typeof country;
-                street: typeof street;
-                houseNameNumber: typeof houseNameNumber;
-                address: typeof address;
-                addressString: typeof addressString;
-            };
-            map: {
-                lat: typeof lat;
-                long: typeof long;
-                latLong: typeof latLong;
-            };
-        };
-        identification: {
-            person: {
-                firstName: typeof firstName;
-                lastName: typeof lastName;
-                middleNames: typeof middleNames;
-                nickname: typeof nickname;
-                fullName: typeof fullName;
-                gender: typeof gender;
-            };
-            uuid: {
-                uuid: typeof uuid;
-            };
-        };
-        math: {
-            number: {
-                float: typeof float;
-                int: typeof int;
-                normalDist: typeof normalDist;
-                bool: typeof bool;
-                percent: typeof percent;
-                percentString: typeof percentString;
-            };
-        };
-        util: {
-            array: {
-                rngFromArray: typeof rngFromArray;
-            };
-            string: {
-                alphaN: typeof alphaN;
-                fromFormat: typeof fromFormat;
-            };
-        };
-    };
-    Locales: {
-        gb: ILocale;
-        global: ILocale;
-        ca: ILocale;
-        usa: ILocale;
-    };
+declare const API: {
+    Server: typeof Server;
 };
 
-export { fauxjs };
+/**
+ * @description Generates a new json web token (JWT)
+ *
+ * @example
+ * const token = sign({some: payload});
+ *
+ */
+declare function JWT(payload?: string | object | Buffer, privateKey?: string, options?: SignOptions): string;
+/**
+ * @description generates a random alpha numeric token
+ *
+ * @example
+ * const t = token(); // hA76dcB12l
+ */
+declare function token(len?: number): string;
+declare const Authentication: {
+    JWT: typeof JWT;
+    token: typeof token;
+};
+
+/**
+ * @module
+ * @category Generators
+ * @subcategory Internet
+ * @description Some awesome description for this generator...
+ */
+/**
+ * @function md5
+ * @description Hash any string input with MD5
+ *
+ * @param {string} [input] input string to hash
+ * @returns {string} the hashed string
+ *
+ * @example typescript const hash = md5('my-string');
+ */
+declare function md5(input?: string): string;
+/**
+ * @function salt
+ * @description Generates a random salt
+ *
+ * @param {number} [len=10] input string to hash
+ * @returns {string} the hashed string
+ *
+ * @example const randomSalt = salt();
+ *
+ * const randomSalt2 = salt(12);
+ */
+declare function salt(len?: number): string;
+declare const Password: {
+    md5: typeof md5;
+    salt: typeof salt;
+};
+
+export { API, Address, Array, Authentication, Bank, Config, Contingency, Core, Factory, Generators, locales as Locales, Map, Number, Password, Person, Probability, Server, string };

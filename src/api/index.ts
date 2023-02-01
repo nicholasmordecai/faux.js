@@ -1,6 +1,6 @@
 import { Server } from './server';
 
 
-export default {
+export const API = {
 	Server
 };

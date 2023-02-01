@@ -23,7 +23,7 @@ export function token(len = 10): string {
 	return alphaN(len);
 }
 
-export const authentication = {
+export const Authentication = {
 	JWT,
 	token
 };
