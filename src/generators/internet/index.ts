@@ -1,7 +1,7 @@
-import { authentication } from './authentication';
-import { password } from './password';
+import { Authentication } from './authentication';
+import { Password } from './password';
 
 export const Internet = {
-	authentication,
-	password
+	Authentication,
+	Password
 };

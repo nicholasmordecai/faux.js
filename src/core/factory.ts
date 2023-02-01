@@ -45,6 +45,7 @@ export class Factory<T> {
 	 * @returns { boolean } True if the object is valid
 	 */
 	public validate(object: RecursivePartial<T>): boolean {
+		//? could always build a fake version to be able to compare againt?
 		return this.traverseValidate(this.dictionary, object);
 	}
 
