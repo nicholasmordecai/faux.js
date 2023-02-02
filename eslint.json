@@ -1,22 +1,21 @@
-module.exports = {
-    extends: [
+{
+    "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended"
     ],
-    parser: "@typescript-eslint/parser",
-    parserOptions: {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
         "sourceType": "module",
         "ecmaVersion": "ES2016"
     },
-    plugins: [
+    "plugins": [
         "@typescript-eslint"
     ],
-    rules: {
+    "rules": {
         "indent": [
             "error",
             "tab"
         ],
-        "linebreak-style": ["error", (process.platform === "win32" ? "windows" : "unix")],
         "quotes": [
             "error",
             "single"
@@ -31,4 +30,4 @@ module.exports = {
             "always"
         ]
     }
-};
+}

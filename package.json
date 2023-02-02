@@ -29,7 +29,7 @@
     "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\"",
     "test:watch": "mocha --require ts-node/register --recursive --watch --watch-files \"test/**/*.spec.ts\",\"src/**/*\" \"test/**/*.spec.ts\"",
     "test:coverage": "nyc npm run test",
-    "lint": "eslint --ext .ts ./src/ --config eslint.js",
+    "lint": "eslint --ext .ts ./src/ --config eslint.json",
     "lint:fix": "eslint --ext .ts ./src/ --config eslint.js --fix",
     "circular-dep-check": "dpdm --exit-code circular:1 ./src/cli/index.ts"
   },
