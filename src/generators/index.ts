@@ -1,13 +1,13 @@
-import geographic from './geographic';
-import identification from './identification';
-import math from './math';
-import util from './util';
-import finance from './finance';
+import { Geographic } from './geographic';
+import { Identification } from './identification';
+import { Math } from './math';
+import { Util } from './util';
+import { Finance } from './finance';
 
 export const Generators = {
-	finance,
-	geographic,
-	identification,
-	math,
-	util
+	Finance,
+	Geographic,
+	Identification,
+	Math,
+	Util
 };

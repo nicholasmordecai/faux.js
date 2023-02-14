@@ -1,11 +1,18 @@
 # Changelog
-
+ 
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+### Fixed
+- Fixed the windows lint error, so now it runs successfully in CI tests
+### Changed
+- Added better module exports and easier core functionality importing
+- Switched from tsup to rollup due to better adoption and better compiled file size
+- Added 'windows-latest' to os matrix for github workflow
 
 ## 0.1.0 - 2023-01-31
 ### Changed

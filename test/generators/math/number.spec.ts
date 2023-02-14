@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 
-import { normalDist, percent, percentString, float, int, bool, sets } from '../../../src/generators/math/number';
+import { percent, percentString, float, int, bool, sets } from '../../../src/generators/math/number';
+import { normalDist } from '../../../src/generators/math/statistics';
 
 describe('Number tests', () => {
     it('Should generate a 32 bit Mulberry random float', () => {

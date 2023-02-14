@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Finance } from './../../../src/generators/finance';
+import { Finance } from '../../../src/generators/finance';
 
 describe('Bank Generator Functions', () => {
     it('Should generate a random IBAN', () => {

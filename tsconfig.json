@@ -2,11 +2,11 @@
   "compilerOptions": {
     "target": "ES2016",
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
-    "moduleResolution": "Node",
     "typeRoots": [
       "./test/@types/",
       "./node_modules/@types"

@@ -1,12 +1,7 @@
-import address from './address';
-import map from './map';
+import { Address } from './address';
+import { Map } from './map';
 
-export const Geo = {
-	address,
-	map
-};
-
-export default {
-	address,
-	map
+export const Geographic = {
+	Address,
+	Map
 };

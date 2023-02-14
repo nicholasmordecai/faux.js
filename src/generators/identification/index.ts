@@ -1,7 +1,7 @@
-import person from './person';
+import { Person } from './person';
 import uuid from './uuid';
 
-export default {
-	person,
+export const Identification = {
+	Person,
 	uuid
 };

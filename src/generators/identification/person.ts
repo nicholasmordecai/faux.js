@@ -1,5 +1,5 @@
 import { getLocale } from '../../configuration';
-import { rngFromArray } from '../util/array';
+import { fromArray } from '../util/array';
 import { bool, int } from '../math/number';
 
 export interface FullName {
@@ -17,7 +17,7 @@ export interface PersonOptions {
 export type Gender = 'Male' | 'Female';
 
 export function nickname(): string {
-	return rngFromArray(getLocale.names.nicknames);
+	return fromArray(getLocale.names.nicknames);
 }
 
 export function fullName(options?: PersonOptions): FullName {
@@ -40,22 +40,22 @@ export function fullName(options?: PersonOptions): FullName {
 export function firstName(options?: PersonOptions): string {
 	if (options && options.gender) {
 		if (options.gender === 'Male') {
-			return rngFromArray(getLocale.names.male);
+			return fromArray(getLocale.names.male);
 		} else {
-			return rngFromArray(getLocale.names.female);
+			return fromArray(getLocale.names.female);
 		}
 	} else {
 		const male = bool();
 		if(male) {
-			return rngFromArray(getLocale.names.male);
+			return fromArray(getLocale.names.male);
 		} else {
-			return rngFromArray(getLocale.names.female);
+			return fromArray(getLocale.names.female);
 		}
 	}
 }
 
 export function lastName(): string {
-	return rngFromArray(getLocale.names.lastNames);
+	return fromArray(getLocale.names.lastNames);
 }
 
 // todo there is a roughly 0.0004% chance of generating two middle names that are identicle.
@@ -65,7 +65,7 @@ export function middleNames(): string[] {
 	const middleNames = [];
 
 	for (let i = count; i > 0; i--) {
-		middleNames.push(rngFromArray(getLocale.names.middleNames));
+		middleNames.push(fromArray(getLocale.names.middleNames));
 	}
 
 	return middleNames;
@@ -89,7 +89,7 @@ export function gender(): Gender {
 // }
 
 
-export default {
+export const Person = {
 	firstName,
 	lastName,
 	middleNames,

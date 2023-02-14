@@ -41,7 +41,7 @@ export function long(): number {
 	return int({ min: -180, max: 180, precision: 9 });
 }
 
-export default { 
+export const Map = { 
 	lat,
 	long,
 	latLong
