@@ -40,16 +40,16 @@ import { Array } from './generators/util/array';
 export { Array } from './generators/util/array';
 
 export const fauxjs = {
-    Config,
-    Generators,
-    Locales,
-    Bank,
-    Address,
-    Map,
-    Person,
-    Authentication,
-    Password,
-    Number,
-    string,
-    Array
-}
+	Config,
+	Generators,
+	Locales,
+	Bank,
+	Address,
+	Map,
+	Person,
+	Authentication,
+	Password,
+	Number,
+	string,
+	Array
+};
