@@ -1,12 +1,6 @@
 export { Config } from './configuration';
 export { Generators } from './generators';
-export { Core } from './core';
-export { API } from './api';
 export { locales as Locales } from './locales';
-export { Factory } from './core/factory';
-export { Probability } from './core/probability';
-export { Contingency } from './core/contingency';
-export { Server } from './api/server';
 export { Bank } from './generators/finance/bank';
 export { Address } from './generators/geographic/address';
 export { Map } from './generators/geographic/map';

@@ -5,11 +5,11 @@
   import VersionSelect from '@ui/versionSelect.svelte';
 </script>
 
-	<div class="bg-white border-b" id="navbar">
+	<div class="" id="navbar">
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between py-4">
         <div>
-          <span>faux.js</span>
+          <a href="/">faux.js</a>
         </div>
 
         <div class="hidden sm:flex sm:items-center">
@@ -17,6 +17,7 @@
         </div>
 
         <div class="hidden sm:flex sm:items-center">
+          <a href="/docs">Docs</a>
           <VersionSelect/>
           <a href="https://github.com/nicholasmordecai/faux.js" target="_blank" rel="noopener noreferrer">
             <div class="icon w-8">
@@ -30,6 +31,7 @@
         <div class="flex flex-col">
           <Search/>
           <div class="flex justify-between items-center border-t-2 pt-2">
+            <a href="/docs">Docs</a>
             <VersionSelect/>
             <a href="https://github.com/nicholasmordecai/faux.js" target="_blank" rel="noopener noreferrer">
               <div class="icon w-8">

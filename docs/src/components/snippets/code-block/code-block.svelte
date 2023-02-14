@@ -20,7 +20,7 @@
   {@html tokyoNightDark}
 </svelte:head>
 
-<div class="rounded overflow-hidden shadow bg-white mb-4" id="{block.name}">
+<div class="rounded overflow-hidden shadow mb-4" id="{block.name}">
     <div class="px-6 py-4">
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div class="font-bold text-2xl mb-2 hover:underline group cursor-pointer flex flex-row" on:click={event => nameClick(event)}>
@@ -56,7 +56,7 @@
 
     <div class="px-6 pt-4 pb-2">
         <span>Source:</span>
-        <a href="https://github.com/nicholasmordecai/tseudo/tree/main/{block.fileName}#L{block.lineNumber}" target="_blank" rel="noopener noreferrer" class="text-blue-500">line {block.lineNumber}</a>
+        <a href="https://github.com/nicholasmordecai/faux.js/tree/main/{block.fileName}#L{block.lineNumber}" target="_blank" rel="noopener noreferrer" class="text-blue-500">line {block.lineNumber}</a>
     </div>
 
     <div class="px-6 pt-4 pb-2">

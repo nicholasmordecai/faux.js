@@ -1,7 +1,6 @@
 'use strict';
 
 var uuid$2 = require('uuid');
-var fastify = require('fastify');
 var jsonwebtoken = require('jsonwebtoken');
 var md5Lib = require('md5');
 
@@ -464,250 +463,6 @@ const Generators = {
     Util
 };
 
-function Contingency(parameters, generator) {
-    const result = generator.apply(parameters);
-    return result;
-}
-
-function Probability(options) {
-    return () => {
-        return generate(options);
-    };
-}
-function generate(options) {
-    validateConditions(options.conditions);
-    const condition = getConditionFromProbability(options.conditions);
-    return getValue(condition.generator);
-}
-function validateConditions(conditions) {
-    let allProbs = 0;
-    for (const condition of conditions) {
-        allProbs += condition.probability;
-    }
-    if (allProbs === 100) {
-        return true;
-    }
-    else {
-        throw new Error('Conditions are not valid. They do not equal 100.');
-    }
-}
-function getConditionFromProbability(conditions) {
-    const calculatedProb = float({ min: 0, max: 100 });
-    let previousProb = 0;
-    for (const condition of conditions) {
-        if (calculatedProb >= previousProb && calculatedProb < previousProb + condition.probability) {
-            return condition;
-        }
-        previousProb = calculatedProb;
-    }
-    throw new Error('Could not generate a conditional value.');
-}
-function getValue(generator) {
-    if (generator instanceof Function) {
-        return generator();
-    }
-    else {
-        return generator;
-    }
-}
-
-class Factory {
-    constructor(obj) {
-        this.dictionary = obj;
-    }
-    add(key, property) {
-        this.dictionary[key] = property;
-    }
-    get(key) {
-        return this.dictionary[key];
-    }
-    /**
-     * @function build
-     * @description Builds a new object from the factory schema. Require you to pass in all properties.
-     * @param {T} properties
-     * @returns {T} A complete
-     */
-    build(properties) {
-        return properties;
-    }
-    /**
-     * @function buildPartial
-     * @description Like the build function, but all properties are optional so you can build the object as you go.
-     * It is advised to use this in conjunction with the validate function.
-     *
-     * @param { RecursivePartial<T> } properties
-     * @returns { RecursivePartial<T> } The new object from the factory schema, but with all keys as optional
-     */
-    buildPartial(properties) {
-        return properties;
-    }
-    /**
-     * @function validate
-     * @description Takes an object that is meant to be the same as what's described above. However, due to the partial keyword, it is possible to have missed
-     * some of the properties, so use this function to ensure the object fully meets the criteria of the schema.
-     * @param object
-     * @returns { boolean } True if the object is valid
-     */
-    validate(object) {
-        //? could always build a fake version to be able to compare againt?
-        return this.traverseValidate(this.dictionary, object);
-    }
-    traverseValidate(referenceObject, object) {
-        for (const key in referenceObject) {
-            const referenceItem = referenceObject[key];
-            const item = object[key];
-            //? Should we worry about function types here?
-            if (typeof item === 'object') {
-                return this.traverseValidate(referenceItem, item);
-            }
-            else {
-                if (this.itemsAreSameType(referenceItem, item)) {
-                    continue;
-                }
-                else {
-                    throw new Error(`Could not validate object. Item ${key} can not be matched as ${typeof item} against ${typeof referenceItem}`);
-                }
-            }
-        }
-        return true;
-    }
-    itemsAreSameType(referenceItem, item) {
-        if (typeof referenceItem !== typeof item) {
-            return false;
-        }
-        return true;
-    }
-    fake() {
-        //? Should this be restricted by an envirnoment variable?
-        return this.traverseObject(this.dictionary, {});
-    }
-    traverseObject(object, result) {
-        for (const key in object) {
-            const item = object[key];
-            if (typeof item === 'function') {
-                const fn = item;
-                result[key] = fn();
-            }
-            else if (typeof item === 'object') {
-                if (item instanceof Factory) {
-                    result[key] = item.fake();
-                }
-                else {
-                    result[key] = this.traverseObject(item, {});
-                }
-            }
-            else {
-                result[key] = item;
-            }
-        }
-        return result;
-    }
-}
-
-const Core = {
-    Contingency,
-    Probability,
-    Factory
-};
-
-/******************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-
-function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-}
-
-function buildResults(count, routes, route) {
-    if (count) {
-        const results = [];
-        for (let i = count; i > 0; i--) {
-            results.push(routes[route].build());
-        }
-        return results;
-    }
-    else {
-        return routes[route].build();
-    }
-}
-class Server {
-    static run(routes, config) {
-        const server = fastify();
-        buildRoutes(server, routes, config);
-        server.listen({ port: config.port || 3000 }, (err, address) => {
-            if (err)
-                handleError(err);
-            console.log(`faux.js server listening at ${address}`);
-        });
-        return server;
-    }
-}
-function handleError(err) {
-    console.error(err);
-    process.exit(1);
-}
-function buildRoutes(server, routes, config) {
-    return __awaiter(this, void 0, void 0, function* () {
-        for (const route in routes) {
-            server.get(route, (request) => __awaiter(this, void 0, void 0, function* () {
-                const results = buildResults(request.query.count, routes, route);
-                // If there is a default, wrap the returned response in a set timeout
-                if (config.defaultDelay) {
-                    let delay;
-                    if (typeof config.defaultDelay === 'number') {
-                        delay = config.defaultDelay;
-                    }
-                    else {
-                        delay = int({ min: config.defaultDelay.min, max: config.defaultDelay.max });
-                    }
-                    yield pause(delay);
-                    return results;
-                }
-                else {
-                    return results;
-                }
-            }));
-        }
-    });
-}
-function pause(duration) {
-    return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve) => {
-            setTimeout(resolve, duration);
-        });
-    });
-}
-// const user = {
-// 	address: address,
-// 	age: () => Math.round(normalDist(20, 40, 2))
-// };
-// const userRegister = new Factory(user);
-// const routes: { [key: string]: any } = {
-// 	'/user': userRegister,
-// };
-// Server.run(routes, {});
-
-const API = {
-    Server
-};
-
 /**
  * @description Generates a new json web token (JWT)
  *
@@ -788,21 +543,15 @@ const Password = {
     salt
 };
 
-exports.API = API;
 exports.Address = Address;
 exports.Array = Array;
 exports.Authentication = Authentication;
 exports.Bank = Bank;
 exports.Config = Config;
-exports.Contingency = Contingency;
-exports.Core = Core;
-exports.Factory = Factory;
 exports.Generators = Generators;
 exports.Locales = locales;
 exports.Map = Map;
 exports.Number = Number;
 exports.Password = Password;
 exports.Person = Person;
-exports.Probability = Probability;
-exports.Server = Server;
 exports.string = string;
