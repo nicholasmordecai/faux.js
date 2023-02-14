@@ -9,10 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed the windows lint error, so now it runs successfully in CI tests
+
+
 ### Changed
 - Added better module exports and easier core functionality importing
 - Switched from tsup to rollup due to better adoption and better compiled file size
 - Added 'windows-latest' to os matrix for github workflow
+- Removed a bunch of code that was originally meant for this project but ended up making it overly complicated. That code will now live in it's own project after this reaches some level of maturity.
+- Add an extra export from the root entry for convenience.
+- Bump dpdm from 3.11.0 to 3.12.0
+- Bump eslint from 8.32.0 to 8.34.0
+- Bump @typescript-eslint/parser from 5.49.0 to 5.51.0
+- Bump @typescript-eslint/eslint-plugin from 5.49.0 to 5.51.0
+- Bump @types/node from 18.11.18 to 18.13.0
+
 
 ## 0.1.0 - 2023-01-31
 ### Changed
