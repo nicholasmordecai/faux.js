@@ -19,9 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add an extra export from the root entry for convenience.
 - Bump dpdm from 3.11.0 to 3.12.0
 - Bump eslint from 8.32.0 to 8.34.0
-- Bump @typescript-eslint/parser from 5.49.0 to 5.51.0
-- Bump @typescript-eslint/eslint-plugin from 5.49.0 to 5.51.0
-- Bump @types/node from 18.11.18 to 18.13.0
+- Bump @typescript-eslint/parser from 5.49.0 to 5.53.0
+- Bump @typescript-eslint/eslint-plugin from 5.49.0 to 5.53.0
+- Bump @types/node from 18.11.18 to 18.14.1
+- Bump fastify from 4.12.0 to 4.13.0
+- Bump rollup from 3.12.1 to 3.17.2
 
 
 ## 0.1.0 - 2023-01-31

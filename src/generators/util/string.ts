@@ -27,7 +27,7 @@ export function fromFormat(format: string) {
 	return result;
 }
 
-export function alphaN(length: number): string {
+export function alphaNumeric(length: number): string {
 	let result = '';
 	const charLen = alphaNumerics.length - 1;
 	for (let i = length; i > 0; i--) {
@@ -37,6 +37,6 @@ export function alphaN(length: number): string {
 }
 
 export const string = {
-	alphaN,
+	alphaNumeric: alphaNumeric,
 	fromFormat
 };

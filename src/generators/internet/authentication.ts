@@ -1,5 +1,5 @@
 import { sign, SignOptions } from 'jsonwebtoken';
-import { alphaN, fromFormat } from '../util/string';
+import { alphaNumeric, fromFormat } from '../util/string';
 
 /**
  * @description Generates a new json web token (JWT)
@@ -20,7 +20,7 @@ export function JWT(payload: string | object | Buffer = '', privateKey = '', opt
  * const t = token(); // hA76dcB12l
  */
 export function token(len = 10): string {
-	return alphaN(len);
+	return alphaNumeric(len);
 }
 
 export const Authentication = {

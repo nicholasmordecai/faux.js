@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { fromFormat, alphaN } from '../../../src/generators/util/string';
+import { fromFormat, alphaNumeric } from '../../../src/generators/util/string';
 
 describe('String Util', () => {
     it('Should create a string from a number and character format', () => {
@@ -23,7 +23,7 @@ describe('String Util', () => {
     });
 
     it('Should generate a alpha numeric string from charcodes', () => {
-        const str = alphaN(12);
+        const str = alphaNumeric(12);
         expect(str).to.be.string;
         expect(str.length).to.be.equal(12);
     });
