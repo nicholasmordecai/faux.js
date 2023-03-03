@@ -38,7 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fauxjs/faux.js": "^0.1.1",
+		"@fauxjs/faux.js": "^0.1.2",
 		"frappe-charts": "^1.6.2",
 		"fuse.js": "^6.6.2",
 		"mermaid": "^9.3.0",

@@ -109,7 +109,6 @@ export declare const fauxjs: {
         gender: typeof import("./generators/identification/person").gender;
     };
     Authentication: {
-        JWT: typeof import("./generators/internet/authentication").JWT;
         token: typeof import("./generators/internet/authentication").token;
     };
     Password: {
