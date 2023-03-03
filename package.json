@@ -1,6 +1,6 @@
 {
   "name": "@fauxjs/faux.js",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Modern performant pseudo random data generator",
   "keywords": [
     "random",

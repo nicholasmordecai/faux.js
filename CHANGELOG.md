@@ -6,13 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
-### Fixed
-- Changed remove module from tsconfig to fix a bug where builds are failing to be imported into the 
 
+## 0.1.4 - 2023-03-03
 ### Changed
 - Bump @types/uuid from 9.0.0 to 9.0.1
 - Bump @types/glob from 8.0.1 to 8.1.0
 - Bump @types/node from 18.14.1 to 18.14.4
+
+### Fixed
+- Changed remove module from tsconfig to fix a bug where builds are failing to be imported into the
 
 ## 0.1.3 - 2023-03-03
 
