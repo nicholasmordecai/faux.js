@@ -22,6 +22,7 @@ const config = {
 			'@components': './src/components/*',
 			'@interfaces': './src/interfaces/*',
 			'@utils': './src/utils/*',
+			"@lib": "./src/lib/*"
 		}
 	}
 };

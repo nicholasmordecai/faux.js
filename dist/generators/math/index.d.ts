@@ -1,9 +1,9 @@
 import { int, float, bool, percent } from './number';
-import { normalDist } from './statistics';
+import { normal } from '../../core/probability';
 export declare const Math: {
     int: typeof int;
     float: typeof float;
     bool: typeof bool;
     percent: typeof percent;
-    normalDist: typeof normalDist;
+    normal: typeof normal;
 };

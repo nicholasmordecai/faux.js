@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 
 import { percent, percentString, float, int, bool, sets } from '../../../src/generators/math/number';
-import { normalDist } from '../../../src/generators/math/statistics';
 
 describe('Number tests', () => {
     it('Should generate a 32 bit Mulberry random float', () => {
@@ -75,30 +74,6 @@ describe('Number tests', () => {
         expect(trueOrFalse).satisfies(() =>{
             return trueOrFalse === true || trueOrFalse === false;
         });
-    });
-
-    it('Should generate a number from a normal distribution', () => {
-        const results: number[] = [];
-
-        for (let i = 0; i < 100000; i++) {
-            const result = normalDist(0, 10, 1);
-            results.push(Math.round(result));
-        }
-
-        const distribution: {[key: string]: number} = {};
-
-        for (const num of results) {
-            distribution[num] = distribution[num] ? distribution[num] + 1 : 1;
-        }
-
-        // Test the distribution to try to assertain if it is a normal distribution
-        expect(distribution['2']).to.be.within(500, 700);
-        expect(distribution['3']).to.be.within(5800, 6300);
-        expect(distribution['4']).to.be.within(23500, 24550);
-        expect(distribution['5']).to.be.within(37500, 39000);
-        expect(distribution['6']).to.be.within(23500, 24500);
-        expect(distribution['7']).to.be.within(5800, 6300);
-        expect(distribution['8']).to.be.within(500, 700);
     });
 
     //! needs finishing off

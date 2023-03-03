@@ -3,7 +3,7 @@ export declare const Util: {
         fromArray: typeof import("./array").fromArray;
     };
     string: {
-        alphaN: typeof import("./string").alphaN;
+        alphaNumeric: typeof import("./string").alphaNumeric;
         fromFormat: typeof import("./string").fromFormat;
     };
 };

@@ -6,4 +6,7 @@ export declare const Finance: {
         cardNumber: typeof import("./bank").cardNumber;
         cvv: typeof import("./bank").cvv;
     };
+    Crypto: {
+        BitcoinAddress: typeof import("./crypto").BitcoinAddress;
+    };
 };

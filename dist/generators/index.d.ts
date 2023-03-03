@@ -7,6 +7,9 @@ export declare const Generators: {
             cardNumber: typeof import("./finance/bank").cardNumber;
             cvv: typeof import("./finance/bank").cvv;
         };
+        Crypto: {
+            BitcoinAddress: typeof import("./finance/crypto").BitcoinAddress;
+        };
     };
     Geographic: {
         Address: {
@@ -43,14 +46,14 @@ export declare const Generators: {
         float: typeof import("./math/number").float;
         bool: typeof import("./math/number").bool;
         percent: typeof import("./math/number").percent;
-        normalDist: typeof import("./math/statistics").normalDist;
+        normal: typeof import("../core/probability").normal;
     };
     Util: {
         Array: {
             fromArray: typeof import("./util/array").fromArray;
         };
         string: {
-            alphaN: typeof import("./util/string").alphaN;
+            alphaNumeric: typeof import("./util/string").alphaNumeric;
             fromFormat: typeof import("./util/string").fromFormat;
         };
     };

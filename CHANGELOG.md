@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Renamed statistics module to probability to better reflect what the functions do
+
 ## 0.1.1 - 2023-02-25
 ### Changed
 - Added better module exports and easier core functionality importing
