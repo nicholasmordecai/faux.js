@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Chart from '@ui/chart.svelte';
-    import { Number } from '@fauxjs/faux.js';
+    // import { Number } from '@fauxjs/faux.js';
 
 	const data = {
 		labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -23,8 +23,8 @@
 	let skew: number = 1;
 
 	function calculate() {
-        const result = Number.int({min: minimum, max: maximum});
-        console.log(result);
+        // const result = Number.int({min: minimum, max: maximum});
+        // console.log(result);
     }
     // calculate();
 </script>
