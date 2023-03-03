@@ -19,6 +19,7 @@
   "preferGlobal": true,
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",
+    "build:docs": "",
     "test": "mocha --require ts-node/register --recursive \"test/**/*.spec.ts\"",
     "test:watch": "mocha --require ts-node/register --recursive --watch --watch-files \"test/**/*.spec.ts\",\"src/**/*\" \"test/**/*.spec.ts\"",
     "test:coverage": "nyc npm run test",
@@ -27,7 +28,6 @@
     "circular-dep-check": "dpdm --exit-code circular:1 ./src/cli/index.ts"
   },
   "dependencies": {
-    "jsonwebtoken": "^9.0.0",
     "md5": "^2.3.0",
     "uuid": "^9.0.0"
   },

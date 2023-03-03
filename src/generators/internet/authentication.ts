@@ -1,4 +1,4 @@
-import { sign, SignOptions } from 'jsonwebtoken';
+// import { sign, SignOptions } from 'jsonwebtoken';
 import { alphaNumeric, fromFormat } from '../util/string';
 
 /**
@@ -8,10 +8,10 @@ import { alphaNumeric, fromFormat } from '../util/string';
  * const token = sign({some: payload});
  * 
  */
-export function JWT(payload: string | object | Buffer = '', privateKey = '', options: SignOptions = {}): string {
-	if (!privateKey) privateKey = fromFormat('aAaAaAaAaAaAaAaA');
-	return sign(payload, privateKey, options);
-}
+// export function JWT(payload: string | object | Buffer = '', privateKey = '', options: SignOptions = {}): string {
+// 	if (!privateKey) privateKey = fromFormat('aAaAaAaAaAaAaAaA');
+// 	return sign(payload, privateKey, options);
+// }
 
 /**
  * @description generates a random alpha numeric token
@@ -24,6 +24,6 @@ export function token(len = 10): string {
 }
 
 export const Authentication = {
-	JWT,
+	// JWT,
 	token
 };

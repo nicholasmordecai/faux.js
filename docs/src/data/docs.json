@@ -3,110 +3,9 @@
         "module": null,
         "blocks": []
     },
-    "src/api/index.ts": {
-        "module": null,
-        "blocks": []
-    },
-    "src/api/server.ts": {
-        "module": null,
-        "blocks": []
-    },
     "src/configuration.ts": {
         "module": null,
         "blocks": []
-    },
-    "src/core/contingency.ts": {
-        "module": null,
-        "blocks": []
-    },
-    "src/core/index.ts": {
-        "module": null,
-        "blocks": []
-    },
-    "src/core/probability.ts": {
-        "module": null,
-        "blocks": []
-    },
-    "src/core/register.ts": {
-        "module": null,
-        "blocks": [
-            {
-                "name": null,
-                "description": "",
-                "returns": null,
-                "params": [],
-                "example": null,
-                "exported": true,
-                "fileName": "src/core/register.ts",
-                "lineNumber": 2,
-                "function": false
-            },
-            {
-                "name": "add",
-                "description": "",
-                "returns": {
-                    "type": "void",
-                    "description": ""
-                },
-                "params": [
-                    {
-                        "name": "key",
-                        "type": "",
-                        "default": null,
-                        "description": "",
-                        "attributes": ""
-                    },
-                    {
-                        "name": "property",
-                        "type": "",
-                        "default": null,
-                        "description": "",
-                        "attributes": ""
-                    }
-                ],
-                "example": null,
-                "exported": false,
-                "fileName": "src/core/register.ts",
-                "lineNumber": 17,
-                "function": true
-            },
-            {
-                "name": "get",
-                "description": "",
-                "returns": {
-                    "type": "T[K]",
-                    "description": ""
-                },
-                "params": [
-                    {
-                        "name": "key",
-                        "type": "",
-                        "default": null,
-                        "description": "",
-                        "attributes": ""
-                    }
-                ],
-                "example": null,
-                "exported": false,
-                "fileName": "src/core/register.ts",
-                "lineNumber": 29,
-                "function": true
-            },
-            {
-                "name": "build",
-                "description": "",
-                "returns": {
-                    "type": "T",
-                    "description": ""
-                },
-                "params": [],
-                "example": null,
-                "exported": false,
-                "fileName": "src/core/register.ts",
-                "lineNumber": 40,
-                "function": true
-            }
-        ]
     },
     "src/data/dictionary.ts": {
         "module": null,
@@ -117,6 +16,10 @@
         "blocks": []
     },
     "src/generators/finance/bank.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/finance/crypto.ts": {
         "module": null,
         "blocks": []
     },
@@ -416,7 +319,7 @@
                 "example": null,
                 "exported": false,
                 "fileName": "src/generators/math/number.ts",
-                "lineNumber": 81,
+                "lineNumber": 61,
                 "function": false
             },
             {
@@ -427,7 +330,7 @@
                 "example": null,
                 "exported": false,
                 "fileName": "src/generators/math/number.ts",
-                "lineNumber": 103,
+                "lineNumber": 82,
                 "function": false
             },
             {
@@ -463,7 +366,7 @@
                 "example": null,
                 "exported": false,
                 "fileName": "src/generators/math/number.ts",
-                "lineNumber": 107,
+                "lineNumber": 86,
                 "function": false
             },
             {
@@ -477,12 +380,150 @@
                 "example": null,
                 "exported": false,
                 "fileName": "src/generators/math/number.ts",
-                "lineNumber": 125,
+                "lineNumber": 104,
                 "function": false
             }
         ]
     },
+    "src/generators/math/probability.ts": {
+        "module": {
+            "name": "",
+            "description": "",
+            "fileName": "src/generators/math/probability.ts",
+            "category": "",
+            "subCategory": ""
+        },
+        "blocks": [
+            {
+                "name": "normal",
+                "description": "",
+                "returns": {
+                    "type": "number",
+                    "description": "generated number"
+                },
+                "params": [
+                    {
+                        "name": "min",
+                        "type": "number",
+                        "default": null,
+                        "description": "minimum value",
+                        "attributes": ""
+                    },
+                    {
+                        "name": "max",
+                        "type": "number",
+                        "default": null,
+                        "description": "maximum value",
+                        "attributes": ""
+                    },
+                    {
+                        "name": "skew",
+                        "type": "number",
+                        "default": null,
+                        "description": "skew value",
+                        "attributes": ""
+                    }
+                ],
+                "example": "const value = normal(0, 10, 1);",
+                "exported": false,
+                "fileName": "src/generators/math/probability.ts",
+                "lineNumber": 14,
+                "function": true
+            },
+            {
+                "name": "binomial",
+                "description": "",
+                "returns": {
+                    "type": "number",
+                    "description": "generated number"
+                },
+                "params": [
+                    {
+                        "name": "k",
+                        "type": "number",
+                        "default": null,
+                        "description": "number of trials",
+                        "attributes": ""
+                    },
+                    {
+                        "name": "n",
+                        "type": "number",
+                        "default": null,
+                        "description": "maximum value",
+                        "attributes": ""
+                    },
+                    {
+                        "name": "p",
+                        "type": "number",
+                        "default": null,
+                        "description": "probability of a success",
+                        "attributes": ""
+                    }
+                ],
+                "example": "const value = binomial(0, 10, 1);",
+                "exported": false,
+                "fileName": "src/generators/math/probability.ts",
+                "lineNumber": 55,
+                "function": true
+            },
+            {
+                "name": "exponential",
+                "description": "",
+                "returns": {
+                    "type": "number",
+                    "description": "generated number"
+                },
+                "params": [
+                    {
+                        "name": "lambda",
+                        "type": "number",
+                        "default": null,
+                        "description": "rate",
+                        "attributes": ""
+                    }
+                ],
+                "example": "const value = binomial(0, 10, 1);",
+                "exported": false,
+                "fileName": "src/generators/math/probability.ts",
+                "lineNumber": 70,
+                "function": true
+            },
+            {
+                "name": "pareto",
+                "description": "",
+                "returns": {
+                    "type": "number",
+                    "description": "generated number"
+                },
+                "params": [
+                    {
+                        "name": "minimum",
+                        "type": "number",
+                        "default": null,
+                        "description": "minimum value",
+                        "attributes": ""
+                    },
+                    {
+                        "name": "alpha",
+                        "type": "number",
+                        "default": null,
+                        "description": "alpha",
+                        "attributes": ""
+                    }
+                ],
+                "example": "const value = pareto(0, 10, 1);",
+                "exported": false,
+                "fileName": "src/generators/math/probability.ts",
+                "lineNumber": 84,
+                "function": true
+            }
+        ]
+    },
     "src/generators/util/array.ts": {
+        "module": null,
+        "blocks": []
+    },
+    "src/generators/util/base64.ts": {
         "module": null,
         "blocks": []
     },

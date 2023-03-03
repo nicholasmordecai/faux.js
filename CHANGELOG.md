@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Renamed statistics module to probability to better reflect what the functions do
+- Moved probability to core rather than a generator as it's not really a generator per-se
+- Removed jsonwebtoken for the time being to test if that's the cause of a browser error
+
 ## 0.1.1 - 2023-02-25
 ### Changed
 - Added better module exports and easier core functionality importing

@@ -2,23 +2,21 @@
   import DiGithubBadge from 'svelte-icons/di/DiGithubBadge.svelte'
 
   import Search from '@components/search.svelte';
-  import VersionSelect from '@ui/versionSelect.svelte';
+	import LogoWord from '@ui/icons/logo-word.svelte';
 </script>
 
 	<div class="" id="navbar">
     <div class="container mx-auto px-4">
       <div class="flex items-center justify-between py-4">
-        <div>
-          <a href="/">faux.js</a>
+        <div class="flex justify-between gap-8">
+          <a class="pt-4 w-28" href="/"><LogoWord color="#000000"/></a>
         </div>
-
-        <div class="hidden sm:flex sm:items-center">
-          <Search/>
-        </div>
-
-        <div class="hidden sm:flex sm:items-center">
+        
+        <Search/>
+        
+        <div class="hidden sm:flex sm:items-center sm:space-x-8">
           <a href="/docs">Docs</a>
-          <VersionSelect/>
+          <!-- <VersionSelect/> -->
           <a href="https://github.com/nicholasmordecai/faux.js" target="_blank" rel="noopener noreferrer">
             <div class="icon w-8">
               <DiGithubBadge />
@@ -32,7 +30,7 @@
           <Search/>
           <div class="flex justify-between items-center border-t-2 pt-2">
             <a href="/docs">Docs</a>
-            <VersionSelect/>
+            <!-- <VersionSelect/> -->
             <a href="https://github.com/nicholasmordecai/faux.js" target="_blank" rel="noopener noreferrer">
               <div class="icon w-8">
                 <DiGithubBadge />

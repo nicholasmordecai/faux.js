@@ -19,11 +19,11 @@
 			};
             
 
-			let observer = new IntersectionObserver(() => {
-				console.log('foo');
-			}, options);
+			// let observer = new IntersectionObserver(() => {
+			// 	console.log('foo');
+			// }, options);
 
-            observer.observe(document.querySelector(`#${block[1].name}`)!);
+            // observer.observe(document.querySelector(`#${block[1].name}`)!);
 
 			return {
 				name: block[1].name as string,
