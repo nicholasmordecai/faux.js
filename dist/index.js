@@ -421,6 +421,52 @@ function normal(min, max, skew) {
     }
     return num;
 }
+function binomialCoefficient(s, t) {
+    let coefficient = 1;
+    for (let i = 0; i < t; i++) {
+        coefficient *= (s - i) / (i + 1);
+    }
+    return coefficient;
+}
+/**
+ * @function binomial
+ * @description Calculate a number for a binomial distribution
+ *
+ * @param {number} k number of trials
+ * @param {number} n maximum value
+ * @param {number} p probability of a success
+ * @returns {number} the generated number
+ *
+ * @example typescript const value = binomial(0, 10, 1);
+ */
+function binomial(k, n, p) {
+    return binomialCoefficient(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
+}
+/**
+ * @function exponential
+ * @description Calculate a number from an exponential distribution
+ *
+ * @param {number} lambda rate
+ * @returns {number} the generated number
+ *
+ * @example typescript const value = binomial(0, 10, 1);
+ */
+function exponential(lambda) {
+    return -Math.log(1.0 - float()) / lambda;
+}
+/**
+ * @function pareto
+ * @description Pareto distribution (80/20 rule)
+ *
+ * @param {number} minimum minimum value
+ * @param {number} alpha alpha
+ * @returns {number} the generated number
+ *
+ * @example typescript const value = pareto(0, 10, 1);
+ */
+function pareto(minimum, alpha) {
+    return minimum / Math.pow((1.0 - float()), 1.0 / alpha);
+}
 
 const Math$1 = {
     int,
@@ -570,6 +616,13 @@ const Password = {
     salt
 };
 
+const Probability = {
+    binomial,
+    exponential,
+    normal,
+    pareto
+};
+
 // Root level exports
 const fauxjs = {
     Config,
@@ -583,7 +636,8 @@ const fauxjs = {
     Password,
     Number,
     string,
-    Array
+    Array,
+    Probability
 };
 
 exports.Address = Address;
@@ -597,5 +651,6 @@ exports.Map = Map;
 exports.Number = Number;
 exports.Password = Password;
 exports.Person = Person;
+exports.Probability = Probability;
 exports.fauxjs = fauxjs;
 exports.string = string;

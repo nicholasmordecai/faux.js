@@ -7,8 +7,7 @@ import { float, mulberry32 } from '../generators/math/number';
  * @description Some awesome description for this generator...
  */
 
-
-// export function uniform() {
+// export function uniform(min: number, max: number) {
 
 // }
 
@@ -70,12 +69,11 @@ export function binomial(k: number, n: number, p: number): number {
 
 /**
  * @function exponential
- * @description Calculate a number from an exponential distribution
+ * @description Decay rate for an exponential distribution
  * 
  * @param {number} lambda rate
  * @returns {number} the generated number
  * 
- * @example typescript const value = binomial(0, 10, 1);
  */
 export function exponential(lambda: number): number {
 	return -Math.log(1.0 - float()) / lambda;
@@ -94,4 +92,10 @@ export function exponential(lambda: number): number {
  */
 export function pareto(minimum: number, alpha: number): number {
 	return minimum / Math.pow((1.0 - float()), 1.0 / alpha);
+}
+
+export const Probability = {
+	normal,
+	binomial,
+	pareto
 }

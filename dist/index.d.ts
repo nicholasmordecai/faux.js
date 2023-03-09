@@ -10,6 +10,7 @@ export { Password } from './generators/internet/password';
 export { Number } from './generators/math/number';
 export { string } from './generators/util/string';
 export { Array } from './generators/util/array';
+export { Probability } from './core';
 export declare const fauxjs: {
     Config: import("./configuration").IConfig;
     Generators: {
@@ -128,5 +129,11 @@ export declare const fauxjs: {
     };
     Array: {
         fromArray: typeof import("./generators/util/array").fromArray;
+    };
+    Probability: {
+        binomial: typeof import("./core/probability").binomial;
+        exponential: typeof import("./core/probability").exponential;
+        normal: typeof import("./core/probability").normal;
+        pareto: typeof import("./core/probability").pareto;
     };
 };

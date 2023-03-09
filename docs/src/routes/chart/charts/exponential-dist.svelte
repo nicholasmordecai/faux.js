@@ -16,39 +16,42 @@
 		spline: 1
 	};
 
-	let sampleSize: number = 1000;
-	let minimum: number = 10;
-	let alpha: number = 10;
+	let sampleSize: number = 10;
+	let lambda: number = 10;
 
 	let chart: Chart;
 
 	function calculate() {
 		const results: number[] = [];
 
-		const newLabels = [];
-		for (let i = minimum; i <= minimum + 10; i++) {
-			newLabels.push(i);
-		}
+		// const newLabels = [];
+		// for (let i = minimum; i <= minimum + 10; i++) {
+		// 	newLabels.push(i);
+		// }
 
 		for (let i = 0; i < sampleSize; i++) {
-			const result = Probability.pareto(minimum, alpha);
+			const result = Probability.exponential(lambda);
+			console.log(result);
 			results.push(Math.round(result));
 		}
 
-		const distribution: { [key: string]: number } = {};
-		for (let label of newLabels) {
-			distribution[label] = 0;
-		}
+		// const distribution: { [key: string]: number } = {};
+		// for (let label of newLabels) {
+		// 	distribution[label] = 0;
+		// }
 
-		for (const num of results) {
-			distribution[num] = distribution[num] + 1;
-		}
+		// for (const num of results) {
+		// 	distribution[num] = distribution[num] + 1;
+		// }
 
-		const newValues = Object.entries(distribution).map((num) => num[1]);
-		data.datasets = [{ values: newValues }];
-		data.labels = newLabels;
+		// console.log(distribution)
 
-		chart.update();
+		// const newValues = Object.entries(distribution).map((num) => num[1]);
+		// console.log(newValues);
+		// data.datasets = [{ values: newValues }];
+		// data.labels = newLabels;
+
+		// chart.update();
 	}
 
 	onMount(() => {
@@ -63,10 +66,10 @@
 <div class="flex mb-4 h-72">
 	<div class="w-1/2">
 		<p>
-			This is an interactive example of a <a
+			This is an interactive example of an <a
 				rel="noreferrer"
-				href="https://en.wikipedia.org/wiki/Pareto_distribution"
-				target="blank">Pareto Distribution</a
+				href="https://en.wikipedia.org/wiki/Exponential_distribution"
+				target="blank">Exponential Distribution</a
 			>
 		</p>
 		<div class="grid grid-cols-4 mt-8 gap-8">
@@ -81,23 +84,13 @@
 				/>
 			</div>
 			<div class="grid grid-rows-2">
-				<label class={labelClass} for="minimum"> Minimum </label>
+				<label class={labelClass} for="lambda"> Lambda </label>
 				<input
 					class={inputClass}
 					on:input={calculate}
-					id="minimum"
+					id="lambda"
 					type="number"
-					bind:value={minimum}
-				/>
-			</div>
-			<div class="grid grid-rows-2">
-				<label class={labelClass} for="alpha"> Alpha </label>
-				<input
-					class={inputClass}
-					on:input={calculate}
-					id="alpha"
-					type="number"
-					bind:value={alpha}
+					bind:value={lambda}
 				/>
 			</div>
 		</div>

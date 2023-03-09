@@ -23,7 +23,7 @@
 				<TsIcon/>
 			</FeatureItem>
 
-			<FeatureItem title="Testing" body="Test ">
+			<FeatureItem title="Testing" body="Accurate test data ensures that the software performs as intended in real-world scenarios and in production environments">
 				<NodeIcon/>
 			</FeatureItem>
 
