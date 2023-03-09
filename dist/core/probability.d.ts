@@ -49,3 +49,8 @@ export declare function exponential(lambda: number): number;
  * @example typescript const value = pareto(0, 10, 1);
  */
 export declare function pareto(minimum: number, alpha: number): number;
+export declare const Probability: {
+    normal: typeof normal;
+    binomial: typeof binomial;
+    pareto: typeof pareto;
+};

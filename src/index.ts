@@ -8,7 +8,6 @@ export { Generators } from './generators';
 import { locales as Locales } from './locales';
 export { locales as Locales } from './locales';
 
-
 // Finance
 import { Bank } from './generators/finance/bank';
 export { Bank } from './generators/finance/bank';
@@ -39,6 +38,9 @@ export { string } from './generators/util/string';
 import { Array } from './generators/util/array';
 export { Array } from './generators/util/array';
 
+import { Probability } from './core';
+export { Probability } from './core';
+
 export const fauxjs = {
 	Config,
 	Generators,
@@ -51,5 +53,6 @@ export const fauxjs = {
 	Password,
 	Number,
 	string,
-	Array
+	Array,
+	Probability
 };
