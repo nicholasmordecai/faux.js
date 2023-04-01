@@ -42,6 +42,10 @@ export function cvv() {
 	return parseInt(fromFormat('999'));
 }
 
+export function currency() {
+	return getLocale.bank.currency;
+}
+
 export const Bank = {
 	IBAN,
 	accountNumber,

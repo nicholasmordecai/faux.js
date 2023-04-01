@@ -15,7 +15,12 @@ export const GB: ILocale = {
 	houseNamePrefixes: ['The', 'Ivy', 'Sunny', 'Green', 'Red'],
 	houseNameSuffixes: ['Barn', 'Lodge', 'Cottage', 'Bungalow', 'House', 'Farm', 'Woodlands', 'Stables'],
 	bank: {
-		iban:' AA99AAAA99999999999999'
+		iban:' AA99AAAA99999999999999',
+		currency: {
+			code: 'GBP',
+			name: 'Pound Sterling',
+			symbol: '£'
+		}
 	},
 	names: {
 		female: ['Rosemary','Macie','Jamie','Kaitlin','Donna','Delilah','Susan','Alexis','Jada','Jordyn','Aria','Perla','Isabell','Monica','Zoe','Leia','Marely','Miley','Daphne','Avery','Caitlyn','Mayra','Serenity','Luna','Juliet','India','Monserrat','Brittany','Kendal','Phoenix','Taylor','Savanah','Danika','Madelyn','Fernanda','Kristina','Mia','Tia','Ali','Jaslyn','Lila','Evelyn','Saniya','Haven','Olivia','Nora','Abigail','Alisa','Julissa','Lucille','Hillary','Aileen','Miah','Dayana','Giselle','Skylar','Aurora','Jaylah','Kali','Alaina','Christina','Claudia','Scarlet','Aniyah','Helena','Areli','Paisley','Elisa','Jaliyah','Mattie','Finley','Ada','Janessa','Melissa','Jennifer','Elle','Laura','Nicole','Mikaela','Karley','Anika','Erica','Abril','Clarissa','Kamari','Adriana','Micah','Armani','Violet','Siena','Alia','Campbell','Catherine','Haleigh','Bryanna','Makayla','Tanya','Emma','Lindsey','Amani'],

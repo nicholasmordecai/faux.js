@@ -14,6 +14,11 @@ export interface ILocale {
     houseNameSuffixes: string[];
     bank: {
         iban: string;
+        currency: {
+            symbol: string;
+            name: string;
+            code: string;
+        }
     }
     names: {
         male: string[];
