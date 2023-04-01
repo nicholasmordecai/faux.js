@@ -1,5 +1,5 @@
 // import { sign, SignOptions } from 'jsonwebtoken';
-import { alphaNumeric, fromFormat } from '../util/string';
+import { alphaNumeric } from '../util/string';
 
 /**
  * @description Generates a new json web token (JWT)

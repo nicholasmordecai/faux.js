@@ -98,4 +98,4 @@ export const Probability = {
 	normal,
 	binomial,
 	pareto
-}
+};
