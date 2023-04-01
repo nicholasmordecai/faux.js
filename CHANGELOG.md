@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 0.1.5 - 2023-04-01
+
 ## 0.1.4 - 2023-03-03
 ### Changed
 - Bump @types/uuid from 9.0.0 to 9.0.1
