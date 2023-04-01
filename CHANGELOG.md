@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump @types/uuid from 9.0.0 to 9.0.1
 - Bump @types/glob from 8.0.1 to 8.1.0
 - Bump @types/node from 18.14.1 to 18.14.4
+- Bump eslint from 8.34.0 to 8.37.0
+- Bump @typescript-eslint/parser from 5.53.0 to 5.57.0
+- Bump rollup from 3.17.2 to 3.20.2
+- Bump fastify from 4.13.0 to 4.15.0
+- Bump @typescript-eslint/eslint-plugin from 5.53.0 to 5.57.0
 
 ### Changed
 - Renamed statistics module to probability to better reflect what the functions do
