@@ -70,16 +70,6 @@ export function houseNameNumber(): string | number {
 }
 
 /**
- * @function country
- * @description Generate a random country
- *
- * @returns {string}
- */
-export function country(): string {
-	return getLocale.name;
-}
-
-/**
  * @function address
  * @description Address generator
  *
@@ -111,7 +101,6 @@ export const Address = {
 	postcode,
 	city,
 	county,
-	country,
 	street,
 	houseNameNumber,
 	address,
