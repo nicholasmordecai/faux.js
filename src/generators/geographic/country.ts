@@ -1,4 +1,4 @@
-import { getLocale } from "../../configuration";
+import { getLocale } from '../../configuration';
 
 /**
  * @function country
