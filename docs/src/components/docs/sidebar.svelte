@@ -3,8 +3,8 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
-	import routes from '../../data/sidebar.json';
-	import docs from '../../data/docs.json';
+	export let routes;
+	export let docs;
 
 	import { selectedDoc } from '@store';
 
@@ -35,12 +35,14 @@
 <div id="sidebar" class="md:block shadow-xl px-3 w-30 md:w-60 lg:w-60 min-h-screen">
 	<div class="space-y-6 md:space-y-10 mt-10">
 		<div id="menu" class="flex flex-col space-y-2">
-			{#each typedRoutes as item }
-				<SidebarItem key={item.title} source={item.source} children={item.children} on:sourceChange={changeDocSource} />
+			{#each typedRoutes as item}
+				<SidebarItem
+					key={item.title}
+					source={item.source}
+					children={item.children}
+					on:sourceChange={changeDocSource}
+				/>
 			{/each}
 		</div>
 	</div>
 </div>
-
-<!-- transition-all ease-in-out duration-150invisible h-0 -->
-<!-- transition-all ease-in-out duration-150 invisible h-0 -->

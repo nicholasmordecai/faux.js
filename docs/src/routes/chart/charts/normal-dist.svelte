@@ -1,57 +1,114 @@
 <script lang="ts">
 	import Chart from '@ui/chart.svelte';
-    // import { Number } from '@fauxjs/faux.js';
+	import { Probability } from '@fauxjs/faux.js';
+	import { onMount } from 'svelte';
 
 	const data = {
-		labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-		datasets: [{ values: [18, 40, 30, 35, 8, 52, 17, -4] }]
+		labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+		datasets: [{ values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] }]
 	};
+
 	const options = {
-		title: 'My Awesome Chart',
 		data: data,
-		type: 'bar', // or 'bar', 'line', 'scatter', 'pie', 'percentage'
+		type: 'line',
 		height: 250,
-		colors: ['#7cd6fd', '#743ee2']
+		colors: ['#7cd6fd', '#743ee2'],
+		spline: 1
 	};
+
+	let sampleSize: number = 10000;
+	let minimum: number = 1;
+	let maximum: number = 20;
+	let skew: number = 1;
+
+	let chart: Chart;
+
+	function calculate() {
+		const results: number[] = [];
+
+		const newLabels = [];
+		for (let i = minimum; i <= maximum; i++) {
+			newLabels.push(i);
+		}
+
+		for (let i = 0; i < sampleSize; i++) {
+			const result = Probability.normal(minimum, maximum, skew);
+			results.push(Math.round(result));
+		}
+
+		const distribution: { [key: string]: number } = {};
+		for (let label of newLabels) {
+			distribution[label] = 0;
+		}
+
+		for (const num of results) {
+			distribution[num] = distribution[num] + 1;
+		}
+
+		const newValues = Object.entries(distribution).map((num) => num[1]);
+
+		data.datasets = [{ values: newValues }];
+		data.labels = newLabels;
+
+		chart.update();
+	}
+
+	onMount(() => {
+		calculate();
+	});
+
 	const labelClass = 'block text-gray-700 text-sm font-bold mb-2';
 	const inputClass =
 		'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline';
-
-	let sampleSize: number = 100;
-	let minimum: number = 0;
-	let maximum: number = 10;
-	let skew: number = 1;
-
-	function calculate() {
-        // const result = Number.int({min: minimum, max: maximum});
-        // console.log(result);
-    }
-    // calculate();
 </script>
 
 <div class="flex mb-4 h-72">
 	<div class="w-1/2">
-		<p>This is an example of a normal distribution</p>
-		<div class="grid grid-cols-2">
-			<div class="mb-4 flex">
+		<p>
+			This is an interactie example of a <a
+				target="_blank"
+				rel="noreferrer"
+				href="https://en.wikipedia.org/wiki/Normal_distribution">Normal Distribution</a
+			>
+		</p>
+		<div class="grid grid-cols-4 mt-8 gap-8">
+			<div class="grid grid-rows-2">
 				<label class={labelClass} for="itterations"> Sample Size </label>
-				<input class={inputClass} id="itterations" type="number" value={sampleSize} />
+				<input
+					class={inputClass}
+					id="itterations"
+					on:input={calculate}
+					type="number"
+					bind:value={sampleSize}
+				/>
 			</div>
-			<div class="mb-4 flex">
+			<div class="grid grid-rows-2">
 				<label class={labelClass} for="minimum"> Minimum </label>
-				<input class={inputClass} id="minimum" type="number" value={minimum} />
+				<input
+					class={inputClass}
+					on:input={calculate}
+					id="minimum"
+					type="number"
+					bind:value={minimum}
+				/>
 			</div>
-			<div class="mb-4 flex">
+			<div class="grid grid-rows-2">
 				<label class={labelClass} for="maximum"> Maximum </label>
-				<input class={inputClass} id="maximum" type="number" value={maximum} />
+				<input
+					class={inputClass}
+					on:input={calculate}
+					id="maximum"
+					type="number"
+					bind:value={maximum}
+				/>
 			</div>
-			<div class="mb-4 flex">
+			<div class="grid grid-rows-2">
 				<label class={labelClass} for="skew"> Skew </label>
-				<input class={inputClass} id="skew" type="number" value={skew} />
+				<input class={inputClass} on:input={calculate} id="skew" type="number" bind:value={skew} />
 			</div>
 		</div>
 	</div>
 	<div class="w-1/2">
-		<Chart {data} {options} />
+		<Chart bind:this={chart} {data} {options} />
 	</div>
 </div>

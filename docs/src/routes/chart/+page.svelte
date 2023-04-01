@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ExponentialDist from './charts/exponential-dist.svelte';
 	import NormalDist from './charts/normal-dist.svelte';
 	import ParetoDist from './charts/pareto-dist.svelte';
 
@@ -16,8 +17,14 @@
 </script>
 
 <div class="container mx-auto">
+	<div class="mt-12" />
 	<NormalDist />
 	<hr />
 
+	<div class="mt-12" />
 	<ParetoDist />
+	<hr />
+
+	<div class="mt-12" />
+	<ExponentialDist />
 </div>

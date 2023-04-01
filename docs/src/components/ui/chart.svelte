@@ -10,6 +10,10 @@
 
     let chart: any;
 
+	export function update() {
+		chart.update(data);
+	}
+
 	onMount(() => {
 		chart = new Chart(divElement, options);
 	});

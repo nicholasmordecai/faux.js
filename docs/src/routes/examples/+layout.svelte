@@ -1,8 +1,10 @@
 <script lang="ts">
 	import Sidebar from '@components/docs/sidebar.svelte';
 	import TableOfContents from '@components/docs/table-of-contents.svelte';
-	import routes from '../../data/sidebar.json';
-	import docs from '../../data/docs.json';
+
+	import routes from '../../data/examples.json';
+	// import docs from '../../data/docs.json';
+	const docs: any[] = [];
 </script>
 
 <div class="flex">

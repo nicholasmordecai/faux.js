@@ -1,6 +1,5 @@
 <script>
   import DiGithubBadge from 'svelte-icons/di/DiGithubBadge.svelte'
-
   import Search from '@components/search.svelte';
 	import LogoWord from '@ui/icons/logo-word.svelte';
 </script>
@@ -15,6 +14,7 @@
         <Search/>
         
         <div class="hidden sm:flex sm:items-center sm:space-x-8">
+          <a href="/examples">Examples</a>
           <a href="/docs">Docs</a>
           <!-- <VersionSelect/> -->
           <a href="https://github.com/nicholasmordecai/faux.js" target="_blank" rel="noopener noreferrer">
@@ -29,6 +29,7 @@
         <div class="flex flex-col">
           <Search/>
           <div class="flex justify-between items-center border-t-2 pt-2">
+            <a href="/examples">Examples</a>
             <a href="/docs">Docs</a>
             <!-- <VersionSelect/> -->
             <a href="https://github.com/nicholasmordecai/faux.js" target="_blank" rel="noopener noreferrer">
