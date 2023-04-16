@@ -12,9 +12,9 @@ import { alphaNumeric } from '../util/string';
  * 
  */
 export function JWT(): string {
-	const header = alphaNumeric(int({min: 36, max: 52}));
-	const payload = alphaNumeric(int({min: 64, max: 300}));
-	const verify = alphaNumeric(int({min: 44, max: 76}));
+	const header = alphaNumeric(int({ min: 36, max: 52 }));
+	const payload = alphaNumeric(int({ min: 64, max: 300 }));
+	const verify = alphaNumeric(int({ min: 44, max: 76 }));
 
 	return `${header}.${payload}.${verify}`;
 }
