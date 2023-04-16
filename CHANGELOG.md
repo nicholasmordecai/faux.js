@@ -7,12 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 0.1.6 - 2023-04-16
 ### Added
 - Custom UUIDv4 function that fakes a UUID
-
-### Fixed
-- Better test coverage
-- Stubbing some functions to make sure assertions are correct 100% of the time
 
 ### Changed
 - Bump eslint-config-prettier from 8.6.0 to 8.8.0
@@ -21,8 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump nodemon from 2.0.20 to 2.0.22
 - Bump @types/node from 18.14.4 to 18.15.11
 
-## 0.1.5 - 2023-04-01
+### Fixed
+- Better test coverage
+- Stubbing some functions to make sure assertions are correct 100% of the time
 
+## 0.1.5 - 2023-04-01
 ### Changed
 - Added export of disstribution functions
 
