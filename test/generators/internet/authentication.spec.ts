@@ -8,6 +8,12 @@ describe('Authentication generator tests', () => {
         expect(randomToken.length).to.be.equal(20);
     });
 
+    it('Should generate a random token with default lenth', () => {
+        const randomToken = token();
+        expect(randomToken).to.be.string;
+        expect(randomToken.length).to.be.equal(10);
+    });
+
     it('Should generate a random JWT', () => {
         const token = JWT();
         expect(token).to.be.string;
