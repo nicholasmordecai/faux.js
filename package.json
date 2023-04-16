@@ -25,11 +25,10 @@
     "test:coverage": "nyc npm run test",
     "lint": "eslint --ext .ts ./src/ --config eslint.json",
     "lint:fix": "eslint --ext .ts ./src/ --config eslint.json --fix",
-    "circular-dep-check": "dpdm --exit-code circular:1 ./src/cli/index.ts"
+    "circular-dep-check": "dpdm --exit-code circular:1 ./src/index.ts"
   },
   "dependencies": {
-    "md5": "^2.3.0",
-    "uuid": "^9.0.0"
+    "md5": "^2.3.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",

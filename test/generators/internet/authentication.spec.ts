@@ -1,15 +1,16 @@
 import { expect } from 'chai';
-import { decode, verify} from 'jsonwebtoken';
+import { token, JWT } from './../../../src/generators/internet/authentication';
 
-// import { JWT } from './../../../src/generators/internet/authentication';
+describe('Authentication generator tests', () => {
+    it('Should generate a random token', () => {
+        const randomToken = token(20);
+        expect(randomToken).to.be.string;
+        expect(randomToken.length).to.be.equal(20);
+    });
 
-// describe('Authentication generator tests', () => {
-//     it('Should generate a JWT', () => {
-//         const token = JWT({name: 'foo'});
-//         expect(token).to.be.string;
-
-//         const decoded = decode(token);
-//         expect(decoded).to.haveOwnProperty('name')
-//         expect(decoded).to.haveOwnProperty('iat');
-//     });
-// });
+    it('Should generate a random JWT', () => {
+        const token = JWT();
+        expect(token).to.be.string;
+        expect(token.split('.').length).to.be.equal(3);
+    });
+});

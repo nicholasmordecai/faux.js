@@ -1,6 +1,10 @@
 [
     {
       "title": "Getting Started",
-      "source": "/examples/getting-started"
+      "source": "getting-started"
+    },
+    {
+      "title": "Distributions",
+      "source": "distributions"
     }
 ]

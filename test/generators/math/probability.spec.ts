@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { Config } from "../../../src/configuration";
-import { normal, binomial, pareto } from "../../../src/core/probability";
+import { normal, binomial, pareto, exponential } from "../../../src/core/probability";
 
 describe('Number tests', () => {
     it('Should generate a number from a normal distribution', () => {
@@ -39,5 +39,10 @@ describe('Number tests', () => {
     it('Should generate a number from a pareto distribution', () => {
         const result = pareto(1, 4);
         expect(result).to.be.within(1, 4);
+    });
+
+    it('Should generate a number from an exponential curve', () => {
+        const result = exponential(1);
+        expect(result).to.be.within(0, 5);
     });
 });

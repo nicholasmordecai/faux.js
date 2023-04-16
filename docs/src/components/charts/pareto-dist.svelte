@@ -16,9 +16,9 @@
 		spline: 1
 	};
 
-	let sampleSize: number = 1000;
-	let minimum: number = 10;
-	let alpha: number = 10;
+	let sampleSize: number = 10000;
+	let minimum: number = 1;
+	let alpha: number = 2;
 
 	let chart: Chart;
 

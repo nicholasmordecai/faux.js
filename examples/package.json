@@ -1,6 +1,6 @@
 {
   "name": "basic",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "ts-node": "^10.9.1",
-    "faux.js": "^0.0.4"
+    "@fauxjs/faux.js": "^0.1.5"
   }
 }

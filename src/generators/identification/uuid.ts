@@ -1,8 +1,17 @@
-import { v5 } from 'uuid';
+import { alphaNumericLower } from '../util/string';
 
+/**
+ * @description generates a random UUID v4
+ * Imitates the UUID V4 gneerator result
+ * Note: Not cryptographically secure - only use for testing / seed data!
+ * 
+ * @example
+ * const guid = uuidv4(); // hA76dcB12l
+ */
 export function uuid(): string {
-	return v5('uuid', '1b671a64-40d5-491e-99b0-da01ff1f3341');
+	return `${alphaNumericLower(8)}-${alphaNumericLower(4)}-${alphaNumericLower(4)}-${alphaNumericLower(4)}-${alphaNumericLower(12)}`;
 }
+
 
 export default {
 	uuid

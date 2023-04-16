@@ -4,6 +4,10 @@ const capitalCharCodes = { min: 65, max: 90 };
 const lowerCaseCharCodes = { min: 97, max: 122 };
 
 const alphaNumerics = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const alphaNumericLength = alphaNumerics.length -1;
+
+const alphaNumericsLower = 'abcdefghijklmnopqrstuvwxyz0123456789';
+const alphaNumericLowerLength = alphaNumericsLower.length -1;
 
 export function fromFormat(format: string) {
 	let result = '';
@@ -29,14 +33,22 @@ export function fromFormat(format: string) {
 
 export function alphaNumeric(length: number): string {
 	let result = '';
-	const charLen = alphaNumerics.length - 1;
 	for (let i = length; i > 0; i--) {
-		result += alphaNumerics[int({ min: 0, max: charLen })];
+		result += alphaNumerics[int({ min: 0, max: alphaNumericLength })];
+	}
+	return result;
+}
+
+export function alphaNumericLower(length: number): string {
+	let result = '';
+	for (let i = length; i > 0; i--) {
+		result += alphaNumericsLower[int({ min: 0, max: alphaNumericLowerLength })];
 	}
 	return result;
 }
 
 export const string = {
-	alphaNumeric: alphaNumeric,
+	alphaNumeric,
+	alphaNumericLower,
 	fromFormat
 };

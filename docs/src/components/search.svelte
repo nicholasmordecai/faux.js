@@ -20,13 +20,13 @@
 
 	const arrayEntries = Object.entries(docs);
 	const mapped = arrayEntries.map((v) => v[1]);
-	console.log(mapped);
+	// console.log(mapped);
 	const fuse = new Fuse(mapped, options);
 
 	let input: string;
 	function searchInputChange() {
 		const result = fuse.search(input);
-		console.log(result);
+		// console.log(result);
 	}
 </script>
 

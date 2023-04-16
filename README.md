@@ -164,6 +164,7 @@ See also the list of [contributors](https://github.com/nicholasmordecai/faux.js/
 ##### Notes To Self
 
 - If a nested structure is optional, a config should be set to allow that nested property to be or not to be generated
+- Remove uuid & MD5 packages so this package is without any dependencies (big bonus)
 
 ### Need to write -
 

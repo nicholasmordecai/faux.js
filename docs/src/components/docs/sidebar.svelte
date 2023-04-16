@@ -5,6 +5,7 @@
 
 	export let routes;
 	export let docs;
+	export let callback: Function | Boolean = false;
 
 	import { selectedDoc } from '@store';
 
@@ -16,6 +17,10 @@
 	const typedDocs: Docs = docs;
 
 	function changeDocSource(event: CustomEvent<string>) {
+		if(callback !== false && typeof(callback) === 'function') {
+			return callback(event.detail);
+		}
+
 		const urlSearchParams = $page.url.searchParams;
 		urlSearchParams.set('doc', event.detail);
 		goto(`?${urlSearchParams.toString()}`);

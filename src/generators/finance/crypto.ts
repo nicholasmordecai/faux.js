@@ -27,5 +27,9 @@ export function CardanoAddress(): string {
 }
 
 export const Crypto = {
-	BitcoinAddress
+	BitcoinAddress,
+	TetherAddress,
+	USDCoinAddress,
+	RippleAddress,
+	CardanoAddress
 };

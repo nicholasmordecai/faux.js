@@ -16,7 +16,6 @@
 	const dispatch = createEventDispatcher<{ sourceChange: string }>();
 
 	function changeSource() {
-		console.log('changing source to:', source);
 		dispatch('sourceChange', source);
 	}
 </script>

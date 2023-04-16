@@ -72,8 +72,8 @@ export function middleNames(): string[] {
 }
 
 export function gender(): Gender {
-	const male = bool();
-	if (male) {
+	const isMale = bool();
+	if (isMale) {
 		return 'Male';
 	} else {
 		return 'Female';

@@ -51,5 +51,6 @@ export const Bank = {
 	accountNumber,
 	sortCode,
 	cardNumber,
-	cvv
+	cvv,
+	currency
 };

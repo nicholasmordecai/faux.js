@@ -26,4 +26,13 @@ describe('Bank Generator Functions', () => {
         const result = Finance.Bank.cvv();
         expect(typeof result).to.be.equal('number');
     });
+
+    it('Should generate a random currency', () => {
+        const result = Finance.Bank.currency();
+        expect(result).to.deep.equal({
+            code: 'GBP',
+            name: 'Pound Sterling',
+            symbol: '£'
+        });
+    });
 });

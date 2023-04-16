@@ -9,6 +9,12 @@ describe('Password generator tests', () => {
         expect(hash.length).to.be.equal(32);
     });
 
+    it('Should generate MD5 hash with input string', () => {
+        const hash = md5('abcdefg');
+        expect(hash).to.be.string;
+        expect(hash.length).to.be.equal(32);
+    });
+
     it('Should generate a determanistic md5', () => {
         Config.seed = 1;
         const hash1 = md5();
