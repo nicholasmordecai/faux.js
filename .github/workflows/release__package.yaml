@@ -9,8 +9,29 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: [4.x, 5.x, 6.x, 7.x, 8.x, 10.x, 12.x, 13.x 14.x, 15.x, 16.x, 17.x 18.x, 19.x]
+        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
+        containers: [1, 2]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+      - run: npm run lint
+
   release:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       # Checkout project repository
       - name: Checkout

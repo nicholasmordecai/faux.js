@@ -30,12 +30,11 @@ export declare function normal(min: number, max: number, skew: number): number;
 export declare function binomial(k: number, n: number, p: number): number;
 /**
  * @function exponential
- * @description Calculate a number from an exponential distribution
+ * @description Decay rate for an exponential distribution
  *
  * @param {number} lambda rate
  * @returns {number} the generated number
  *
- * @example typescript const value = binomial(0, 10, 1);
  */
 export declare function exponential(lambda: number): number;
 /**

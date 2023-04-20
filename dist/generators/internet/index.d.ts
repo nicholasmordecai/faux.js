@@ -1,5 +1,6 @@
 export declare const Internet: {
     Authentication: {
+        JWT: typeof import("./authentication").JWT;
         token: typeof import("./authentication").token;
     };
     Password: {

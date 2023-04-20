@@ -4,6 +4,7 @@ export declare const Util: {
     };
     string: {
         alphaNumeric: typeof import("./string").alphaNumeric;
+        alphaNumericLower: typeof import("./string").alphaNumericLower;
         fromFormat: typeof import("./string").fromFormat;
     };
 };

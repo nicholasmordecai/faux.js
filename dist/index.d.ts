@@ -21,9 +21,14 @@ export declare const fauxjs: {
                 sortCode: typeof import("./generators/finance/bank").sortCode;
                 cardNumber: typeof import("./generators/finance/bank").cardNumber;
                 cvv: typeof import("./generators/finance/bank").cvv;
+                currency: typeof import("./generators/finance/bank").currency;
             };
             Crypto: {
                 BitcoinAddress: typeof import("./generators/finance/crypto").BitcoinAddress;
+                TetherAddress: typeof import("./generators/finance/crypto").TetherAddress;
+                USDCoinAddress: typeof import("./generators/finance/crypto").USDCoinAddress;
+                RippleAddress: typeof import("./generators/finance/crypto").RippleAddress;
+                CardanoAddress: typeof import("./generators/finance/crypto").CardanoAddress;
             };
         };
         Geographic: {
@@ -31,12 +36,12 @@ export declare const fauxjs: {
                 postcode: typeof import("./generators/geographic/address").postcode;
                 city: typeof import("./generators/geographic/address").city;
                 county: typeof import("./generators/geographic/address").county;
-                country: typeof import("./generators/geographic/address").country;
                 street: typeof import("./generators/geographic/address").street;
                 houseNameNumber: typeof import("./generators/geographic/address").houseNameNumber;
                 address: typeof import("./generators/geographic/address").address;
                 addressString: typeof import("./generators/geographic/address").addressString;
             };
+            Country: typeof import("./generators/geographic/country").country;
             Map: {
                 lat: typeof import("./generators/geographic/map").lat;
                 long: typeof import("./generators/geographic/map").long;
@@ -56,6 +61,16 @@ export declare const fauxjs: {
                 uuid: typeof import("./generators/identification/uuid").uuid;
             };
         };
+        Internet: {
+            Authentication: {
+                JWT: typeof import("./generators/internet/authentication").JWT;
+                token: typeof import("./generators/internet/authentication").token;
+            };
+            Password: {
+                md5: typeof import("./generators/internet/password").md5;
+                salt: typeof import("./generators/internet/password").salt;
+            };
+        };
         Math: {
             int: typeof import("./generators/math/number").int;
             float: typeof import("./generators/math/number").float;
@@ -69,6 +84,7 @@ export declare const fauxjs: {
             };
             string: {
                 alphaNumeric: typeof import("./generators/util/string").alphaNumeric;
+                alphaNumericLower: typeof import("./generators/util/string").alphaNumericLower;
                 fromFormat: typeof import("./generators/util/string").fromFormat;
             };
         };
@@ -85,12 +101,12 @@ export declare const fauxjs: {
         sortCode: typeof import("./generators/finance/bank").sortCode;
         cardNumber: typeof import("./generators/finance/bank").cardNumber;
         cvv: typeof import("./generators/finance/bank").cvv;
+        currency: typeof import("./generators/finance/bank").currency;
     };
     Address: {
         postcode: typeof import("./generators/geographic/address").postcode;
         city: typeof import("./generators/geographic/address").city;
         county: typeof import("./generators/geographic/address").county;
-        country: typeof import("./generators/geographic/address").country;
         street: typeof import("./generators/geographic/address").street;
         houseNameNumber: typeof import("./generators/geographic/address").houseNameNumber;
         address: typeof import("./generators/geographic/address").address;
@@ -110,6 +126,7 @@ export declare const fauxjs: {
         gender: typeof import("./generators/identification/person").gender;
     };
     Authentication: {
+        JWT: typeof import("./generators/internet/authentication").JWT;
         token: typeof import("./generators/internet/authentication").token;
     };
     Password: {
@@ -125,6 +142,7 @@ export declare const fauxjs: {
     };
     string: {
         alphaNumeric: typeof import("./generators/util/string").alphaNumeric;
+        alphaNumericLower: typeof import("./generators/util/string").alphaNumericLower;
         fromFormat: typeof import("./generators/util/string").fromFormat;
     };
     Array: {

@@ -19,7 +19,12 @@
         houseNamePrefixes: ['The', 'Ivy', 'Sunny', 'Green', 'Red'],
         houseNameSuffixes: ['Barn', 'Lodge', 'Cottage', 'Bungalow', 'House', 'Farm', 'Woodlands', 'Stables'],
         bank: {
-            iban: ' AA99AAAA99999999999999'
+            iban: ' AA99AAAA99999999999999',
+            currency: {
+                code: 'GBP',
+                name: 'Pound Sterling',
+                symbol: '£'
+            }
         },
         names: {
             female: ['Rosemary', 'Macie', 'Jamie', 'Kaitlin', 'Donna', 'Delilah', 'Susan', 'Alexis', 'Jada', 'Jordyn', 'Aria', 'Perla', 'Isabell', 'Monica', 'Zoe', 'Leia', 'Marely', 'Miley', 'Daphne', 'Avery', 'Caitlyn', 'Mayra', 'Serenity', 'Luna', 'Juliet', 'India', 'Monserrat', 'Brittany', 'Kendal', 'Phoenix', 'Taylor', 'Savanah', 'Danika', 'Madelyn', 'Fernanda', 'Kristina', 'Mia', 'Tia', 'Ali', 'Jaslyn', 'Lila', 'Evelyn', 'Saniya', 'Haven', 'Olivia', 'Nora', 'Abigail', 'Alisa', 'Julissa', 'Lucille', 'Hillary', 'Aileen', 'Miah', 'Dayana', 'Giselle', 'Skylar', 'Aurora', 'Jaylah', 'Kali', 'Alaina', 'Christina', 'Claudia', 'Scarlet', 'Aniyah', 'Helena', 'Areli', 'Paisley', 'Elisa', 'Jaliyah', 'Mattie', 'Finley', 'Ada', 'Janessa', 'Melissa', 'Jennifer', 'Elle', 'Laura', 'Nicole', 'Mikaela', 'Karley', 'Anika', 'Erica', 'Abril', 'Clarissa', 'Kamari', 'Adriana', 'Micah', 'Armani', 'Violet', 'Siena', 'Alia', 'Campbell', 'Catherine', 'Haleigh', 'Bryanna', 'Makayla', 'Tanya', 'Emma', 'Lindsey', 'Amani'],
@@ -130,6 +135,9 @@
     const capitalCharCodes = { min: 65, max: 90 };
     const lowerCaseCharCodes = { min: 97, max: 122 };
     const alphaNumerics = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const alphaNumericLength = alphaNumerics.length - 1;
+    const alphaNumericsLower = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    const alphaNumericLowerLength = alphaNumericsLower.length - 1;
     function fromFormat(format) {
         let result = '';
         for (const char of format) {
@@ -153,14 +161,21 @@
     }
     function alphaNumeric(length) {
         let result = '';
-        const charLen = alphaNumerics.length - 1;
         for (let i = length; i > 0; i--) {
-            result += alphaNumerics[int({ min: 0, max: charLen })];
+            result += alphaNumerics[int({ min: 0, max: alphaNumericLength })];
+        }
+        return result;
+    }
+    function alphaNumericLower(length) {
+        let result = '';
+        for (let i = length; i > 0; i--) {
+            result += alphaNumericsLower[int({ min: 0, max: alphaNumericLowerLength })];
         }
         return result;
     }
     const string = {
-        alphaNumeric: alphaNumeric,
+        alphaNumeric,
+        alphaNumericLower,
         fromFormat
     };
 
@@ -217,15 +232,6 @@
         }
     }
     /**
-     * @function country
-     * @description Generate a random country
-     *
-     * @returns {string}
-     */
-    function country() {
-        return getLocale.name;
-    }
-    /**
      * @function address
      * @description Address generator
      *
@@ -255,12 +261,22 @@
         postcode,
         city,
         county,
-        country,
         street,
         houseNameNumber,
         address,
         addressString
     };
+
+    /**
+     * @function country
+     * @description Generate a random country
+     *
+     * @returns {string}
+     */
+    function country() {
+        return getLocale.name;
+    }
+    const Country = country;
 
     /**
      * Generates a latitude and longitude object
@@ -297,6 +313,7 @@
 
     const Geographic = {
         Address,
+        Country,
         Map
     };
 
@@ -352,8 +369,8 @@
         return middleNames;
     }
     function gender() {
-        const male = bool();
-        if (male) {
+        const isMale = bool();
+        if (isMale) {
             return 'Male';
         }
         else {
@@ -373,225 +390,16 @@
         gender
     };
 
-    var REGEX = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
-
-    function validate(uuid) {
-      return typeof uuid === 'string' && REGEX.test(uuid);
-    }
-
     /**
-     * Convert array of 16 byte values to UUID string format of the form:
-     * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+     * @description generates a random UUID v4
+     * Imitates the UUID V4 gneerator result
+     * Note: Not cryptographically secure - only use for testing / seed data!
+     *
+     * @example
+     * const guid = uuidv4(); // hA76dcB12l
      */
-
-    const byteToHex = [];
-
-    for (let i = 0; i < 256; ++i) {
-      byteToHex.push((i + 0x100).toString(16).slice(1));
-    }
-
-    function unsafeStringify(arr, offset = 0) {
-      // Note: Be careful editing this code!  It's been tuned for performance
-      // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
-      return (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + '-' + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + '-' + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + '-' + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + '-' + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
-    }
-
-    function parse(uuid) {
-      if (!validate(uuid)) {
-        throw TypeError('Invalid UUID');
-      }
-
-      let v;
-      const arr = new Uint8Array(16); // Parse ########-....-....-....-............
-
-      arr[0] = (v = parseInt(uuid.slice(0, 8), 16)) >>> 24;
-      arr[1] = v >>> 16 & 0xff;
-      arr[2] = v >>> 8 & 0xff;
-      arr[3] = v & 0xff; // Parse ........-####-....-....-............
-
-      arr[4] = (v = parseInt(uuid.slice(9, 13), 16)) >>> 8;
-      arr[5] = v & 0xff; // Parse ........-....-####-....-............
-
-      arr[6] = (v = parseInt(uuid.slice(14, 18), 16)) >>> 8;
-      arr[7] = v & 0xff; // Parse ........-....-....-####-............
-
-      arr[8] = (v = parseInt(uuid.slice(19, 23), 16)) >>> 8;
-      arr[9] = v & 0xff; // Parse ........-....-....-....-############
-      // (Use "/" to avoid 32-bit truncation when bit-shifting high-order bytes)
-
-      arr[10] = (v = parseInt(uuid.slice(24, 36), 16)) / 0x10000000000 & 0xff;
-      arr[11] = v / 0x100000000 & 0xff;
-      arr[12] = v >>> 24 & 0xff;
-      arr[13] = v >>> 16 & 0xff;
-      arr[14] = v >>> 8 & 0xff;
-      arr[15] = v & 0xff;
-      return arr;
-    }
-
-    function stringToBytes(str) {
-      str = unescape(encodeURIComponent(str)); // UTF8 escape
-
-      const bytes = [];
-
-      for (let i = 0; i < str.length; ++i) {
-        bytes.push(str.charCodeAt(i));
-      }
-
-      return bytes;
-    }
-
-    const DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
-    const URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
-    function v35(name, version, hashfunc) {
-      function generateUUID(value, namespace, buf, offset) {
-        var _namespace;
-
-        if (typeof value === 'string') {
-          value = stringToBytes(value);
-        }
-
-        if (typeof namespace === 'string') {
-          namespace = parse(namespace);
-        }
-
-        if (((_namespace = namespace) === null || _namespace === void 0 ? void 0 : _namespace.length) !== 16) {
-          throw TypeError('Namespace must be array-like (16 iterable integer values, 0-255)');
-        } // Compute hash of namespace and value, Per 4.3
-        // Future: Use spread syntax when supported on all platforms, e.g. `bytes =
-        // hashfunc([...namespace, ... value])`
-
-
-        let bytes = new Uint8Array(16 + value.length);
-        bytes.set(namespace);
-        bytes.set(value, namespace.length);
-        bytes = hashfunc(bytes);
-        bytes[6] = bytes[6] & 0x0f | version;
-        bytes[8] = bytes[8] & 0x3f | 0x80;
-
-        if (buf) {
-          offset = offset || 0;
-
-          for (let i = 0; i < 16; ++i) {
-            buf[offset + i] = bytes[i];
-          }
-
-          return buf;
-        }
-
-        return unsafeStringify(bytes);
-      } // Function#name is not settable on some platforms (#270)
-
-
-      try {
-        generateUUID.name = name; // eslint-disable-next-line no-empty
-      } catch (err) {} // For CommonJS default export support
-
-
-      generateUUID.DNS = DNS;
-      generateUUID.URL = URL;
-      return generateUUID;
-    }
-
-    // Adapted from Chris Veness' SHA1 code at
-    // http://www.movable-type.co.uk/scripts/sha1.html
-    function f(s, x, y, z) {
-      switch (s) {
-        case 0:
-          return x & y ^ ~x & z;
-
-        case 1:
-          return x ^ y ^ z;
-
-        case 2:
-          return x & y ^ x & z ^ y & z;
-
-        case 3:
-          return x ^ y ^ z;
-      }
-    }
-
-    function ROTL(x, n) {
-      return x << n | x >>> 32 - n;
-    }
-
-    function sha1(bytes) {
-      const K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6];
-      const H = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0];
-
-      if (typeof bytes === 'string') {
-        const msg = unescape(encodeURIComponent(bytes)); // UTF8 escape
-
-        bytes = [];
-
-        for (let i = 0; i < msg.length; ++i) {
-          bytes.push(msg.charCodeAt(i));
-        }
-      } else if (!Array.isArray(bytes)) {
-        // Convert Array-like to Array
-        bytes = Array.prototype.slice.call(bytes);
-      }
-
-      bytes.push(0x80);
-      const l = bytes.length / 4 + 2;
-      const N = Math.ceil(l / 16);
-      const M = new Array(N);
-
-      for (let i = 0; i < N; ++i) {
-        const arr = new Uint32Array(16);
-
-        for (let j = 0; j < 16; ++j) {
-          arr[j] = bytes[i * 64 + j * 4] << 24 | bytes[i * 64 + j * 4 + 1] << 16 | bytes[i * 64 + j * 4 + 2] << 8 | bytes[i * 64 + j * 4 + 3];
-        }
-
-        M[i] = arr;
-      }
-
-      M[N - 1][14] = (bytes.length - 1) * 8 / Math.pow(2, 32);
-      M[N - 1][14] = Math.floor(M[N - 1][14]);
-      M[N - 1][15] = (bytes.length - 1) * 8 & 0xffffffff;
-
-      for (let i = 0; i < N; ++i) {
-        const W = new Uint32Array(80);
-
-        for (let t = 0; t < 16; ++t) {
-          W[t] = M[i][t];
-        }
-
-        for (let t = 16; t < 80; ++t) {
-          W[t] = ROTL(W[t - 3] ^ W[t - 8] ^ W[t - 14] ^ W[t - 16], 1);
-        }
-
-        let a = H[0];
-        let b = H[1];
-        let c = H[2];
-        let d = H[3];
-        let e = H[4];
-
-        for (let t = 0; t < 80; ++t) {
-          const s = Math.floor(t / 20);
-          const T = ROTL(a, 5) + f(s, b, c, d) + e + K[s] + W[t] >>> 0;
-          e = d;
-          d = c;
-          c = ROTL(b, 30) >>> 0;
-          b = a;
-          a = T;
-        }
-
-        H[0] = H[0] + a >>> 0;
-        H[1] = H[1] + b >>> 0;
-        H[2] = H[2] + c >>> 0;
-        H[3] = H[3] + d >>> 0;
-        H[4] = H[4] + e >>> 0;
-      }
-
-      return [H[0] >> 24 & 0xff, H[0] >> 16 & 0xff, H[0] >> 8 & 0xff, H[0] & 0xff, H[1] >> 24 & 0xff, H[1] >> 16 & 0xff, H[1] >> 8 & 0xff, H[1] & 0xff, H[2] >> 24 & 0xff, H[2] >> 16 & 0xff, H[2] >> 8 & 0xff, H[2] & 0xff, H[3] >> 24 & 0xff, H[3] >> 16 & 0xff, H[3] >> 8 & 0xff, H[3] & 0xff, H[4] >> 24 & 0xff, H[4] >> 16 & 0xff, H[4] >> 8 & 0xff, H[4] & 0xff];
-    }
-
-    const v5 = v35('v5', 0x50, sha1);
-    var v5$1 = v5;
-
     function uuid() {
-        return v5$1('uuid', '1b671a64-40d5-491e-99b0-da01ff1f3341');
+        return `${alphaNumericLower(8)}-${alphaNumericLower(4)}-${alphaNumericLower(4)}-${alphaNumericLower(4)}-${alphaNumericLower(12)}`;
     }
     var uuid$1 = {
         uuid
@@ -608,7 +416,7 @@
      * @subcategory Math
      * @description Some awesome description for this generator...
      */
-    // export function uniform() {
+    // export function uniform(min: number, max: number) {
     // }
     /**
      * @function normal
@@ -662,12 +470,11 @@
     }
     /**
      * @function exponential
-     * @description Calculate a number from an exponential distribution
+     * @description Decay rate for an exponential distribution
      *
      * @param {number} lambda rate
      * @returns {number} the generated number
      *
-     * @example typescript const value = binomial(0, 10, 1);
      */
     function exponential(lambda) {
         return -Math.log(1.0 - float()) / lambda;
@@ -725,20 +532,44 @@
     function cvv() {
         return parseInt(fromFormat('999'));
     }
+    function currency() {
+        return getLocale.bank.currency;
+    }
     const Bank = {
         IBAN,
         accountNumber,
         sortCode,
         cardNumber,
-        cvv
+        cvv,
+        currency
     };
 
     function BitcoinAddress() {
         const addressLength = int({ min: 26, max: 35 });
         return alphaNumeric(addressLength);
     }
+    function TetherAddress() {
+        const addressLength = int({ min: 26, max: 35 });
+        return alphaNumeric(addressLength);
+    }
+    function USDCoinAddress() {
+        const addressLength = int({ min: 26, max: 35 });
+        return alphaNumeric(addressLength);
+    }
+    function RippleAddress() {
+        const addressLength = int({ min: 26, max: 35 });
+        return alphaNumeric(addressLength);
+    }
+    function CardanoAddress() {
+        const addressLength = int({ min: 26, max: 35 });
+        return alphaNumeric(addressLength);
+    }
     const Crypto = {
-        BitcoinAddress
+        BitcoinAddress,
+        TetherAddress,
+        USDCoinAddress,
+        RippleAddress,
+        CardanoAddress
     };
 
     const Finance = {
@@ -746,26 +577,22 @@
         Crypto
     };
 
-    const Generators = {
-        Finance,
-        Geographic,
-        Identification,
-        Math: Math$1,
-        Util
-    };
-
     // import { sign, SignOptions } from 'jsonwebtoken';
     /**
-     * @description Generates a new json web token (JWT)
+     * @description Generates a fake JSON Web Token
+     * It literally creates random strings with a period in between. There are not real JWT's and can not be decoded etc
+     * If you need to include real JWT's for your seed / test data then it would be ideal to use the same logic as in your application
      *
      * @example
-     * const token = sign({some: payload});
+     * const JWToken = JWT(); // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
      *
      */
-    // export function JWT(payload: string | object | Buffer = '', privateKey = '', options: SignOptions = {}): string {
-    // 	if (!privateKey) privateKey = fromFormat('aAaAaAaAaAaAaAaA');
-    // 	return sign(payload, privateKey, options);
-    // }
+    function JWT() {
+        const header = alphaNumeric(int({ min: 36, max: 52 }));
+        const payload = alphaNumeric(int({ min: 64, max: 300 }));
+        const verify = alphaNumeric(int({ min: 44, max: 76 }));
+        return `${header}.${payload}.${verify}`;
+    }
     /**
      * @description generates a random alpha numeric token
      *
@@ -776,7 +603,7 @@
         return alphaNumeric(len);
     }
     const Authentication = {
-        // JWT,
+        JWT,
         token
     };
 
@@ -1158,6 +985,20 @@
     const Password = {
         md5,
         salt
+    };
+
+    const Internet = {
+        Authentication,
+        Password
+    };
+
+    const Generators = {
+        Finance,
+        Geographic,
+        Identification,
+        Internet,
+        Math: Math$1,
+        Util
     };
 
     const Probability = {

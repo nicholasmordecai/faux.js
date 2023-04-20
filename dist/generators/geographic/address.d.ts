@@ -42,13 +42,6 @@ export declare function street(): string;
  */
 export declare function houseNameNumber(): string | number;
 /**
- * @function country
- * @description Generate a random country
- *
- * @returns {string}
- */
-export declare function country(): string;
-/**
  * @function address
  * @description Address generator
  *
@@ -66,7 +59,6 @@ export declare const Address: {
     postcode: typeof postcode;
     city: typeof city;
     county: typeof county;
-    country: typeof country;
     street: typeof street;
     houseNameNumber: typeof houseNameNumber;
     address: typeof address;

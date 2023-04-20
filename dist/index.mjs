@@ -1,4 +1,3 @@
-import { v5 } from 'uuid';
 import md5Lib from 'md5';
 
 const GB = {
@@ -16,7 +15,12 @@ const GB = {
     houseNamePrefixes: ['The', 'Ivy', 'Sunny', 'Green', 'Red'],
     houseNameSuffixes: ['Barn', 'Lodge', 'Cottage', 'Bungalow', 'House', 'Farm', 'Woodlands', 'Stables'],
     bank: {
-        iban: ' AA99AAAA99999999999999'
+        iban: ' AA99AAAA99999999999999',
+        currency: {
+            code: 'GBP',
+            name: 'Pound Sterling',
+            symbol: '£'
+        }
     },
     names: {
         female: ['Rosemary', 'Macie', 'Jamie', 'Kaitlin', 'Donna', 'Delilah', 'Susan', 'Alexis', 'Jada', 'Jordyn', 'Aria', 'Perla', 'Isabell', 'Monica', 'Zoe', 'Leia', 'Marely', 'Miley', 'Daphne', 'Avery', 'Caitlyn', 'Mayra', 'Serenity', 'Luna', 'Juliet', 'India', 'Monserrat', 'Brittany', 'Kendal', 'Phoenix', 'Taylor', 'Savanah', 'Danika', 'Madelyn', 'Fernanda', 'Kristina', 'Mia', 'Tia', 'Ali', 'Jaslyn', 'Lila', 'Evelyn', 'Saniya', 'Haven', 'Olivia', 'Nora', 'Abigail', 'Alisa', 'Julissa', 'Lucille', 'Hillary', 'Aileen', 'Miah', 'Dayana', 'Giselle', 'Skylar', 'Aurora', 'Jaylah', 'Kali', 'Alaina', 'Christina', 'Claudia', 'Scarlet', 'Aniyah', 'Helena', 'Areli', 'Paisley', 'Elisa', 'Jaliyah', 'Mattie', 'Finley', 'Ada', 'Janessa', 'Melissa', 'Jennifer', 'Elle', 'Laura', 'Nicole', 'Mikaela', 'Karley', 'Anika', 'Erica', 'Abril', 'Clarissa', 'Kamari', 'Adriana', 'Micah', 'Armani', 'Violet', 'Siena', 'Alia', 'Campbell', 'Catherine', 'Haleigh', 'Bryanna', 'Makayla', 'Tanya', 'Emma', 'Lindsey', 'Amani'],
@@ -127,6 +131,9 @@ const Array = {
 const capitalCharCodes = { min: 65, max: 90 };
 const lowerCaseCharCodes = { min: 97, max: 122 };
 const alphaNumerics = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const alphaNumericLength = alphaNumerics.length - 1;
+const alphaNumericsLower = 'abcdefghijklmnopqrstuvwxyz0123456789';
+const alphaNumericLowerLength = alphaNumericsLower.length - 1;
 function fromFormat(format) {
     let result = '';
     for (const char of format) {
@@ -150,14 +157,21 @@ function fromFormat(format) {
 }
 function alphaNumeric(length) {
     let result = '';
-    const charLen = alphaNumerics.length - 1;
     for (let i = length; i > 0; i--) {
-        result += alphaNumerics[int({ min: 0, max: charLen })];
+        result += alphaNumerics[int({ min: 0, max: alphaNumericLength })];
+    }
+    return result;
+}
+function alphaNumericLower(length) {
+    let result = '';
+    for (let i = length; i > 0; i--) {
+        result += alphaNumericsLower[int({ min: 0, max: alphaNumericLowerLength })];
     }
     return result;
 }
 const string = {
-    alphaNumeric: alphaNumeric,
+    alphaNumeric,
+    alphaNumericLower,
     fromFormat
 };
 
@@ -214,15 +228,6 @@ function houseNameNumber() {
     }
 }
 /**
- * @function country
- * @description Generate a random country
- *
- * @returns {string}
- */
-function country() {
-    return getLocale.name;
-}
-/**
  * @function address
  * @description Address generator
  *
@@ -252,12 +257,22 @@ const Address = {
     postcode,
     city,
     county,
-    country,
     street,
     houseNameNumber,
     address,
     addressString
 };
+
+/**
+ * @function country
+ * @description Generate a random country
+ *
+ * @returns {string}
+ */
+function country() {
+    return getLocale.name;
+}
+const Country = country;
 
 /**
  * Generates a latitude and longitude object
@@ -294,6 +309,7 @@ const Map = {
 
 const Geographic = {
     Address,
+    Country,
     Map
 };
 
@@ -349,8 +365,8 @@ function middleNames() {
     return middleNames;
 }
 function gender() {
-    const male = bool();
-    if (male) {
+    const isMale = bool();
+    if (isMale) {
         return 'Male';
     }
     else {
@@ -370,8 +386,16 @@ const Person = {
     gender
 };
 
+/**
+ * @description generates a random UUID v4
+ * Imitates the UUID V4 gneerator result
+ * Note: Not cryptographically secure - only use for testing / seed data!
+ *
+ * @example
+ * const guid = uuidv4(); // hA76dcB12l
+ */
 function uuid() {
-    return v5('uuid', '1b671a64-40d5-491e-99b0-da01ff1f3341');
+    return `${alphaNumericLower(8)}-${alphaNumericLower(4)}-${alphaNumericLower(4)}-${alphaNumericLower(4)}-${alphaNumericLower(12)}`;
 }
 var uuid$1 = {
     uuid
@@ -388,7 +412,7 @@ const Identification = {
  * @subcategory Math
  * @description Some awesome description for this generator...
  */
-// export function uniform() {
+// export function uniform(min: number, max: number) {
 // }
 /**
  * @function normal
@@ -442,12 +466,11 @@ function binomial(k, n, p) {
 }
 /**
  * @function exponential
- * @description Calculate a number from an exponential distribution
+ * @description Decay rate for an exponential distribution
  *
  * @param {number} lambda rate
  * @returns {number} the generated number
  *
- * @example typescript const value = binomial(0, 10, 1);
  */
 function exponential(lambda) {
     return -Math.log(1.0 - float()) / lambda;
@@ -505,20 +528,44 @@ function cardNumber() {
 function cvv() {
     return parseInt(fromFormat('999'));
 }
+function currency() {
+    return getLocale.bank.currency;
+}
 const Bank = {
     IBAN,
     accountNumber,
     sortCode,
     cardNumber,
-    cvv
+    cvv,
+    currency
 };
 
 function BitcoinAddress() {
     const addressLength = int({ min: 26, max: 35 });
     return alphaNumeric(addressLength);
 }
+function TetherAddress() {
+    const addressLength = int({ min: 26, max: 35 });
+    return alphaNumeric(addressLength);
+}
+function USDCoinAddress() {
+    const addressLength = int({ min: 26, max: 35 });
+    return alphaNumeric(addressLength);
+}
+function RippleAddress() {
+    const addressLength = int({ min: 26, max: 35 });
+    return alphaNumeric(addressLength);
+}
+function CardanoAddress() {
+    const addressLength = int({ min: 26, max: 35 });
+    return alphaNumeric(addressLength);
+}
 const Crypto = {
-    BitcoinAddress
+    BitcoinAddress,
+    TetherAddress,
+    USDCoinAddress,
+    RippleAddress,
+    CardanoAddress
 };
 
 const Finance = {
@@ -526,26 +573,22 @@ const Finance = {
     Crypto
 };
 
-const Generators = {
-    Finance,
-    Geographic,
-    Identification,
-    Math: Math$1,
-    Util
-};
-
 // import { sign, SignOptions } from 'jsonwebtoken';
 /**
- * @description Generates a new json web token (JWT)
+ * @description Generates a fake JSON Web Token
+ * It literally creates random strings with a period in between. There are not real JWT's and can not be decoded etc
+ * If you need to include real JWT's for your seed / test data then it would be ideal to use the same logic as in your application
  *
  * @example
- * const token = sign({some: payload});
+ * const JWToken = JWT(); // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
  *
  */
-// export function JWT(payload: string | object | Buffer = '', privateKey = '', options: SignOptions = {}): string {
-// 	if (!privateKey) privateKey = fromFormat('aAaAaAaAaAaAaAaA');
-// 	return sign(payload, privateKey, options);
-// }
+function JWT() {
+    const header = alphaNumeric(int({ min: 36, max: 52 }));
+    const payload = alphaNumeric(int({ min: 64, max: 300 }));
+    const verify = alphaNumeric(int({ min: 44, max: 76 }));
+    return `${header}.${payload}.${verify}`;
+}
 /**
  * @description generates a random alpha numeric token
  *
@@ -556,7 +599,7 @@ function token(len = 10) {
     return alphaNumeric(len);
 }
 const Authentication = {
-    // JWT,
+    JWT,
     token
 };
 
@@ -612,6 +655,20 @@ function salt(len = 10) {
 const Password = {
     md5,
     salt
+};
+
+const Internet = {
+    Authentication,
+    Password
+};
+
+const Generators = {
+    Finance,
+    Geographic,
+    Identification,
+    Internet,
+    Math: Math$1,
+    Util
 };
 
 const Probability = {
